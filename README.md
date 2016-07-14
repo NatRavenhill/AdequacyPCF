@@ -3,4 +3,6 @@ Each folder is for a different section of the project
 * Domains -> Domain Theoretic notes and proofs from first two weeks
 * Operational Semantics -> Operational Semantics of language and type safety proofs
 * Denotational Semantics -> Denotational Semantics of language and type safety proofs
-* Inspection -> Contains sides and explanation for Project Inspection
+* Inspection -> Contains sides and explanation for Project Inspection  
+
+In Inspection, there is a file called "sofar" that summarises everything I have done so far...
