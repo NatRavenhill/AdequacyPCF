@@ -1,0 +1,120 @@
+\contentsline {chapter}{\numberline {1}Introduction}{3}
+\contentsline {chapter}{\numberline {2}Background}{4}
+\contentsline {section}{\numberline {2.1}Domain Theory}{4}
+\contentsline {section}{\numberline {2.2}Definition of a domain}{5}
+\contentsline {section}{\numberline {2.3}Examples of Domains}{5}
+\contentsline {subsection}{\numberline {2.3.1}Single Element Domain}{5}
+\contentsline {subsection}{\numberline {2.3.2}Flat Natural Numbers}{6}
+\contentsline {subsection}{\numberline {2.3.3}Product of domains}{8}
+\contentsline {section}{\numberline {2.4}Product of Domains}{8}
+\contentsline {subsection}{\numberline {2.4.1}$\forall (x,y) \in X \times Y. \bot \sqsubseteq (x,y)$}{8}
+\contentsline {subsection}{\numberline {2.4.2}$\sqsubseteq $ is a partial order}{8}
+\contentsline {paragraph}{Reflexivity}{8}
+\contentsline {paragraph}{Antisymmetry}{8}
+\contentsline {paragraph}{Transitivity}{9}
+\contentsline {subsection}{\numberline {2.4.3}All chains have a least upper bound}{9}
+\contentsline {section}{\numberline {2.5}Continuous Functions}{9}
+\contentsline {section}{\numberline {2.6}$\forall f \in Cont(X,Y). \ \bot \sqsubseteq _{C}f$ }{10}
+\contentsline {section}{\numberline {2.7}Prove $\sqsubseteq _{C}$ is a partial order}{10}
+\contentsline {paragraph}{Reflexivity}{10}
+\contentsline {paragraph}{Antisymmetry}{10}
+\contentsline {paragraph}{Transitivity}{11}
+\contentsline {section}{\numberline {2.8}All chains have a least upper bound (limit)}{11}
+\contentsline {subsection}{\numberline {2.8.1}Fixpoint Theorem}{12}
+\contentsline {paragraph}{$\sqcup f^i (\bot )$ is a fixpoint}{12}
+\contentsline {paragraph}{$\sqcup f^i (\bot )$ is the least fixpoint}{12}
+\contentsline {section}{\numberline {2.9}Logical Relations}{13}
+\contentsline {subsection}{\numberline {2.9.1}Main Lemma}{13}
+\contentsline {chapter}{\numberline {3}Definition of PCF and Syntax}{14}
+\contentsline {section}{\numberline {3.1}Definition of PCF}{14}
+\contentsline {section}{\numberline {3.2}Type System for PCF}{14}
+\contentsline {chapter}{\numberline {4}Operational Semantics of PCF}{16}
+\contentsline {section}{\numberline {4.1}Example programs in PCF}{17}
+\contentsline {chapter}{\numberline {5}Type Safety}{18}
+\contentsline {section}{\numberline {5.1}Lemmas for Type Safety}{18}
+\contentsline {subsection}{\numberline {5.1.1}Weakening}{18}
+\contentsline {paragraph}{Variables}{19}
+\contentsline {paragraph}{Zero}{19}
+\contentsline {paragraph}{Successor}{19}
+\contentsline {paragraph}{Case}{20}
+\contentsline {paragraph}{Application}{20}
+\contentsline {paragraph}{Abstraction}{21}
+\contentsline {paragraph}{Fixpoint}{21}
+\contentsline {subsection}{\numberline {5.1.2}Substitution Rules}{21}
+\contentsline {paragraph}{Variables}{22}
+\contentsline {paragraph}{Zero}{22}
+\contentsline {paragraph}{Successor}{22}
+\contentsline {paragraph}{Case}{22}
+\contentsline {paragraph}{Application}{23}
+\contentsline {paragraph}{$\lambda $ Abstraction}{23}
+\contentsline {paragraph}{Fixpoint}{23}
+\contentsline {subsection}{\numberline {5.1.3}Substitution}{23}
+\contentsline {paragraph}{Variables}{24}
+\contentsline {paragraph}{Zero}{24}
+\contentsline {paragraph}{Successor}{25}
+\contentsline {paragraph}{Case}{25}
+\contentsline {paragraph}{Application}{26}
+\contentsline {paragraph}{Abstraction}{26}
+\contentsline {paragraph}{Fixpoint}{26}
+\contentsline {section}{\numberline {5.2}Type Safety Lemmas}{27}
+\contentsline {subsection}{\numberline {5.2.1}Type Preservation}{27}
+\contentsline {paragraph}{Vsriables}{28}
+\contentsline {paragraph}{Zero}{28}
+\contentsline {paragraph}{Successor}{28}
+\contentsline {paragraph}{Case}{28}
+\contentsline {paragraph}{Application}{29}
+\contentsline {paragraph}{$\lambda $-abstraction}{30}
+\contentsline {paragraph}{Fixpoint}{30}
+\contentsline {subsection}{\numberline {5.2.2}Type Progress}{30}
+\contentsline {paragraph}{Zero}{31}
+\contentsline {paragraph}{Variables}{31}
+\contentsline {paragraph}{Successor}{31}
+\contentsline {paragraph}{Case}{31}
+\contentsline {paragraph}{Application}{32}
+\contentsline {paragraph}{$\lambda $-abstraction}{32}
+\contentsline {paragraph}{Fixpoint}{32}
+\contentsline {section}{\numberline {5.3}Type Safety}{32}
+\contentsline {chapter}{\numberline {6}Denotational Semantics}{34}
+\contentsline {section}{\numberline {6.1}Denotation of Types}{34}
+\contentsline {section}{\numberline {6.2}Denotation of Typing Contexts}{34}
+\contentsline {section}{\numberline {6.3}Denotation of well typed terms}{35}
+\contentsline {paragraph}{Variables}{35}
+\contentsline {paragraph}{Zero}{35}
+\contentsline {paragraph}{Successor}{36}
+\contentsline {paragraph}{Case}{36}
+\contentsline {paragraph}{Application}{36}
+\contentsline {paragraph}{$\lambda $ abstraction}{36}
+\contentsline {paragraph}{Fixpoint}{37}
+\contentsline {section}{\numberline {6.4}Substitution Theorem}{37}
+\contentsline {paragraph}{Variables}{37}
+\contentsline {paragraph}{Zero}{38}
+\contentsline {paragraph}{Successor}{38}
+\contentsline {paragraph}{Case}{38}
+\contentsline {paragraph}{Application}{38}
+\contentsline {paragraph}{$\lambda $ abstraction}{39}
+\contentsline {paragraph}{Fixpoint}{39}
+\contentsline {section}{\numberline {6.5}Soundness}{39}
+\contentsline {paragraph}{Variables}{40}
+\contentsline {paragraph}{Zero}{40}
+\contentsline {paragraph}{Successor}{40}
+\contentsline {paragraph}{Case}{40}
+\contentsline {paragraph}{Application}{41}
+\contentsline {paragraph}{$\lambda $ abstraction}{42}
+\contentsline {paragraph}{Fixpoint}{42}
+\contentsline {chapter}{\numberline {7}Adequacy}{44}
+\contentsline {section}{\numberline {7.1}$\Leftarrow $}{44}
+\contentsline {section}{\numberline {7.2}$\Rightarrow $}{45}
+\contentsline {subsection}{\numberline {7.2.1}Substitution Function}{46}
+\contentsline {section}{\numberline {7.3}Expansion Lemma}{46}
+\contentsline {section}{\numberline {7.4}Lemmas for Main Lemma}{47}
+\contentsline {section}{\numberline {7.5}Main Lemma}{48}
+\contentsline {paragraph}{Variables}{48}
+\contentsline {paragraph}{Zero}{48}
+\contentsline {paragraph}{Successor}{49}
+\contentsline {paragraph}{\leavevmode {\color {red}Case}}{49}
+\contentsline {paragraph}{Application}{50}
+\contentsline {paragraph}{\leavevmode {\color {red}$\lambda $-Abstraction}}{50}
+\contentsline {paragraph}{\leavevmode {\color {red}Fixpoint}}{50}
+\contentsline {chapter}{\numberline {8}Non-Definability of Parallel-Or}{52}
+\contentsline {chapter}{\numberline {9}Evaluation}{53}
+\contentsline {chapter}{\numberline {10}Conclusion and Future Work}{54}

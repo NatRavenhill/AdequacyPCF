@@ -1,0 +1,42 @@
+\section{Lemmas for Main Lemma}
+
+\begin{lem}\label{infinite}
+If $\llbracket e \rrbracket = \bot$ and $\vdash e : A$ and $e \mapsto^{\infty}$, then $e \in Good_A$
+\end{lem}
+
+\begin{proof}
+By induction on types. Base case will be for the type $Nat$. We need to show that $\vdash e : Nat$ (which we already have as an assumption) and $\llbracket e \rrbracket = n \Rightarrow e \mapsto^* \underline{n}$. 
+
+We can rewrite this as $\llbracket e \rrbracket \neq n \ \vee \ e \mapsto^* \underline{n}$
+
+As we have $\llbracket e \rrbracket = \bot$ as an assumption and $\bot \notin \mathbb{N}$, we know that $\llbracket e \rrbracket \neq n$ for any $n \in \mathbb{N}$. Therefore $\llbracket e \rrbracket \neq n \ \vee \ e \mapsto^* \underline{n}$, so $\llbracket e \rrbracket = n \Rightarrow e \mapsto^* \underline{n}$ and $e \in Good_{Nat}$.  
+
+For the inductive case, we need to show that $e \in Good_{A \to B}$, so we need $\vdash e : A \to B$ (which we have as an assumption) and $\forall e' \in Good_A. \ e \ e' \in Good_B$.
+
+Let $e' \in Good_A$. As $\llbracket e \rrbracket = \bot$ is the bottom element of $[ A \to B]$, this is the same as $\lambda a \in A. \bot_B$.  We can apply the inductive hypothesis to get $e \ e' \in Good_B$, as we know $\llbracket e \ e' \rrbracket = \bot_B$ and $\vdash e \ e' \in B$ (from the typing rule for function application with $e' \in Good_A$), so to do this, we just need to prove $e \ e' \mapsto^{\infty}$, which we prove by contradiction:
+
+Assume $e \ e' \mapsto \underline{n}$, for some $n \in \mathbb{N}$. Then by correctness, we have $\llbracket e \ e' \rrbracket = n$. But $\llbracket
+e \ e' \rrbracket = \bot_B$, so we have a contradiction. So $e \ e' \mapsto^{\infty}$.Now we apply the inductive hypothesis and get $e \ e' \in Good_B$. 
+
+So for any $e' \in Good_A$, we have $e \ e' \in Good_B$.
+
+Now we have proved the lemma for any type.
+\end{proof}
+
+\vspace{1cm}
+
+\begin{lem}\label{closedgamma}
+If $\gamma \in Good_{Ctx}(\Gamma)$ and $\Gamma \vdash e : A$ then $\vdash [\gamma](e) : A$
+\end{lem}
+
+\begin{proof}
+By induction on $\Gamma$. The base case is when $\Gamma$ is the empty context. We have $\gamma = <>$, so we need to prove $\vdash <>e : A$. The empty substitution does nothing, so this is the same as $\vdash e : A$, which we already have as an assumption.
+
+The inductive case is where we have $\gamma \in Good_{Ctx}(\Gamma,x:A)$. Let $\gamma = (\gamma',e'/x)$ where $\gamma' \in Good_{Ctx}(\Gamma)$ and $e' \in  Good_A$. 
+
+From $e' \in Good_A$, we have $\vdash e' : A$. We can use weakening on each variable in the context individually to get $\Gamma \vdash e' : A$. We use type substitution with this and the assumption $\Gamma, x:A \vdash e:A$ to get $\Gamma \vdash  [e'/x]e : A$.
+
+Now we apply the inductive hypothesis of the theorem with $\gamma' \in Good_{Ctx}(\Gamma)$ to get $\vdash [\gamma'][e'/x'] e : A =  \ \vdash [\gamma]e : A$
+
+Now we have proved the lemma for any type.
+\end{proof}

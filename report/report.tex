@@ -1,0 +1,73 @@
+\documentclass{report}
+\usepackage{natbib}
+\usepackage{tikz}
+\title{Adequacy of PCF}
+\usepackage{mathpartir}
+\usepackage{amsmath}
+\usepackage{parskip}
+%\usepackage{bbold}
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\newcommand{\rel}{\sqsubseteq_{C}}
+\usepackage{amsthm}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\usepackage{changepage}
+\author{Natalie Ravenhill}
+\begin{document}
+\maketitle
+\newcommand{\natb}{\mathbb{N}_{\bot}}
+\tableofcontents
+\chapter{Introduction}
+%Literature Review goes here
+
+\chapter{Background}
+There are some mathematical topics and proof techniques, which are very important in semantics, that we need for this project. To prove Adequacy, we need a model for our language in which we can work in.
+
+We can use sets to model each type in PCF. But for function types,if a function of that type never terminates, then its result will not be in the set. Therefore we need an additional element in the model to represent this.
+
+We also want to compare different programs in the model, which we can do by an information ordering, where more defined programs are higher in the ordering and the element representing non-termination is the lowest. This ordering is a partial order.
+
+%define and give example.
+
+Therefore, we need a structure which includes a set, an ordering on the set and an undefined element - this is a domain.
+
+The usefulness of this ordering will become apparent when we discuss recursion (see \ref{fixpoint}).
+
+%Recursion also gives an issue of what functions we can define in the model. As described in \citep{streicher06}, if a function of type  $A \to B$ are represented in the model by all the functions between the domains of the types, then every function would have to have a fixpoint. In reality, only monotone functions have fixpoints. Therefore we must restrict the functions to those with fixpoints. 
+
+\input{domaintheory.tex}
+
+\section{Logical Relations}
+
+\input{logicalREPORT.tex}
+%Definition.
+%Exercises for Murawski's slides
+
+\chapter{Definition of PCF and Syntax}
+
+\input{typesREPORT.tex}
+
+
+\chapter{Denotational Semantics}
+\input{denotationalREPORT.tex}
+
+\chapter{Adequacy}
+\input{logrelREPORT.tex}
+
+
+
+\chapter{Non-Definability of Parallel-Or}
+
+%\chapter{FPC}
+
+\chapter{Evaluation}
+
+\chapter{Conclusion and Future Work}
+
+\bibliographystyle{plainnat}
+\bibliography{report}
+
+\end{document}

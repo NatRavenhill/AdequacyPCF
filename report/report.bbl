@@ -1,0 +1,32 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Gunter(1992)]{Gunter92}
+Carl~A Gunter.
+\newblock \emph{Semantics of programming languages: structures and techniques}.
+\newblock MIT press, 1992.
+
+\bibitem[Hutton(2014)]{Hutton14}
+G.~Hutton.
+\newblock Introduction to domain theory (course notes).
+\newblock 2014.
+
+\bibitem[Scott(1993)]{Scott93}
+Dana~S. Scott.
+\newblock A type-theoretical alternative to {ISWIM, CUCH, OWHY}.
+\newblock \emph{Theor. Comput. Sci.}, 121\penalty0 (1-2):\penalty0 411--440,
+  December 1993.
+\newblock ISSN 0304-3975.
+\newblock \doi{10.1016/0304-3975(93)90095-B}.
+\newblock URL \url{http://dx.doi.org/10.1016/0304-3975(93)90095-B}.
+
+\bibitem[Streicher(2006)]{streicher06}
+Thomas Streicher.
+\newblock \emph{Domain-theoretic foundations of functional programming}.
+\newblock World Scientific, 2006.
+
+\end{thebibliography}
