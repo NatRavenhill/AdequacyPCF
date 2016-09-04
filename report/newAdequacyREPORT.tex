@@ -1,0 +1,189 @@
+%Link back
+Now that we have defined our operational semantics (in  Chapter \ref{ch4}) and our denotational semantics (in Chapter \ref{ch6}), we can relate them using the Adequacy Theorem: 
+
+\vspace{1cm}
+%Statement of thm
+\begin{thm}\label{adeq}
+If $\vdash e : \nat$ (i.e.\ $e$ is a closed term of type $\nat$), then $\forall n \in \mathbbm{N}. \ \llbracket e \rrbracket = n \Leftrightarrow e \mapsto^* \underline{n}$
+\end{thm}
+
+\vspace{0.5cm}
+
+where $\llbracket e \rrbracket$ = $\llbracket \vdash e : \nat \rrbracket$ and $\underline{n}$ represents the numeral $n$, (as opposed to the actual natural number $n$).
+
+\vspace{0.5cm}
+
+%EXPLAIN WHY ONLY AT BASE TYPE.
+
+%Correctness as in before
+The theorem has two directions. We have mostly proved the backwards direction because of the Soundness proof we proved in the previous chapter (see Section \ref{sound}) we have proved half of Adequacy.
+
+Therefore, the right to left direction of adequacy is a corollary of the soundness proof:
+
+\vspace{0.5cm}
+
+\begin{cor}
+If $\vdash e : \nat$ and $\llbracket e \rrbracket = n$ then $e \mapsto^* \underline{n} \Rightarrow \llbracket e \rrbracket = n$
+\end{cor}
+
+
+\begin{proof}
+We rewrite $e \mapsto^* \underline{n}$ as $e \mapsto e_0 \mapsto \dots \mapsto e_m \mapsto \underline{n}$ , for any $m \geq 0$. Applying soundness to these evaluations gives us $\llbracket e\rrbracket = \dots = \llbracket e_m \rrbracket = \llbracket \underline{n} \rrbracket$. Therefore we have $\llbracket  e \rrbracket = \llbracket \underline{n} \rrbracket$.
+
+Now we need to prove $\forall n \in \mathbb{N}. \llbracket \underline{n} \rrbracket = n$, which we prove by induction on $n$:
+
+If $n = 0$, then $\llbracket \underline{0} \rrbracket = \llbracket z \rrbracket = 0$, by the definition of the denotational semantics for zero.
+
+%If $\underline{n} = zero$, then by the denotational semantics for $ zero$ we have $\llbracket e_n \rrbracket =  0$.
+
+If $n = n + 1$, then $\llbracket \underline{n + 1} \rrbracket = \llbracket s(\underline{n}) \rrbracket$. By the inductive hypothesis we have $\llbracket \underline{n} \rrbracket = n$, so $\llbracket s(\underline{n}) \rrbracket = n + 1$. The definition of $\llbracket s(\underline{n}) \rrbracket$ is $\llbracket  \underline{n} \rrbracket + 1$. Therefore $\llbracket \underline{n + 1} \rrbracket = n + 1$.
+
+%If $\underline{n} = s(v)$, then  in the rule, we have $\llbracket v \rrbracket$, which equals $v$ by the inductive hypothesis. Therefore, we use the case in the successor rule for a number and get $v + 1$.
+
+Therefore $\forall n \in \mathbb{N}. \llbracket \underline{n} \rrbracket  = n$, so $\llbracket e \rrbracket =  \llbracket \underline{n} \rrbracket  = n$.
+
+\end{proof}
+
+To prove the forwards direction, we could naively try to prove it by induction on the denotations of each expression. However, because although we only consider closed expressions of base type, if it has sub-expressions then they may not be closed or of type $\nat$, so we have no inductive hypothesis to provide in these cases.
+
+Therefore, instead we use the Logical Relations approach that we described in Section \ref{log}.
+
+%Binary Logical Relation definition
+\section{Logical Relation}
+The logical relation we define is a binary logical relation between denotations of PCF expressions and closed expressions of PCF. It is defined as the following:
+
+\vspace{0.5cm}
+
+\begin{defn}
+We define a family of binary  relations $R_A \subseteq \llbracket A \rrbracket \times \{e \ | \ \vdash e : A \}$, defined by induction on types for each type as follows:
+
+\[ d  R_{\nat}  e \Leftrightarrow \forall n \in \mathbbm{N}. \ d = n \Rightarrow e \mapsto^* n\]
+
+\[f  R_{A \to B}  e \Leftrightarrow \forall d \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ d R_A e' \Rightarrow f(d) R_B  e \ e'\]
+
+\end{defn}
+
+The forwards direction of Adequacy is given by the definition of the relation on expressions of type $\nat$.
+
+As we previously described in section \ref{log}, to prove our actual property, we prove a more general Main Lemma on the logical relation first. Our Main Lemma for this relation will be the following:
+
+\vspace{0.5cm}
+
+\begin{lem} \label{main}
+If $\Gamma = x_1 : A_1, \dots, x_n : A_n$, $\Gamma \vdash e : A$ and $ \ d_1 R_{A_1} e_1, \ d_2 R_{A_2} e_2, \dots , \  d_n   R_{A_n} e_n$, then
+
+\[ \llbracket \Gamma \vdash e : A \rrbracket (d_1, \dots, d_n)  \ R_A \  [e_1/x_1, \dots, e_n/x_n]e \]
+\end{lem}
+
+In the lemma we are given an expression $e$ that is well typed in a typing context $\Gamma$ and some denotations $d_i$ that are related to some expressions $e_i$.
+
+The denotation of that expression applied to substitutions $(d_1, \dots d_n)$ for all the  free variables in $\Gamma$ will be related to the expression $e$ with the expressions that correspond to each denotation (according to our assumption) substituted for the free variables in $e$.
+
+We will prove this by induction on each possible expression $e$.
+
+%substitution function
+\subsection{Substitution Function}
+In the Main Lemma, we make multiple substitutions in the expression $e$, but we only defined our substitution function (in Chapter \ref{safe}) on single substitutions $[e'/x]e$. Therefore we define substituting multiple variables in the following way, where $\gamma = [e_1/x_1, \dots e_n/x_n]$:
+
+\begin{adjustwidth}{2cm}{}
+$[\gamma](zero) = zero$
+\end{adjustwidth}
+
+\begin{minipage}{3.5in}
+\begin{align*}
+[\gamma](x) = 
+  \begin{cases} 
+           [\gamma](x) & \text{if } x \in dom(\gamma) \\
+           x & otherwise 
+  \end{cases}
+\end{align*} 
+\end{minipage}
+
+This says that if $x$ is present in $\gamma$, (there is a substitution for it), replace $x$ with the result of the substitution in $\gamma$. Otherwise there is nothing to replace $x$ with, so we return the variable unaltered. 
+
+\vspace{0.5cm}
+
+\begin{adjustwidth}{2cm}{}
+
+$[\gamma](s(e)) = s([\gamma] (e))$
+
+$[\gamma](\case (e, z \mapsto e_0, s(v) \mapsto e_S)) = \case ([\gamma](e), z \mapsto [\gamma](e_0), s(v) \mapsto [\gamma](e_S))$
+
+$[\gamma](e \ e') = ([\gamma] e) ([\gamma] e')$
+
+$[\gamma] (\lambda x:A. e) = \lambda x:A. [\gamma] e$
+
+$[\gamma] (\fix \ x:A. e) = \fix \ x:A. [\gamma] e$
+\end{adjustwidth}
+
+\vspace{0.5cm}
+
+For a non empty $\gamma = e_1/x_1, \dots e_n/x_n$, we have:
+
+\[ [e_1/x_1, \dots , e_n/x_n] e = [e_1/x_1]([e_2/x_2]( \dots [e_n/x_n] e) \]
+
+If we add a variable to the substitution we can define this in the following way:
+\[ [t/x][\gamma] e = [\gamma, t/x] e \]
+
+%Lemmas we need for main lemma
+\section{Lemmas for Main Lemma}
+We are almost ready to prove the Main Lemma, but first we prove some lemmas that we will use in the proof:
+
+
+\subsection{Bottom Element Lemma}
+
+\vspace{0.25cm}
+
+\begin{lem} \label{bot}
+For any type $A$ and $\Gamma \vdash e: A$, $\bot \ R_A \ e$ 
+\end{lem}
+
+\begin{proof}
+By induction on types. For $\nat$, we want to show $\forall n \in \mathbbm{N}. \ \bot  = n \Rightarrow e \mapsto^* n$. Because $\bot \notin \mathbbm{N}$, this statement is vacuously true.
+
+For $R_{A \to B}$, we have that $\bot$ is the function $\lambda x : A. \bot$, so we want to show $\forall  d \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ d R_A e' \Rightarrow (\lambda x : A. \bot)(d) R_B  e \ e'$. Assume $d$ is an element of the domain representing type $A$ and $e'$ is an expression of type $A$ such that $d \ R_A e'$. We want to show that $\bot \ R_B \ e \ e'$ and by the inductive hypothesis, we know for any $e : B$ that $\bot \ R_B \ e$, so we can just use this with $e \ e'$ to get our conclusion.
+\end{proof}
+
+\subsection{Expansion Lemma}\label{exp}
+
+\vspace{0.25cm}
+
+\begin{lem}\label{exp}
+If $\Gamma \vdash e : A$ and $e \mapsto e'$ and $d R_A e'$ then $d R_A e$ 
+\end{lem}
+
+\begin{proof}
+By induction on types. For base case we assume $d R_{\nat} e'$, so we have $\forall n \in \mathbbm{N}. \ d = n \Rightarrow e' \mapsto^* n$. Let $n = d$. Then, as $e \mapsto e'$ and $e' \mapsto^* n$, we know that $e \mapsto^*n$. Therefore, $d R_{\nat} e$.
+
+For the inductive case, assume $e_0 \mapsto e'_0$ and $f \ R_{A \to B} \ e_0$, so we have $\forall a \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ a \ R_A \ e' \Rightarrow f(a) \ R_B \ e_0 \ e'$. Let $a$ be an element in the domain representing $A$ and $e_1$ be an expression of type $A$ such that $a R_A e_1$. Then $f(a) \ R_B \ e_0 \ e_1$.
+
+By the inductive hypothesis we know that for any $e \mapsto e'$ for expressions of type $B$, that they are both related to the same denotation. Therefore we have $f(a) \ R_B \ e'_0 \ e_1$, so we know $\forall a \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ a \ R_A \ e' \Rightarrow f(a) \ R_B \ e'_0 \ e'$, so $f \ R_{A \to B} \ e'_0$. 
+\end{proof}
+
+\subsection{Chains Lemma}
+
+\vspace{0.25cm}
+
+\begin{lem}\label{chain}
+For an expression $e : A$ and a  chain $x_0 \sqsubseteq x_1 \sqsubseteq \dots$, if $x_n R_A e$, then $\bigsqcup x_n \ R_A \ e$
+\end{lem}
+
+\begin{proof}
+By induction on types. For base type, $\nat$, we assume we have a chain of elements in $\mathbbm{N}_\bot$ such that $x_n \ R_{\nat} e$. Therefore for any element in the chain we know $\forall n \in \mathbbm{N} . \ x_n = n \Rightarrow e \mapsto^* n$. We have two cases depending on the values of $\bigsqcup x_n$:
+
+\begin{enumerate}
+\item{$\bigsqcup x_n = n$. Then we know that $e \mapsto^* \sqcup x_n$, as any $x_n R_{\nat} e$}
+\item{$\bigsqcup x_n = \bot$. By Lemma \ref{bot} we know that $\bot R_{\nat} e$ for any $e$}
+\end{enumerate}
+
+The inductive case is for $R_{A \to B}$. Assume we have a chain $f_1 \sqsubseteq f_2 \sqsubseteq \dots$ of elements in $\llbracket A \rrbracket \to \llbracket B \rrbracket$ and $d \ R_A \ e'$ for some $d \in \llbracket A \rrbracket$ and $e : A$. Then we need to show $\bigsqcup f_n (d) \ R_B \ e \ e'$. By induction we know for any expression of type $B$ and a chain  $f_1(d) \sqsubseteq f_2(d) \sqsubseteq \dots$ of elements of $\llbracket B \rrbracket$, $\bigsqcup f_n(d)$ is related to that expression. Therefore we have $\bigsqcup f_n(d) \ R_B \ e \ e'$.
+%for a chain of elements in $\llbracket A \rrbracket$, $ \bigsqcup x_n R_A e$ and also the functions are continuous,so $f (\bigsqcup x_n) = \bigsqcup (f x_n)$. Therefore we have a chain of elements in $B$ which are the upperBy induction, every element of a chain in $B$ is in
+\end{proof}
+
+\section{Main Lemma}
+Finally, we can prove the Main Lemma (Lemma \ref{main} above):
+
+\input{mainlem.tex}
+
+
+%main lemma proof

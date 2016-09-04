@@ -1,0 +1,368 @@
+Denotational semantics describe expressions in a programming language as functions in a mathematical model, as explained in Chapter \ref{ch1}. Now we use the domain theory we discussed in Section \ref{dom} to create that model for PCF:
+
+\section{Denotational Model of PCF} 
+
+\subsection{Denotation of Types}
+
+Our denotational semantics maps the types of PCF to a domain representing that type. We define a function:
+
+\[\llbracket - \rrbracket : Type \to Domain \]
+
+that maps a type to a domain. We defined our types by induction, so we  have specify the different constructions of domains we use by induction on types:
+
+\begin{enumerate}
+\item{The type of Natural numbers is the base type, so they are modelled by a single domain. We use the flat domain of Natural numbers, described in Section \ref{flat}, where $\bot$ represents a term that does not terminate:
+
+\[ \llbracket \nat \rrbracket = \mathbb{N}_{\bot} \]
+
+}
+\item{Function types are formed of other types. We model them using the domain of continuous functions, described in Section \ref{cont}.
+
+\[\llbracket A \to B \rrbracket = \llbracket A \rrbracket \to \llbracket B \rrbracket \]
+
+(Where $\llbracket A \rrbracket \to \llbracket B \rrbracket$ is the same as $\cont(A,B)$)}
+\end{enumerate}
+
+\subsection{Denotation of Typing Contexts}
+We also need a domain for the typing contexts, which is given by the following function:
+
+\[ \llbracket - \rrbracket_{Ctx} : Context \to Domain \]
+
+that maps a typing context to a domain. The domain will be a nested tuple, the size of which depends on the number of variables in $\Gamma$. Each variable's type is a domain, so the overall domain is a product of domains, described in Section \ref{prod}.  Therefore we define these domains by induction on the size of the given typing context:
+
+The empty context is given by 
+
+\[\llbracket \cdot \rrbracket_{Ctx} = \mathbbm{1}\]
+
+the single element domain, which we defined in Section \ref{single}. 
+
+Adding a variable to a context $\Gamma$ gives us the following domain:
+
+\[ \llbracket \Gamma, x : A \rrbracket_{Ctx} = \llbracket \Gamma \rrbracket \times \llbracket A \rrbracket \]
+
+where $\llbracket \Gamma \rrbracket$ is a product of domains.
+
+This gives us all combinations of all possible values of each variable in $\Gamma$. If we want a specific valuation of the variables, we can refer to $d^* \in \llbracket \Gamma \rrbracket_{Ctx}$. $d^* = (d_1, \dots, d_n)$ will be a tuple in the underlying set of the product domain of size $n$, where $n$ is the number of domains in the product domain and also the number or variables in $\Gamma$.
+
+\subsection{Denotation of well typed terms}
+We map well-typed PCF expressions to the domain that models their type. Given a well typed term $\Gamma \vdash e : A$ we have the continuous function:
+
+\[ \llbracket \Gamma \vdash e : A \rrbracket \in \llbracket \Gamma \rrbracket_{Ctx} \to \llbracket A \rrbracket \]
+
+So $\llbracket \Gamma \vdash e : A \rrbracket d^*$ gives us an element of $\llbracket A \rrbracket$, the domain that models $e$'s type. We define this function by induction on each possible value of $e$:
+
+\paragraph{Variables} 
+
+Given a context $\Gamma = x_0 : A_0, \ \dots \ ,x_n : A_n$, $\llbracket \Gamma \rrbracket_{Ctx}$ maps a tuple $d^*$ in $\llbracket A_0 \rrbracket \times \dots \times \llbracket A_n \rrbracket$ to a value in $\llbracket A_i \rrbracket$:
+
+\[\llbracket \Gamma \vdash x_i : A_i \rrbracket  = \lambda d^* \in \llbracket \Gamma \rrbracket . \pi_i (d^*)\]
+
+We use the $i$th projection function to get the value of the $i$th variable in the context.
+
+\paragraph{Zero}
+$z$ has the type $\nat$, the domain of which we have defined to be $\mathbbm{N}_\bot$. As $z$ is a constant, we always map it to the same value, which is 0, no matter what $d^*$ is:
+
+\[ \llbracket \Gamma \vdash z : Nat \rrbracket d^* = 0\]
+
+\paragraph{Successor} 
+When $\Gamma \vdash s(e) : \nat$ is a well typed term, then so is $\Gamma \vdash e : \nat$, so we can use $\llbracket \Gamma \vdash e : \nat \rrbracket$ in the definition of the denotational semantics for successor. As the domain of $e$ is $\mathbb{N}_{\bot}$, we must consider the case where $e$ maps to $\bot$, for which we would also have to map $s(e)$ to $\bot$:
+
+\begin{minipage}{4in}
+\begin{align*}
+\intertext{$\llbracket \Gamma \vdash s(e) : \nat \rrbracket d^* =$ Let $v = \llbracket \Gamma \vdash e : \nat \rrbracket d^*$ in}
+  \begin{cases}
+            v+1 & \text{if } v \neq \bot  \\
+           \bot & \text{if } v = \bot
+  \end{cases}
+\end{align*} 
+\end{minipage}
+
+\paragraph{Case} When $\Gamma \vdash \case \ (e, z \mapsto e_0, s(y) \mapsto e_S) : C$ is a well typed term, then so is $\Gamma \vdash e : \nat$, so we can use $\llbracket \Gamma \vdash e : \nat \rrbracket$ in the definition of the denotational semantics for case:
+
+\begin{minipage}{4in}
+\begin{align*}
+\intertext{$\llbracket \Gamma \vdash \case \ (e, z \mapsto e_0, s(y) \mapsto e_S) : C \rrbracket d^* =$ Let $v = \llbracket \Gamma \vdash e : \nat \rrbracket d^*$ in}
+  \begin{cases} 
+           \llbracket \Gamma \vdash e_0 : C \rrbracket d^* & \text{if } v = 0 \\
+           \llbracket \Gamma,  y : \nat \vdash e_S : C \rrbracket (d^*, n) & \text{if } v = n + 1 \\
+             \bot & \text{if } v = \bot
+  \end{cases}
+\intertext{}
+\end{align*} 
+\end{minipage}
+
+\paragraph{Application} In this rule we already have a denotation for the function and for the element we are applying it to. The bottom element of our domain of functions is the function that loops on all inputs, $\lambda x \in X. \bot_Y$. Therefore the value of $f$ will always be a function. Functions on domains can be applied to bottom elements, so we can still have $f(v)$ when $v = \bot$. Therefore there is only one case for function application: 
+
+\vspace{0.25cm}
+
+$\llbracket \Gamma \vdash e \ e' : B \rrbracket d^* =$ Let $f = \llbracket \Gamma \vdash e : A \to B \rrbracket d^*$ in 
+
+\hspace{4.5cm} Let $v = \llbracket \Gamma \vdash e' : A \rrbracket d^*$ 
+
+\hspace{7cm} in $f(v)$
+
+\paragraph{$\lambda$ abstraction} For $\lambda$ abstraction, by its typing rule, we already have a denotation for $\llbracket \Gamma , x : A \vdash e : B \rrbracket d^*$. This is a function of type $\llbracket \Gamma \rrbracket \times \llbracket A \rrbracket \to \llbracket B \rrbracket$. The function we want to obtain is of type $\llbracket \Gamma \rrbracket \to  (\llbracket A \to  B \rrbracket)$, so we must return a continuous function. We use currying, with our denotation of $\Gamma, x : A \vdash e : B$. As this is in a different context, we need our function to be in a context where the value of $x$ is our $a \in \llbracket A \rrbracket$ that is the argument to our function, which is $(d^*, a)$ :
+
+\[\llbracket \Gamma \vdash \lambda x : A. e : A \to B \rrbracket d^* = \lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a)\]
+ 
+\paragraph{Fixpoint} For fixpoint, by its typing rule we already have a denotation for $\llbracket \Gamma , x : A \vdash e : A \rrbracket d^*$ This is a function of type $\llbracket \Gamma \rrbracket \times \llbracket A \rrbracket \to \llbracket A \rrbracket$. The function we want to obtain is of type $\llbracket \Gamma \rrbracket \to  \llbracket A \rrbracket$ To get an element of $\llbracket A \rrbracket$, we use the fixpoint function, $fix_{\llbracket A \rrbracket}$, which is a continuous function of type $(\llbracket A \rrbracket \to \llbracket A \rrbracket) \to \llbracket A \rrbracket$. the function we give to the fixpoint is the one that maps any given $a \in \llbracket A \rrbracket$ to the denotation of $ \Gamma , x : A \vdash e : A$ in a context where $a$ is the value of $x$:
+
+\[\llbracket \Gamma \vdash \fix \ x : A. e : A \rrbracket d^* = fix_{\llbracket A \rrbracket} (\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a)\] 
+
+\section{Substitution Theorem}
+The following theorem says that given a well typed expression $e : A$ and another expression $e' : C$, which is well typed in the context with $x:A$ added, then the denotation of $e'$ with $e$ substituted for $x$ is the same as the denotation of the original expression in the context with $x:A$ added and valuation with the denotation of $e$ as the value of $x$:
+
+\vspace{0.5cm}
+
+\begin{thm}
+If $\Gamma \vdash e : A$ and $\Gamma, x:A \vdash e' : C$ and $d^* \in \llbracket \Gamma \rrbracket$, then $\llbracket \Gamma \vdash [e/x]e' : C \rrbracket d^* =\llbracket \Gamma, x : A \vdash e': C \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$
+\end{thm}
+
+\begin{proof}
+
+We prove this by induction on the value of $e'$:
+
+\paragraph{Variables} There are two cases for variables:
+\begin{enumerate}
+\item{For a variable $x : C$, $C$ must be equal to $A$, so we get $\llbracket \Gamma \vdash [e/x]x : A \rrbracket d^* = \llbracket \Gamma \vdash e : A \rrbracket d^*$, from the substitution rule. 
+
+On the right hand side, $\llbracket \Gamma , x : A \vdash x : A \rrbracket(d^* , \llbracket \Gamma \vdash e : A \rrbracket d^*) = \pi_i(d^* , \llbracket \Gamma \vdash e : A \rrbracket d^*)$. The value of this is the value of $x$, which is $\llbracket \Gamma \vdash e : A \rrbracket d^*$.
+
+Therefore $\llbracket \Gamma \vdash [e/x]x : A \rrbracket d^* = \llbracket \Gamma , x : A \vdash x : A \rrbracket(d^* , \llbracket \Gamma \vdash e : A \rrbracket d^*) = \llbracket \Gamma \vdash e : A \rrbracket d^*$ }
+\item{For a variable $y: C$, we have $\llbracket \Gamma \vdash [e/x]y : C \rrbracket d^* = \llbracket \Gamma \vdash y : C \rrbracket d^*$ , by the substitution rule for variables. This is equal to $\pi_i(d^*)$, where $y : C$ is the $i$th element of $\Gamma$. If we extend the context $\Gamma$ with $x:A$ and the valuation $d^*$ with $\llbracket \Gamma \vdash e : A \rrbracket d^*$, then this does not affect $\pi_i(d^*)$, as each variable is independent. Therefore $\llbracket \Gamma \vdash [e/x]y : C \rrbracket d^* =\llbracket \Gamma, x : A \vdash y: C \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*).$}
+\end{enumerate}
+
+\paragraph{Zero} By the substitution rule for zero, $\llbracket \Gamma \vdash [e/x]z : \nat \rrbracket d^* = \llbracket \Gamma \vdash z : \nat \rrbracket d^*$. As $z$ is a constant, its denotation will be the same for any $\Gamma$ and $d^*$, so we always get 0. Therefore $\llbracket \Gamma \vdash [e/x]z : \nat \rrbracket d^* = \llbracket \Gamma, x : A \vdash z : \nat \rrbracket (d^*, \llbracket \Gamma , \vdash e : A \rrbracket d^*) = 0.$
+
+\paragraph{Successor} Using the substitution rule, $\llbracket \Gamma \vdash [e/x]s(e') : \nat \rrbracket d^* = \llbracket \Gamma \vdash s([e/x]e') : \nat \rrbracket d^*$. The induction hypothesis is $\llbracket \Gamma \vdash [e/x]e' : C \rrbracket d^* =\llbracket \Gamma, x : A \vdash e': C \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$, so we can use this to rewrite $\llbracket \Gamma \vdash s([e/x]e') : \nat \rrbracket d^*$ as the following  function:
+
+\begin{minipage}{4in}
+\begin{align*}
+\intertext{Let $v  =\llbracket \Gamma, x : A \vdash e': C \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$  in}
+  \begin{cases}
+            v+1 & \text{if } v \neq \bot  \\
+           \bot & \text{if } v = \bot
+  \end{cases}
+\end{align*} 
+\end{minipage}
+
+This function is also the definition of $\llbracket \Gamma , x : A \vdash s(e'): C \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$.
+
+Therefore $\llbracket \Gamma \vdash [e/x]s(e') : \nat \rrbracket d^* = \llbracket \Gamma , x : A \vdash s(e'): C \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$
+
+\paragraph{Case} Using the substitution rule for case, $\llbracket \Gamma \vdash [e/x](\case \ (e', z \mapsto e_0, s(y) \mapsto e_S) : C \rrbracket d^* = \llbracket \Gamma \vdash (\case \ ([e/x]e', z \mapsto [e/x]e_0, s(y) \mapsto [e/x]e_S) : C \rrbracket d^*$. We can use induction on all the expressions with substitutions to get the following definition of $\llbracket \Gamma \vdash (\case \ ([e/x]e' ,z \mapsto [e/x]e_0, s(y) \mapsto [e/x]e_S) : C \rrbracket d^*$:
+
+\begin{minipage}{4in}
+\begin{align*}
+\intertext{ Let $v = \llbracket \Gamma , x : A \vdash e' : \nat \rrbracket (d^*,\llbracket \Gamma \vdash e : A \rrbracket d^*) $ in}
+  \begin{cases} 
+           \llbracket \Gamma, x : A \vdash e_0 : C \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*) & \text{if } v = 0 \\
+           \llbracket \Gamma,  y : \nat, x : A \vdash e_S : C \rrbracket (d^*, n, \llbracket \Gamma \vdash e : A \rrbracket d^*) & \text{if } v = n + 1 \\
+             \bot & \text{if } v = \bot
+  \end{cases}
+\intertext{}
+\end{align*} 
+\end{minipage}
+
+This function is also the definition of $\llbracket \Gamma , x : A \vdash [e/x](\case \ (e',z \mapsto e_0, s(v) \mapsto e_S)): C \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$
+
+Therefore $\llbracket \Gamma \vdash [e/x] (\case \ (e', z \mapsto e_0, s(v) \mapsto e_S): C \rrbracket d^* = \llbracket \Gamma , x : A \vdash \case \ (e', z \mapsto e_0, s(v) \mapsto e_S): C \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$
+
+\paragraph{Application} Using the substitution rule for application, $\llbracket \Gamma \vdash [e/x](e_0 \ e_1) : B \rrbracket d^* = \llbracket \Gamma \vdash [e/x]e_0 ([e/x] e_1) : B \rrbracket d^*$. We can use induction on $\llbracket \Gamma \vdash [e/x]e_0 : A \to B \rrbracket$ and $ \llbracket \Gamma \vdash [e/x]e_1 : A \rrbracket$ to rewrite the denotation as the following:
+
+Let $f = \llbracket \Gamma, x : A \vdash e_0 : A \to B \rrbracket (d^*,\llbracket \Gamma \vdash e : A \rrbracket d^*) $ in 
+
+\hspace{4.5cm} Let $v = \llbracket \Gamma, x : A \vdash e_1 : A \rrbracket (d^* \llbracket \Gamma \vdash e : A \rrbracket d^*)$ 
+
+\hspace{7cm} in $f(v)$
+
+This function is also the definition of $\llbracket \Gamma, x : A \vdash e_0 \ e_1 : B \rrbracket (d^* \llbracket \Gamma \vdash e : A \rrbracket d^*)$.
+
+Therefore, $\llbracket \Gamma \vdash [e/x](e_0 \ e_1) : B \rrbracket d^* = \llbracket \Gamma, x : A \vdash e_0 \ e_1 : B \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$
+
+
+\paragraph{$\lambda$-Abstraction} Using the substitution rule we have $\llbracket \Gamma \vdash [e/x](\lambda y : A.e') : A \to B \rrbracket d^* = \llbracket \Gamma \vdash \lambda y : A. ([e/x] e') : A \to B \rrbracket d^*$. We can use induction with $\llbracket \Gamma \vdash \lambda [e/x] e' : B$, to rewrite the denotation as the following:
+
+ \[\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, y : A, x : A  \vdash e : B \rrbracket(d^*, a , \llbracket \Gamma \vdash e : A \rrbracket d^*)\]
+
+This is also the definition of $\llbracket \Gamma, x : A \vdash \lambda y : A. \ e' : A \to B \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$
+
+Therefore $\llbracket \Gamma \vdash [e/x](\lambda y : A.e') : A \to B \rrbracket d^* = \llbracket \Gamma, x : A \vdash \lambda y : A. \ e' : A \to B \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$
+
+
+\paragraph{Fixpoint} Using the substitution rule for fixpoint, $\llbracket \Gamma \vdash [e/x](\fix \ y : C . e' : C) \rrbracket d^* = \llbracket \Gamma \vdash \fix \ y : C . [e/x]e' : C \rrbracket d^*$. The denotation of this is the following:
+
+\[fix_{\llbracket C \rrbracket} (\lambda c \in \llbracket C \rrbracket . \llbracket \Gamma, y : C \vdash [e/x]e' : C \rrbracket (d^*, c)\]
+
+ We can use induction on $\llbracket \Gamma, y : C \vdash [e/x]e' : C \rrbracket$ to rewrite the denotation as the following:
+
+\[fix_{\llbracket C \rrbracket} (\lambda c \in \llbracket C \rrbracket . \llbracket \Gamma, y : C, x : A \vdash e' : C \rrbracket (d^*, c, \llbracket \Gamma \vdash e : A \rrbracket d^*)\] 
+
+This is also the definition of $\llbracket \Gamma, x : A \vdash (fix \ y : C . e' : C) \rrbracket (d^*, \llbracket \Gamma \vdash e : C \rrbracket d^*)$.
+
+\vspace{0.25cm}
+
+Therefore $\llbracket \Gamma \vdash [e/x](\fix \ y : C . \ e' : C) \rrbracket d^* = \llbracket \Gamma, x : A \vdash (fix \ y : C . e' : C) \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^* / x)$.
+
+\vspace{0.25cm}
+
+Now we have proved the theorem for every case of $e'$.
+\end{proof}
+
+\section{Soundness}\label{sound}
+In general, soundness says that if we have a mapping from one expression to another in the operational semantics, then these expressions must also have equal denotations in the denotational semantics (so the Operational Semantics are sound with relation to the Denotational Semantics).
+ 
+Our Soundness theorem is the following theorem, which says that for a well typed expression $e$, if it maps to another expression $e'$, then its denotation will be equal to that of the new expression in the same context:
+
+\vspace{0.35cm}
+
+\begin{thm}
+If $\Gamma \vdash e: A$ and $e \mapsto e'$ and $d^* \in \llbracket \Gamma \rrbracket$, then $\llbracket \Gamma \vdash e : A \rrbracket d^* =  \llbracket \Gamma \vdash e' : A \rrbracket d^*$
+\end{thm}
+
+\begin{proof}
+By induction on $e \mapsto e'$, so there is a case for each evaluation rule:
+
+\paragraph{Variables} have no rules in the operational semantics, so there are no cases here.
+
+\paragraph{Zero} is a value, so it has no evaluation rules. Therefore there are no cases for zero.
+
+\paragraph{Successor} We use a congruence rule for successor, so when $s(e) \mapsto s(e')$ we also know that $e \mapsto e'$. From $\Gamma \vdash s(e) : \nat$, we know that $\Gamma \vdash e : \nat$. Therefore we can use induction on this to get $\llbracket \Gamma \vdash e : A \rrbracket d^* =  \llbracket \Gamma \vdash e' : A \rrbracket d^*$.
+
+We can use this to rewrite $\llbracket \Gamma \vdash s(e) : \nat \rrbracket d^*$ as:
+
+\begin{minipage}{4in}
+\begin{align*}
+\intertext{Let $v = \llbracket \Gamma \vdash e' : \nat \rrbracket d^*$ in}
+  \begin{cases}
+            v+1 & \text{if } v \neq \bot  \\
+           \bot & \text{if } v = \bot
+  \end{cases}
+\end{align*} 
+\end{minipage}
+
+Which is the same as $\llbracket \Gamma \vdash s(e') : \nat \rrbracket d^*$
+
+\paragraph{Case} There are three cases for case:
+
+\begin{enumerate}
+\item{When $e$ is an expression that can be reduced, we  use a congruence rule for case, so when $\case \ (e, z \mapsto e_0, s(y) \mapsto e_S)  \mapsto \case \ (e', z \mapsto e_0, s(y) \mapsto e_S)$ we also know that $e \mapsto e'$. From $\Gamma \vdash \case \ (e, z \mapsto e_0, s(y) \mapsto e_S) : C $, we know that $\Gamma \vdash e : \nat$. Therefore we can use induction to get $\llbracket \Gamma \vdash e : \nat \rrbracket d^* =  \llbracket \Gamma \vdash e' : \nat \rrbracket d^*$.
+
+We can use this to rewrite $\llbracket \Gamma \vdash \case \ (e, z \mapsto e_0, s(y) \mapsto e_S) : C \rrbracket d^*$ as:
+
+\begin{minipage}{4in}
+\begin{align*}
+\intertext{ Let $v = \llbracket \Gamma \vdash e' : \nat \rrbracket d^*$ in}
+  \begin{cases} 
+           \llbracket \Gamma \vdash e_0 : C \rrbracket d^* & \text{if } v = 0 \\
+           \llbracket \Gamma, y : \nat \vdash e_S : C \rrbracket (d^*, n)  & \text{if } v = n + 1 \\
+             \bot & \text{if } v = \bot
+  \end{cases}
+\intertext{}
+\end{align*} 
+\end{minipage}
+
+Which is the same as $\llbracket \Gamma \vdash \case \ (e', z \mapsto e_0, s(y) \mapsto e_S) : C \rrbracket d^*$.}
+\item{When $e = z$, we have $\llbracket \Gamma \vdash \case(z, z \mapsto e_0, s(y) \mapsto e_S) : C \rrbracket d^*$ which is:
+
+\begin{minipage}{4in}
+\begin{align*}
+\intertext{ Let $v = \llbracket \Gamma \vdash z : \nat \rrbracket d^*$ in}
+  \begin{cases} 
+           \llbracket \Gamma \vdash e_0 : C \rrbracket d^* & \text{if } v = 0 \\
+           \llbracket \Gamma, y : \nat \vdash e_S : C \rrbracket (d^*, n)  & \text{if } v = n + 1 \\
+             \bot & \text{if } v = \bot
+  \end{cases}
+\intertext{}
+\end{align*} 
+\end{minipage}
+
+As $\llbracket \Gamma' \vdash z : \nat \rrbracket d^*$ is always 0, this can be simplified to $\llbracket \Gamma \vdash e_0 : C \rrbracket d^*$, which is the result of the evaluation rule.}
+\item{When $e = s(v)$, we have $\llbracket \Gamma \vdash \case(s(v), z \mapsto e_0, s(y) \mapsto e_S) : C \rrbracket d^*$ which is:
+
+\begin{minipage}{4in}
+\begin{align*}
+\intertext{ Let $v' = \llbracket \Gamma \vdash s(v) : \nat \rrbracket d^*$ in}
+  \begin{cases} 
+           \llbracket \Gamma \vdash e_0 : C \rrbracket d^* & \text{if } v' = 0 \\
+           \llbracket \Gamma, y : \nat \vdash e_S : C \rrbracket (d^*, n)  & \text{if } v' = v + 1 \\
+             \bot & \text{if } v' = \bot
+  \end{cases}
+\intertext{}
+\end{align*} 
+\end{minipage}
+
+where $n = \llbracket \Gamma \vdash v : Nat \rrbracket d^*$.
+
+There are two possibilities for the value of $v'$.
+\begin{enumerate}
+\item{If $v' = \bot$ then the function will return $\bot$}
+\item{Otherwise $v' = n+1$, where $n = \llbracket \Gamma \vdash v : \nat \rrbracket d^*$. With this we can simplify the definition of the expression to $\llbracket \Gamma, y : \nat \vdash e_S : C \rrbracket (d^*, n)$
+
+This is the same as:
+\[\llbracket \Gamma, y : Nat \vdash e_S : C \rrbracket (d^*, \llbracket \Gamma \vdash v : Nat \rrbracket d^*)\]
+
+Using the substitution lemma, we get $\llbracket \Gamma \vdash [v/y]e_S \rrbracket d^*$.}
+\end{enumerate}
+}
+\end{enumerate}
+
+\paragraph{Application}There are two cases for application:
+
+\begin{enumerate}
+\item{We use a congruence rule for function application, so when $e_0 \ e_1 \mapsto e_0' \ e_1$ we also know that $e \mapsto e'$. From $\Gamma \vdash e_0 \ e_1 : B$, we know that $\Gamma \vdash e_0 : A \to B$. Therefore we can use induction on this to get $\llbracket \Gamma \vdash e_0 \ e_1 : A \rrbracket d^* =  \llbracket \Gamma' \vdash e_0' \ e_1 : A \rrbracket d^*$.
+
+We can use this to rewrite $\llbracket \Gamma \vdash e_0 \ e_1 : B \rrbracket d^*$ as:
+
+Let $f = \llbracket \Gamma \vdash e_0' : A \to B \rrbracket d^*$ in 
+
+\hspace{4.5cm} Let $v = \llbracket \Gamma \vdash e_1 : A \rrbracket d^*$ 
+
+\hspace{7cm} in $f(v)$
+
+which is the same as $\llbracket \Gamma \vdash e_0' \ e_1 : B \rrbracket d^*$
+}
+\item{When $e = \lambda x:A.e$, it is a value, so cannot be reduced further by the congruence rule. We use the semantic rule:
+
+$$
+\inferrule{ \ }
+ {(\lambda x: A .\ e) \ e' \mapsto [e'/x]e}
+$$
+
+so we need a denotation $\llbracket \Gamma \vdash [e'/x]e \rrbracket d^*$.
+
+As we have the denotation of $\llbracket \Gamma \vdash (\lambda x:A. e) \ e' : B \rrbracket d^*$, we have $f = \llbracket \Gamma \vdash \lambda x:A. e : A \to B \rrbracket d^*$ and $v = \llbracket \Gamma \vdash e': A  \rrbracket d^*.$
+
+$f = \lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a)$ , so $f \ v$ is $\llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, \llbracket \Gamma \vdash e' : A \rrbracket d^*)$
+
+By the substitution lemma, this is the same as $\llbracket \Gamma \vdash [e'/x]e \rrbracket d^*$}
+\end{enumerate}
+
+\paragraph{$\lambda$-Abstraction}  is a value, so has no evaluation rules. Therefore there are no cases.
+
+\paragraph{Fixpoint} As $\llbracket \Gamma \vdash \fix \ x:A .e : A \rrbracket d^*$ is a fixpoint operator, we know that $f(fix(f)) = fix(f)$, so we can rewrite it as:
+
+\[(\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a))[fix_{\llbracket A \rrbracket} (\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a))]\]
+
+which is equal to:
+
+\[\llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, fix_{\llbracket A \rrbracket} (\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a)))
+\]
+
+which is equal to:
+
+\[\llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, \llbracket \Gamma \vdash \fix \ x:A .e : A \rrbracket d^*)
+\]
+
+Using the substitution lemma, this is the same as
+
+\[\llbracket \Gamma \vdash [fix \ x:A.e/x] e : A \rrbracket d^* \]
+ 
+ 
+The evaluation rule is 
+$$
+\inferrule{ \ }
+{fix \ x:A. e \mapsto [fix \ x:A. e/x]e}
+$$
+so this is the denotation we need.
+\end{proof}

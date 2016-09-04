@@ -1,0 +1,131 @@
+\documentclass{bhamthesis}
+\usepackage{natbib}
+\setcounter{tocdepth}{1}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    linktoc = all,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=black
+}
+\usepackage{tikz}
+\title{Adequacy of PCF}
+\pagestyle{thesis}
+\usepackage{mathpartir}
+\usepackage{amsmath}
+\usepackage{parskip}
+\usepackage{bbm}
+%\usepackage{bbold}
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\newcommand{\rel}{\sqsubseteq_{C}}
+\usepackage{amsthm}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{defn}{Definition}
+\usepackage{changepage}
+\author{Natalie Ravenhill}
+\supervisor{Neelakantan Krishnaswami and Mart\'{i}n Escard\'{o}}
+\department{Computer Science}
+\newcommand{\chain}{\operatorname{Chain}}
+\newcommand{\cont}{\operatorname{Cont}}
+\newcommand{\nat}{\operatorname{Nat}}
+\newcommand{\fix}{\operatorname{fix}}
+\newcommand{\add}{\operatorname{add}}
+\newcommand{\adeq}{\operatorname{Adeq}}
+\newcommand{\case}{\operatorname{case}}
+\degree{MSc Advanced Computer Science}
+
+
+\begin{document}
+\maketitle
+\newcommand{\natb}{\mathbb{N}_{\bot}}
+\begin{abstract}
+We give a proof of Adequacy, a theorem relating the denotational semantics of PCF, a typed language with recursion,  to its operational semantics, using the logical relations technique. To do this, we first develop operational and denotational semantics of PCF, proving type safety and some necessary lemmas for this, and soundness of PCF. Finally we consider whether all possible elements in our denotational semantic model are denotations of syntactically correct PCF terms.
+\vspace{0.5cm}
+
+\textbf{Keywords:} \emph{Computational Adequacy, Denotational Semantics, Domain Theory,  Logical Relations, Operational Semantics, PCF}
+\end{abstract}
+
+\begin{acknowledgements}
+\end{acknowledgements}
+
+\tableofcontents
+\chapter{Introduction}\label{ch1}
+\input{intoREPORT.tex}
+%Literature Review goes here
+
+\chapter{Background}\label{ch2}
+There are some mathematical topics and proof techniques, which are very important in semantics, that are used in this report. To prove Adequacy, we need a model for our language in which we can work.
+
+The most obvious choice is to model the language in sets, where we can use a set to model each type in PCF. However, for function types, if a function of some type never terminates, then its result will not be in the set of that type, and we cannot model it. Therefore we need some additional "undefined" element in the model to represent this.
+
+We also want to compare different programs in the model, which we can do by using an information ordering, where more defined programs are higher in the ordering and the element representing non-termination is the lowest. The usefulness of the ordering will become apparent when we discuss recursion (see \ref{fixpoint}).
+
+A good ordering to use is a partial order, which is defined as follows:
+
+\vspace{0.25cm}
+
+\begin{defn}
+A partial order on a set $X$ is a binary relation $\sqsubseteq$  that it is reflexive, antisymmetric and transitive, which are the following properties:
+\begin{itemize}
+      \item{$\forall x \in X, \ x \sqsubseteq x$ \hspace{4.5cm} Reflexivity}
+      \item{$\forall x, y \in X. \  x \sqsubseteq y \wedge y \sqsubseteq x \to x = y$ \hspace{1cm} Antisymmetry}
+      \item{$\forall x, y, z \in X. \ x \sqsubseteq y \wedge y \sqsubseteq z \to x \sqsubseteq z$ \hspace{1cm} Transitivity}
+\end{itemize} 
+\end{defn}
+
+%define and give example.
+
+Therefore, we need a structure which includes an underlying set, an partial order on the set and an undefined element - this is a \textbf{domain}.
+ 
+
+\input{domaintheory.tex}
+
+\section{Logical Relations}\label{log}
+
+\input{logicalREPORT.tex}
+%Definition.
+%Exercises for Murawski's slides
+
+\chapter{Definition of PCF and Syntax}\label{ch3}
+
+\input{typesREPORT.tex}
+
+
+\chapter{Denotational Semantics}\label{ch6}
+\input{denotationalREPORT.tex}
+
+\chapter{Adequacy}\label{Adequacy}
+\input{newAdequacyREPORT.tex}
+%\input{logrelREPORT.tex}
+
+\chapter{Other Proofs of Adequacy}\label{ch8}
+
+\input{adeqREPORT.tex}
+
+
+
+\chapter{Non-Definability of Parallel-Or}
+\input{por.tex}
+
+%\chapter{FPC}
+
+\chapter{Evaluation}\label{ch9}
+
+\input{evaluationREPORT.tex}
+
+\chapter{Conclusion}\label{ch10}
+In the report we defined the syntax of PCF and gave the typing rules, which all syntactically correct PCF programs must satsify. We specified the operational semantics of PCF and we proved Type Safety, which states that all correctly typed PCF programs must have a valid evaluation in the operational semantics if they are expected to.
+We defined our denotational semantics of PCF and proved that the operational semantics are sound with respect to this. We proved the Adequacy theorem on our semantics and we discussed other approaches to the proof of Adequacy.
+
+Therefore we have fully solved the problem stated in the introduction (in Chapter \ref{ch1}).
+
+\bibliographystyle{plainnat}
+\bibliography{report}
+
+\end{document}

@@ -1,0 +1,74 @@
+There have been other proofs for Adequacy for PCF completed. Here we discuss some of the other approaches:
+
+\section{Proof using "Computable Terms"}
+The following definition of a computable term in PCF is given by \citep{Gunter92} and is adpated from \citep{Plotkin77}:
+
+\vspace{0.5cm}
+
+\begin{defn} A computable term is defined by the following statements:
+\begin{enumerate}
+\item{If $e$ is a closed PCF term of type $\nat$, then $e$ is computable if $\llbracket e \rrbracket = n \Rightarrow e \mapsto^* n$}
+\item{If $e$ is a closed PCF term of type $A \to B$, it is computable if whenever $e'$ is a closed computable term of type $A$, then $e \ e'$ is a closed computable term of type $B$}
+\item{If $e$ is an open term with free variables $x_1, \dots, x_n$ of types $A_1, \dots A_n$ then it is computable if $[e_1/x_1, \dots e_n/x_n]e$ is computable when $\forall i. \ e_i$ are closed computable terms}
+\end{enumerate}
+\end{defn}  
+
+\vspace{0.5cm}
+
+\textcolor{red}{compare to mine!}
+
+%Therefore if any closed terms $e : A$ are computable, then this is the same as saying $e \in \adeq_a$.
+
+%The third point differs from our logical predicate in that it is the same as saying if $\Gamma \vdash e : A$ and $\gamma \in \adeq_{Ctx}(\Gamma)$ and $[\gamma]e \in \adeq_A$ (so if the Main Lemma holds), then $e \in \adeq_A$.
+
+By combining each part of the definition of computable terms, we get that $e : A \to B$ is computable only if  $\sigma e(e'_1, \dots e'_n)$ is (where $\forall i. \ e'_i :  A_i$ is closed computable and $\sigma $ is a substitution formed of closed computable terms). This is because starting from the open term $e$, using part 3 of the definition we know that everything in $\sigma$ is closed computable, so if $\sigma e$ is closed computable, then so is $e$. Then we use part 2 to prove $\sigma e$ is closed computable. We get $\sigma e (e'_1)$ is closed computable, then $(\sigma e (e'_1))(e'_2)$ is closed computable and so on until we have applied every argument and the whole result is closed computable, so $\sigma e$ is too.
+
+Therefore if open function terms substituted with a closed computable substitution are closed computable and the application of them to any closed computable terms will give a closed computable term as a result, then the open function term is also closed computable. This will come in useful for proving terms of types other than base type are computable:
+
+\vspace{0.5cm}
+
+\begin{thm}
+Every PCF term is computable
+\end{thm}
+
+%summarize this, just do fixpoint case!
+\begin{proof}
+By induction on $e$. The cases for variables, zero, succ are basically the same as in our proof.
+
+For case, we prove $\sigma \case(e, z \to e_0, s(v) \to e_S)(e'_1, \dots e'_n)$ is computable (where $(e'_1, \dots e'_n)$ are all closed  computable and $\sigma$ contains only closed computable terms) to prove all possible $\case$ terms are computable. (This also works in closed case terms $\sigma$ is just the empty substitution).  
+
+Function application just follows from the inductive hypothesis (on $\sigma e$ and $\sigma e'$ for open terms) and part 2 of the definition.
+
+For $\lambda$ abstraction, we prove $(\lambda x:A. \ \sigma e)(e'_1 \dots e'_n)$ is computable if $e'_1 \dots e'_n$ are closed computable and all the free variables of $e$ have been substituted by closed computable terms in $\sigma$, by using parts $2$ and $3$ of the definition, so   any $\lambda x:A. \ e$ is closed computable.
+
+Fixpoint is the hardest case. We want to prove $(\fix x:A. \ \sigma e)(e'_1 \dots e'_n)$ is computable if $e'_1 \dots e'_n$ are closed computable and all the free variables of $e$ have been substituted, $\lambda$ abstraction. To do this we use the syntactic approximation described in \ref{un}, so we now want to prove $\sigma M^n (e'_1 \dots e'_n)$ is closed computable.
+
+We prove this by induction on $n$, as we did in our Adequacy proof. $\llbracket M^0 \rrbracket = \bot$, so the proof follows in a similar way to our non-termination lemma \ref{non}.
+
+For the inductive case, we assume $\sigma M^{k-1}$ is closed computable, and then evaluate $\sigma M^k$ in the operational semantics to get $[\sigma, \sigma M^{k-1}/x]e$.
+
+By the inductive hypothesis, we know $\sigma  M^{k-1}$ and $e$ are closed computable, so    $[\sigma, \sigma M^{k-1}/x]e$ is too.
+
+Now we know $\sigma M^k$ is computable, we must show $\sigma M^k (e'_1, \dots, e'_n)$ is too. This will be a closed term of ??? The denotation of $M^k$ is $\bigsqcup n M^n$, so we must prove $\llbracket M^n \rrbracket = n$
+%continue with this.  
+\end{proof}
+
+\section{PCF with fixpoint constant}
+
+We could have also defined PCF in a different way, by using constants to replace certain constructors in the language.
+
+For example, in our definition of PCF, we have terms $\succ \ e$, for some expression $e$. Here $\succ$ is a constructor, so $\succ$ itself is not a term, but once we attach an expression to it, it is a term, $succ \ e$.
+
+This is the same for zero, $\case$ and $\fix$.
+
+Alternatively, we could have defined these operations as constants, for example, $\succ : \nat \to \nat$ is a function in the language that has a pre defined definition that never changes. We then also define $zero : \nat$, $\case : \nat \to \nat \to \nat$ (just on Natural numbers) and $\fix : (A \to A) \to A$.
+
+This is the way PCF is defined in \citep{Streicher06}. Also Plotkin uses this definition, with the addition of a Boolean base type in \citep{Plotkin77}. (?)
+
+\section{Proof using Binary Logical Relation}
+
+The proof of Adequacy given in \citep{Streicher06}, as well as using a different definition of PCF, also uses a different logical relation.
+
+%Continue with material from other document.
+
+%Just give the fixpoint case (and possibly successor)

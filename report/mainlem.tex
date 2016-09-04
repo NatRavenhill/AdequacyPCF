@@ -1,0 +1,217 @@
+\begin{proof}
+By induction on the possible values of $e$.
+
+\paragraph{Variables} For a variable $x_1 : A_1, \dots, x_n : A_n \vdash x : A$, assume for any $i = 1, \dots, n$ that $d_i R_{A_i} e_i$. Then we want to show:
+
+\[ (\lambda (d_1, \dots, d_n) \in \llbracket \Gamma \rrbracket. \ \pi_i(d_1, \dots, d_n))(d_1, \dots, d_n) \ R_A \ [e_1/x_1, \dots, e_n/x_n]x \]
+
+As we have $\Gamma \vdash x : A$, by the typing rule for variables we have $\Gamma(x) = A$, so $x \in dom(\Gamma)$ and $\exists i. \ d_i R_{A_i} e_i$ . Then on the right hand side we have $[e_i/x]x$. Therefore we want to show
+
+\[ d_i R_{A_i} e_i \]
+
+which we have as an assumption. 
+
+%Therefore we know there is some $e'$ such that $e'/x \in \gamma$ and by our assumption there is some $d$ such that $d R_A e'$.
+
+%On the right hand side, the substitution $[\gamma]$ will apply the substitution for $x$ and ignore everything else in $\gamma$. Therefore we want to show $d R_A e'$, which we already have as an assumption.
+
+\paragraph{Zero} For $z : \nat$, we want to show:
+
+\[ \llbracket \Gamma \vdash z : \nat \rrbracket (d_1, \dots, d_n) \ R_{\nat} \ [e_1/x_1, \dots, e_n/x_n]z \]
+
+Expanding the definitions gives us $0 \ R_{\nat} \ z$, so we must show $\forall n \in \mathbbm{N}. 0 = n \Rightarrow z \mapsto^* n$, which is the case as $z$ reduces to $n$ in zero steps. Therefore $0 \ R_{\nat} \ z$.
+
+\paragraph{Successor} For $x_1 : A_1, \dots, x_n : A_n \vdash s(e) : \nat$, assume for any $i = 1, \dots, n$ that $d_i R_{A_i} e_i$. Then we want to show:
+
+\[ \llbracket \Gamma \vdash s(e) : \nat \rrbracket (d_1, \dots, d_n) \ R_{\nat} \ [e_1/x_1, \dots, e_n/x_n](s(e))\]
+
+Which expands to $\forall n \in \mathbbm{N}. \ \llbracket \Gamma \vdash s(e) : \nat \rrbracket (d_1, \dots, d_n) = n \Rightarrow [e_1/x_1, \dots, e_n/x_n]s(e) \mapsto^* n $. By the inductive hypothesis, we know:
+
+\[ \llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) \ R_{\nat} \ [e_1/x_1, \dots, e_n/x_n]e \]
+
+This expands to $\forall n \in \mathbbm{N}. \ \llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = n \Rightarrow [e_1/x_1, \dots, e_n/x_n]e \mapsto^* n $. (If the denotation of $e$ is $\bot$ then this is vacuously true.)
+
+Therefore there will be two cases:
+
+\begin{enumerate}
+\item{If $\llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = \bot$, then we must show $\bot R_{\nat} [e_1/x_1, \dots, e_n/x_n]s(e)$, which we get from Lemma \ref{bot}}%As there is no $n = \bot$ then the statement that gives $\bot R_{\nat} [x_1/t_1, \dots, x_n/t_n]s(e)$ is vacuously true.}
+\item{If $\llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = v$, then we must show $v+1 \ R_{\nat} \ [e_1/x_1, \dots, e_n/x_n]s(e)$. Let $n = v + 1$. From the inductive hypothesis we know that $[e_1/x_1, \dots, e_n/x_n]e \mapsto^* v$. Using the congruence evaluation rule for successor, we get $s([e_1/x_1, \dots, e_n/x_n]e) \mapsto s(v)$ and $s(v)$ is the same as $v+1$. Therefore we have $v + 1 \ R_{Nat} s(v)$, so if we use this with the congruence rule in Lemma \ref{exp}, we have  $v + 1 \ R_{Nat} s([e_1/x_1, \dots, e_n/x_n]e)$ }
+\end{enumerate}
+
+\paragraph{Case} For $x_1 : A_1, \dots, x_n : A_n \vdash \case (e,z \mapsto e_0, s(x) \mapsto e_S)$, assume for any $i = 1, \dots, n$ that $d_i R_{A_i} e_i$. Then we want to show:
+
+
+\[ \llbracket \Gamma \vdash \case(e,z \mapsto e_0, s(x) \mapsto e_S) : A \rrbracket (d_1, \dots, d_n) \]
+\[ R_A \]
+\[ [e_1/x_1, \dots, e_n/x_n]\case (z \mapsto e_0, s(x) \mapsto e_S) \]
+
+The result of the denotation depends on the value of $e$, so we have three cases:
+
+\begin{enumerate}
+\item{$\llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = \bot$, then we must show $\bot \ R_A \ [e_1/x_1, \dots, e_n/x_n] \\ \case (z \mapsto e_0, s(x) \mapsto e_S)$, which we get by applying Lemma \ref{bot}.}
+\item{$\llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = 0$, then we want to show $\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ \\ R_A [e_1/x_1, \dots, e_n/x_n]\case (z \mapsto e_0, s(x) \mapsto e_S)$. As we have $\Gamma \vdash e_0 : A$ from the typing rule of case, we can get $\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ R_A [e_1/x_1, \dots, e_n/x_n]e_0$ by the induction hypothesis. We can now use this in Lemma \ref{exp}, with the operational semantics rule for case when the expression is zero, to get $\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ R_A [e_1/x_1, \dots, e_n/x_n]\case (z \mapsto e_0, s(x) \mapsto e_S)$}
+\item{$\llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = n+1$ we want to show
+\[ \llbracket \Gamma, x : \nat \vdash e_S : \nat \rrbracket(d_1, \dots , d_n, d) \]
+\[\ R_A \]
+\[ [e_1/x_1, \dots, e_n/x_n]\case (e, z \mapsto e_0, s(x) \mapsto e_S)\]
+
+From the induction hypothesis we have 
+
+\[ \llbracket \Gamma, x : \nat \vdash e_S : \nat \rrbracket(d_1, \dots, d_n, d) \ \ R_A \ [e_1/x_1, \dots, e_n/x_n, e/x]e_S\]
+
+We can now use this in Lemma \ref{exp}, with the operational semantics rule for case when the expression is not zero to get 
+
+\[ \llbracket \Gamma, x : \nat \vdash e_S : \nat \rrbracket(d_1, \dots , d_n, d) \]
+\[ R_A \]
+\[ [e_1/x_1, \dots, e_n/x_n]\case (e, z \mapsto e_0, s(x) \mapsto e_S)\].
+
+
+}
+\end{enumerate}
+
+\paragraph{Application} For $x_1 : A_1, \dots, x_n : A_n \vdash e \ e' : B$, assume for any $i = 1, \dots, n$ that $d_i R_{A_i} e_i$. Then we want to show:
+
+\[ \llbracket \Gamma \vdash  e \ e' : B \rrbracket (d_1, \dots, d_n) \]
+\[ R_B \]
+\[ [e_1/x_1, \dots, e_n/x_n]e \ e' \]
+
+Using the denotational semantics and substitution function we can rewrite this as:
+
+\[ \llbracket \Gamma \vdash  e : A \to B \rrbracket (d_1, \dots, d_n) (\llbracket \Gamma \vdash e' : B \rrbracket (d_1, \dots, d_n))\]
+\[ \ R_B \]
+\[ ([e_1/x_1, \dots, e_n/x_n]e) ([e_1/x_1, \dots, e_n/x_n] e') \]
+
+By the inductive hypothesis we have
+
+\[\llbracket \Gamma \vdash  e : A \to B \rrbracket (d_1, \dots, d_n) \ R_{A \to B} \ [e_1/x_1, \dots, e_n/x_n]e\]
+
+
+Expanding this gives us $ \forall d \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ d R_A e' \Rightarrow \llbracket \Gamma \vdash  e : A \to B \rrbracket (d_1, \dots, d_n) (d) \  R_B \ [e_1/x_1, \dots, e_n/x_n]e \ e'$. Let $d = \llbracket \Gamma \vdash e' : B \rrbracket (d_1, \dots, d_n)$ and $e' = [e_1/x_1, \dots, e_n/x_n]e'$. Then we have $\llbracket \Gamma \vdash  e : A \to B \rrbracket (d_1, \dots, d_n) (\llbracket \Gamma \vdash e' : B \rrbracket (d_1, \dots, d_n) \ R_B \ ([e_1/x_1, \dots, e_n/x_n]e) ([e_1/x_1, \dots, e_n/x_n] e')$.
+
+\paragraph{$\lambda$-Abstraction} 
+For $x_1 : A_1, \dots, x_n : A_n \vdash \lambda x : A. \ e : A \to B$, assume for any $i = 1, \dots, n$ that $d_i R_{A_i} e_i$. Then we want to show:
+
+\[ \llbracket \Gamma \vdash \lambda x : A. \ e : A \to B \rrbracket (d_1, \dots, d_n) \ R_{A \to B} \ [e_1/x_1, \dots, e_n/x_n] (\lambda x : A. \ e) \]
+
+
+%\[ \lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash e : B \rrbracket(\gamma, a/x) \ R_{A \to B} [\gamma] (\lambda x : A. \ e) \]
+
+Expanding the definition of the logical relation gives us
+
+\[ \forall d \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ d R_A e' \Rightarrow\]
+\[ \llbracket \Gamma ,x:A \vdash e : B \rrbracket(d_1, \dots, d_n) (d) \ R_B \  [x_1/t_1, \dots, x_n/t_n](\lambda x:A. \ e) \ e'\]
+
+Let $d$ be an element of the domain of type $A$ and $e'$ be an expression of type $A$ such that $d R_A  e'$.
+
+Then by the using the denotational semantics for $\lambda$ abstraction, we want to show:
+
+\[ (\lambda d \in \llbracket A \rrbracket. \ \llbracket \Gamma, x :A \vdash e : B \rrbracket (d_1, \dots, d_n,d))(d) \ R_B \ [e_1/x_1, \dots, e_n/x_n] (\lambda x:A. \ e) \ e'\]
+
+which is the same as:
+
+\[ \llbracket \Gamma, x :A \vdash e : B \rrbracket (d_1, \dots, d_n, d) \ R_B \ [e_1/x_1, \dots, e_n/x_n, e'/x] \ e \]
+
+which we get by the inductive hypothesis, because from the evaluation rule we have \[[e_1/x_1, \dots, e_n/x_n] (\lambda x:A. \ e) \ e'  \mapsto [e'/x][e_1/x_1, \dots, e_n/x_n]e = [e_1/x_1, \dots, e_n/x_n, e'/x]e\]
+
+ so we can use Lemma \ref{exp}. 
+
+\paragraph{Fixpoint}
+For $x_1 : A_1, \dots, x_n : A_n \vdash \fix x:A. \ e : A$, assume for any $i = 1, \dots, n$ that $d_i R_{A_i} e_i$. Then we want to show:
+
+\[ \llbracket \Gamma \vdash \fix x:A. \ e : A \rrbracket (d_1, \dots, d_n) \ R_A \ [e_1/x_1, \dots, e_n/x_n] (\fix x:A. \ e : A) \]
+
+The denotation of the left hand side is $fix( \lambda a \in \llbracket A \rrbracket. \  \llbracket \Gamma, x :A \vdash e : A \rrbracket(d_1, \dots, d_n, a))$.
+
+By the fixpoint theorem, we know this is the same as 
+\[\bigsqcup_n (\lambda a \in \llbracket A \rrbracket. \  \llbracket \Gamma, x :A \vdash e : A \rrbracket(d_1, \dots, d_n, a))^n(\bot)\]
+
+
+If we can prove that \[\forall n \in \mathbbm{N}. \ (\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash \ e : A \rrbracket(d_1 \dots d_n, a))^n(\bot) \ R_A \ [e_1/x_1, \dots e_n/x_n]\fix x : A. \ e : A\]
+
+then we can use Lemma \ref{chain}, to get the above result.
+
+We prove this by induction on $n$. When $n = 0$, we need to show $\bot \ R_A \ [e_1/x_1, \dots e_n/x_n]\fix x : A. \ e : A$, for which we just use Lemma \ref{bot}.
+
+For the inductive case, we must show 
+
+\[(\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash e : A \rrbracket(d_1 \dots d_n,a))^{n+1}(\bot) \ R_A \ [e_1/x_1, \dots e_n/x_n]\fix x : A. \ e : A\]
+
+We can rewrite the left hand side as $(\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash e : A \rrbracket(d_1 \dots d_n,a))(\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash e : A \rrbracket(d_1 \dots d_n,a))^n(\bot)) $, which is the same as:
+
+\[ \llbracket \Gamma, x : A \vdash e : A \rrbracket(d_1 \dots d_n,(\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash e : A \rrbracket(d_1 \dots d_n,a))^n(\bot)))\]
+
+We know that 
+
+\[(\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash e : A \rrbracket(d_1 \dots d_n,a))^n(\bot))) \ R_A \ [e_1/x_1, \dots e_n/x_n]\fix x : A. \ e : A\]
+
+by the inductive hypothesis, so we can use this as an assumption in the inductive hypothesis of the Main Lemma to get:
+
+\[ \llbracket \Gamma, x : A \vdash e : A \rrbracket(d_1 \dots d_n,(\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash e : A \rrbracket(d_1 \dots d_n,a))^n(\bot)))\]
+\[ R_A \]
+\[ [e_1/x_1, \dots e_n/x_n, [e_1/x_1, \dots e_n/x_n]\fix x : A. \ e : A/x]e \]
+
+because 
+\[[e_1/x_1, \dots e_n/x_n]\fix x : A. \ e : A \]
+
+\[ = \fix  x : A. [e_1/x_1, \dots e_n/x_n]e : A \]
+
+\[\mapsto [\fix x:A. [e_1/x_1, \dots e_n/x_n]e/x][e_1/x_1, \dots e_n/x_n] e : A\]
+
+\[ = [[e_1/x_1, \dots e_n/x_n] \fix x:A. e/x] [e_1/x_1, \dots e_n/x_n] e : A\]
+
+\[ = [e_1/x_1, \dots e_n/x_n, [e_1/x_1, \dots e_n/x_n] \fix x:A. e/x] e : A \]
+
+We can use Lemma \ref{exp}, to get 
+\[(\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash e : A \rrbracket(d_1 \dots d_n,a))^{n+1}(\bot) \ R_A \ [e_1/x_1, \dots e_n/x_n]\fix x : A. \ e : A\].
+
+
+
+%[\fix x:A. e : A/x][e_1/x_1, \dots e_n/x_n]\fix x : A. \ e : A $
+
+%Then we use Lemma \ref{exp} with $[x_1/t_n, \dots, x_n/t_n] \fix x:A. \ e :A \mapsto 
+
+ 
+%Using the fixpoint constant (see \ref{const}) , we can rewrite this as: 
+
+%\[ \llbracket \Gamma \vdash \FIX \ (\lambda x:A. \ e) : A \rrbracket (d_1, \dots, d_n) \ R_A \ [x_1/t_1, \dots, x_n/t_n] (\FIX \ (\lambda x:A. \ e) : A) \]
+
+%As $\FIX \ (\lambda x:A. \ e)$ is a function application, by its typing rule we have $\Gamma \vdash \lambda x:A . \ e : A \to A$, so we can use the inductive hypothesis to get:
+
+%\[ \llbracket \Gamma \vdash \lambda x:A. \ e \rrbracket(d_1, \dots, d_n) \ R_{A \to A} \ [x_1/t_1, \dots, x_n/t_n](\lambda x :A. \ e)\]
+
+%Then, we use Lemma \ref{fix} with $f = \llbracket \Gamma \vdash \lambda x : A . \ e \rrbracket (d_1, \dots, d_n)$ and $e = [x_1/t_1, \dots, x_n/t_n](\lambda x :A. e)$. This gives us $\llbracket \FIX \rrbracket \llbracket \Gamma \vdash \lambda x : A . \ e \rrbracket (d_1, \dots, d_n) \ R_A \ \FIX \ [x_1/t_1, \dots, x_n/t_n](\lambda x :A. e)$.
+
+%Using the denotational semantics for function application, we have:
+
+%\[ \llbracket \Gamma \vdash \FIX \ \lambda x : A . \ e \rrbracket (d_1, \dots, d_n) \ R_A \ [x_1/t_1, \dots, x_n/t_n]\FIX (\lambda x : A . \ e)\].
+
+
+
+
+%Which we can rewrite as:
+%
+%\[ fix(\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x:A \vdash e:A \rrbracket (\gamma, a/x)) \ R_A \ \fix x:A. \ [\gamma]e : A \]
+%
+%We want to use Lemma \ref{fix}, so we need to show:
+%
+%\textcolor{red}{\[ \lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x:A \vdash e:A \rrbracket (\gamma, a/x) \ R_{A \to A} \ [\gamma]e \]}
+%
+%\textcolor{red}{But we don't know that $[\gamma]e$ is a function!} 
+%
+%which expands to:
+%
+%\[\forall d \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ d R_A e' \Rightarrow \llbracket \Gamma, x:A \vdash e:A \rrbracket (\gamma, d/x) R_B  [\gamma]e \ e'\]
+%
+%The induction hypothesis is:
+%
+%\[ \llbracket \Gamma, x : A \vdash e : A \rrbracket(\gamma, d/x) \ R_A \  [\gamma, e'/x] e \]
+%
+%
+
+
+
+
+
+
+
+\end{proof}

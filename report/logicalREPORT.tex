@@ -1,0 +1,133 @@
+Logical relations, developed in \citep{Tait67},\citep{Plotkin73},\citep{Statman85}, are a proof technique that is used for proving properties that cannot be proved by structural induction alone, due to higher order constructions being present in the structure we are proving a property of.
+
+They have been used to prove Strong Normalisation (i.e.\ that every expression terminates) of systems such as the Simply Typed $\lambda$ Calculus, Type Safety and Program Equivalence.
+
+\subsection{Definition}
+We can define logical relations on program terms in PCF (or any other language) by defining relations on each type individually. We use Streicher's definition, as given in \citep{Streicher06}: 
+
+\vspace{0.5cm}
+
+\begin{defn}
+Let $W$ be an arbitrary set.  A $W$-ary \textbf{logical relation} on the model of PCF is a family of relations
+
+\[R = (R_A \in \mathcal{P}(\llbracket A \rrbracket^W) \ | \ A \in Type)\]
+
+such that
+
+\[f \in R_{A \to B} = \forall d \in R_A. \ \lambda i \in W. \ f(i)d(i) \in R_B\]
+\end{defn}
+
+where $Type$ is the set of all possible types our programs can have, defined by induction.
+
+Different logical relations are defined by defining the relation differently on  the base type. For example, if the types are defined by the base type being $\nat$ and other types $A \to B$ (formed any other types $A$ and $B$), then the relation is defined by the definition of $R_{\nat}$.
+
+Therefore we say that a logical relation $R$ of arity $W$ is uniquely determined by $R_{\nat}$, so for all subsets of ${\llbracket \nat \rrbracket}^W$ there is a unique $R$ equal to the set. 
+
+\vspace{0.5cm}
+
+\paragraph{Logical Relations at Function Types}
+
+For a function $f = (f_1, \dots f_n)$ to be in the relation, if we apply it to \textbf{any} value that is in the relation of the type of its domain, for example, for arity $3$:
+
+\[ (x,y,z) \in R_A \]
+
+Then $f$ applied to everything in these elements will be in the relation of the codomain, so we must have:
+
+\[ (f_1(x),f_2(y),f_3(z)) \in R_B \]
+
+Then $f \in R_{A \to B}$.
+
+%Define a set of types, $Type$, which is formed by:
+%
+%\[ \theta ::= o \ | \ \theta \to \theta \]
+%
+%such that $\llbracket o \rrbracket = X$ and  $\llbracket \theta_1 \to \theta_2 \rrbracket = \llbracket \theta_1 \rrbracket \to \llbracket \theta_2 \rrbracket$
+%
+%\begin{defn}
+%An $n$-ary \textbf{logical relation} is a family $\mathcal{R} = \{R_\theta\}_{\theta \in Type}$ of $n$-ary relations such that $R_\theta \subseteq \llbracket \theta \rrbracket \times \dots \llbracket \theta \rrbracket$ (i.e.\ an $n$-tuple) for any $\theta$ and
+%
+%\[ R_{\theta_1 \to \theta_2}(f_1, \dots f_n) \Leftrightarrow\]
+%
+%
+%for all $(d_1, \dots d_n) \in \llbracket \theta_1 \rrbracket^n$, if $R_{\theta_1}(d_1, \dots d_n)$ then $R_{\theta_2}(f_1(d_1), \dots f_n(d_n))$ 
+%\end{defn}
+
+\subsection{Examples and Non-Examples}
+
+
+Applying certain restrictions on $R_{\nat}$ restricts the relations we can define on function types, for example:
+
+\begin{itemize}
+\item{If $R_{\nat} = \llbracket \nat \rrbracket^n$, relations on function types can only have $n$ arguments, if $n$ is specified, otherwise 
+there is no difference to the definition.}
+\item{If $R_{\nat} = \emptyset$, then all relations in $R$ are the empty relation.}
+\end{itemize}
+
+\paragraph{Union of two logical relations}
+Given two logical relations $R$ and $S$ of the same arity, we could try to form a logical relation $R \cup S$. This is \textbf{not} a logical relation. For example, if we have $(f_1, \dots , f_n) \in R_{A \to B}$ (and not in $S_{A \to B}$) and $(d_1, \dots , d_n) \in S_A$, (and not in $R_{A \to B}$)  then $(f_1(d_n), \dots , f_n(d_n))$ cannot be in either $R$ or $S$.
+
+\paragraph{Intersection of two logical relations}
+Therefore if we restrict the logical relation to only contain tuples that are in both $R$ and $S$ then we do not have this problem, so this is a logical relation.
+
+If the relations did not have the same arity, there will be no tuples that are in both relations that satisfy the definition, as if we have $R$ of arity 3 and $S$ of arity 5, then have, for example, $(f,g,h) \in R_{A \to B}$ and $(f,g,h,i,j) \in S_{A \to B}$, then we cannot say that $(f,g,h)$ is in both, as this would not be in $S$ anymore. Therefore, this would not be a logical relation.
+
+\paragraph{Composition of two binary logical relations}
+We define $R;S$ in the following way:
+
+\[ (R;S)(x,y) \Leftrightarrow \exists z. \ (R(x,z) \ \wedge \ S(z,y))\]
+
+So for base type we have:
+
+\[ (R_{\nat};S_{\nat})(x,z) \Leftrightarrow \exists y. \ (R_{\nat}(x,y) \ \wedge \ S_{\nat}(y,z))\]
+
+and for functions we have
+
+\[ (R_{A \to B};S_{A \to B})(f,h) \Leftrightarrow \exists g. \ (R_{A \to B}(f,g) \ \wedge \ S_{A \to B}(g,h))\] 
+
+where for any $(x,z) \in (R_A;S_A)$ we have
+
+\[ (R_B(f(x),g(y)) \ \wedge \ S_B(g(y),h(z)))\] 
+
+So as functions in $R$ are only applied to inputs that are in $R$ and the same for $S$, and functions in both are only applied to inputs that are in both, then \textbf{this is a logical relation.}  
+
+\subsection{Main Lemma}
+When using logical relations, we usually prove a general theorem about the relation, which we then give specific inputs to, to get the proof of our original property. This is called the Main Lemma (or sometimes the Fundamental Property/Theorem/Lemma). For program terms, we define the Main Lemma in the following way, as in \citep{Streicher06}. (Note that this definition uses the denotational semantics of PCF, so reading Chapter \ref{ch6} first will make this definition much easier to understand): 
+
+\vspace{0.5cm}
+
+For any denotation of a PCF term, we want to show that it is in the relation at its type, so we want to show that $\llbracket \Gamma \vdash e : A \rrbracket \in R_{\Gamma \to A}$. An element of $\llbracket \Gamma \rrbracket$ is any tuple of substitutions $d^* = (d_1, \dots d_n)$ for $x_1 : A_1, \dots x_n :A_n = \Gamma$. So $R_\Gamma \in \mathcal{P}(\llbracket A_1 \rrbracket \times \dots \times \llbracket A_n \rrbracket$).
+
+We want all substitutions in a set of size $W$ to be in the relation, so using the definition of $f \in R_{\Gamma \to A}$, we want to show that 
+
+\[ \forall d \in R_\Gamma. \ \lambda i \in W. \llbracket \Gamma \vdash e : A \rrbracket(d(i))\]
+
+This says that for any position in the $W$-tuple, we have the denotation of $e$ using the substitution $d$ from the $i$th position in the $d \in R_\Gamma$.
+
+For $W$ different substitutions we want to have
+
+\[(\llbracket \Gamma \vdash e : A \rrbracket(d^*)_1 , \dots, \llbracket \Gamma \vdash e : A \rrbracket(d^*)_W) \in R_B \]
+
+Therefore the main lemma \textcolor{red}{(for $\lambda terms??$)} is the following:
+
+\vspace{0.5cm}
+
+\begin{lem}\label{main2}
+Let $R$ be a logical relation of arity $W$ on the Scott Model of PCF. Then for $\lambda$ terms $\Gamma \vdash e : A$ and $d_j \in R_{A_j}$ for $j = 1, \dots, n$
+
+\[ \lambda i \in W. \llbracket \Gamma \vdash e : A \rrbracket(d^*(i)) \in R_A\]
+
+where $d^*(i) = d_1(i) \dots d_n(i)$ and $\Gamma = x_1 : A_1 , \dots x_n : A_n$
+\end{lem}
+
+%\begin{lem}
+
+%Let $\Gamma \vdash e : A$ where $\Gamma = \{x_1 : \theta_1, \dots x_m : \theta_m\}$ and $f = \llbracket \Gamma \vdash M : \theta \rrbracket$. Suppose $\{R_\theta\}$ is an $n$-ary logical relation and
+%
+%\[\gamma_i = (d_{i1} \dots d_{im}) \in \llbracket \theta_1 \rrbracket \times \dots \times \llbracket \theta_m \rrbracket\] 
+%
+%where $i = 1, \dots n$, are such that $R_{\theta_j}(d_{1j} \dots d_{nj})(1 \leq j \leq m)$. Then 
+%
+%\[R_\theta(f\gamma_1, \dots , f\gamma_n)\]  
+%\end{lem}
+%
+%This says that for a well typed term $M$, that has a denotation equal to a function $f$, if we have a logical relation for types, then any possible set of substitutions for the variables in $\Gamma$ (of which there are $n$), that are in that term will be a tuple, $\gamma_i$, in the relation, and applying $f$ to each of these tuples gives another tuple that will be in the relation. The resulting tuple will contain the result of $f$ for each substitution.

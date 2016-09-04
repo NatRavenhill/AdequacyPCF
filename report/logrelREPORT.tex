@@ -1,0 +1,268 @@
+Now that we have proved Correctness, (as Theorem \ref{sound}) we have proved half of Adequacy, as it is the following theorem:
+
+\vspace{0.5cm}
+
+\begin{thm}\label{adeq}
+If $\vdash e : \nat$ (i.e.\ $e$ is a closed term of type $\nat$), then $\llbracket e \rrbracket = n \Leftrightarrow e \mapsto^* \underline{n}$
+\end{thm}
+
+where $\llbracket e \rrbracket$ = $\llbracket \vdash e : \nat \rrbracket$ and $\underline{n}$ represents the numeral $n$, instead of the natural number $n$.
+
+The right to left direction of Theorem \ref{adeq} is a corollary of the correctness proof:
+
+\vspace{0.5cm}
+
+\begin{cor}
+If $\vdash e : \nat$ and $\llbracket e \rrbracket = n$ then $e \mapsto^* \underline{n} \Rightarrow \llbracket e \rrbracket = n$
+\end{cor}
+
+
+\begin{proof}
+Rewrite $e \mapsto^* \underline{n}$ as $e \mapsto e_0 \mapsto \dots \mapsto e_m \mapsto \underline{n}$ , for any $n \geq 0$. Applying correctness to these evaluations gives us $\llbracket e\rrbracket = \dots = \llbracket e_m \rrbracket = \llbracket \underline{n} \rrbracket$. Therefore we have $\llbracket  e \rrbracket = \llbracket \underline{n} \rrbracket$.
+
+Now we need to prove $\forall n \in \mathbb{N}. \llbracket \underline{n} \rrbracket = n$, which we prove by induction on $n$:
+
+If $n = 0$, then $\llbracket z \rrbracket = 0$ and $z$ is the syntactic representation of 0.
+
+%If $\underline{n} = zero$, then by the denotational semantics for $ zero$ we have $\llbracket e_n \rrbracket =  0$.
+
+If $n + 1 = v + 1$, then by the inductive hypothesis $\llbracket \underline{n} \rrbracket = v$. The definition of $\llbracket s(\underline{n}) \rrbracket$ is $\llbracket  \underline{n} \rrbracket + 1$, so this is v + 1. Therefore $\llbracket s(\underline{n}) \rrbracket = v + 1$.
+
+%If $\underline{n} = s(v)$, then  in the rule, we have $\llbracket v \rrbracket$, which equals $v$ by the inductive hypothesis. Therefore, we use the case in the successor rule for a number and get $v + 1$.
+
+Therefore $\forall n \in \mathbb{N}. \llbracket n \rrbracket  = n$, so $\llbracket e \rrbracket =  \llbracket n \rrbracket  = n$.
+
+\end{proof}
+
+ \section{Logical Relation}
+
+For the other direction of Theorem \ref{adeq}, we want to show that if $\llbracket e \rrbracket = n$ then $e \mapsto^* n$. We cannot prove this by induction, so we need to define a \textbf{logical predicate} to use in the proof, inductively on types, which is the following:
+
+\[\adeq_{\nat} = \{e  \ | \ \vdash e : \nat \ \wedge \ (\llbracket e \rrbracket = n \Rightarrow e \mapsto^* \underline{n}) \} \]
+
+\[\adeq_{A \to B} = \{ e \ | \  \vdash e : A \to B \ \wedge \ \forall e' \in \adeq_A (e \ e') \in \adeq_B \}\]
+
+Now to prove adequacy, we just prove that every well typed term is in $\adeq$, so we also defined $\adeq$ on typing contexts:
+
+\[\adeq_{Ctx} (\cdot) = \{ <>\} \]
+where $<>$ is the empty substitution and $\cdot$ is the empty context.
+
+\[\adeq_{Ctx}(\Gamma, A) = \{ (\gamma, e/x) \ | \ \gamma \in \adeq_{Ctx}(\Gamma) \ \wedge \ e \in \adeq_A\} \]
+
+For example, if we have the context $\Gamma = x_1 : A_1, \dots , x_n : A_n$ then:
+
+\[\adeq_{Ctx} (x_1 : A_1, \dots ,x_n : A_n) = \{(e_1 / x_1, \dots, e_n / x_n) \ | \ e_i \in \adeq_{A_i}\} \]
+
+From this we know that:
+
+\begin{itemize}
+\item{The set of free variables in the expression $[\gamma](e)$, $FV([\gamma](e)) = \emptyset$, because for any expression $e$, $FV(e) \subseteq \Gamma$ and $[\gamma]$ substitutes all the free variables in $\Gamma$ with expressions.}
+\item{If $\gamma \in \adeq_{Ctx}(\Gamma)$ then $\gamma(x_i)$ has no free variables, because every expression in $\gamma$ that substitutes some $x_i$ is in $\adeq_{A_i}$, so is a closed term.}
+\end{itemize}
+
+
+Now we have this, we can prove the \textbf{Main Lemma}, which is the following:
+
+\vspace{0.5cm}
+
+\begin{lem}
+If $\Gamma \vdash e:A$ and $\gamma \in \adeq_{Ctx}(\Gamma)$, then $[\gamma](e) \in \adeq_A$
+\end{lem}
+
+\vspace{0.5cm}
+
+\subsection{Substitution Function}
+$[\gamma](e)$ is the expression obtained by applying a substitution $\gamma$ to an expression $e$. We can define it inductively in the following way:
+
+\begin{adjustwidth}{2cm}{}
+$[\gamma](zero) = zero$
+\end{adjustwidth}
+
+\begin{minipage}{3.5in}
+\begin{align*}
+[\gamma](x) = 
+  \begin{cases} 
+           [\gamma](x) & \text{if } x \in dom(\gamma) \\
+           x & otherwise 
+  \end{cases}
+\end{align*} 
+\end{minipage}
+
+This says that if $x$ is present in $\gamma$, (there is a substitution for it), replace $x$ with the result of the substitution in $\gamma$. Otherwise there is nothing to replace $x$ with, so we return the variable unaltered. 
+
+\vspace{0.5cm}
+
+\begin{adjustwidth}{2cm}{}
+
+$[\gamma](s(e)) = s([\gamma] (e))$
+
+$[\gamma](\case (e, z \mapsto e_0, s(v) \mapsto e_S)) = \case ([\gamma](e), z \mapsto [\gamma](e_0), s(v) \mapsto [\gamma](e_S))$
+
+$[\gamma](e \ e') = ([\gamma] e) ([\gamma] e')$
+
+$[\gamma] (\lambda x:A. e) = \lambda x:A. [\gamma] e$
+
+$[\gamma] (\fix \ x:A. e) = \fix \ x:A. [\gamma] e$
+\end{adjustwidth}
+
+\vspace{0.5cm}
+
+For a non empty $\gamma = e_1/x_1, \dots e_n/x_n$, we have:
+
+\[ [e_1/x_1, \dots , e_n/x_n] e = [e_1/x_1]([e_2/x_2]( \dots [e_n/x_n] e) \]
+
+\textcolor{blue}{If we add a variable to the substitution we can define this in the following way:
+\[ [t/x][\gamma] e = [\gamma, t/x] e \]}
+
+\section{Expansion Lemma}
+
+To prove this lemma, we need another lemma for the $\lambda$-abstraction case. This lemma is called the \textbf{Expansion Lemma}:
+
+\vspace{0.5cm}
+
+\begin{lem}\label{exp}
+If $ \vdash e : A$ and $e \mapsto e'$ and $e' \in \adeq_A$ then $e \in \adeq_A$
+\end{lem}
+
+\begin{proof}
+By induction on types.
+
+The base case will be when $\vdash e :  \nat$.  We have $e' \in \adeq_{\nat}$, so we have $\vdash e' : \nat$ and $\llbracket e' \rrbracket = n \Rightarrow e' \mapsto^* \underline{n}$. We need to show that $e \in \adeq_{\nat}$. We already have $\vdash e : \nat$ as it is one of our assumptions, so we just prove $\llbracket e \rrbracket = n \Rightarrow e \mapsto^* \underline{n}$.
+
+Assume $\llbracket e \rrbracket = n$. Correctness in the empty context is $e \mapsto e' \Rightarrow \llbracket e \rrbracket = \llbracket e' \rrbracket$, so we use this to get $\llbracket e \rrbracket = \llbracket e' \rrbracket = n$. 
+
+We can use $\llbracket e' \rrbracket = n$ to get $e' \mapsto^* \underline{n}$ from $e' \in \adeq_{\nat}$ . As $e \mapsto e'$ was an assumption, we now have $e \mapsto e' \ \wedge \ e' \mapsto^* \underline{n}$, so we have $e \mapsto^* \underline{n}$. Therefore $e \in \adeq_{\nat}$.
+
+\vspace{0.5cm}
+
+The inductive case will be when $\vdash e : A \to B$. We have $e \mapsto e'$ and $e' \in \adeq_{A \to B}$ and we need to show that $e \in \adeq_{A \to B}$. We already have $\vdash e : A \to B$, as it is one of our assumptions, so we just prove $\forall a \in \adeq_A. \ e \ a \in \adeq_B$.
+
+Let $a : A$ be an expression such that $a \in Good_A$. Then we have $e' \ a \in Good_B$ from $e' \in Good_A$. We use $\vdash e : A \to B$ and $\vdash a : A$ (obtained from $a \in Good_A$) with the typing rule for function application to get $\vdash e \ a : B$. We use the congruence rule on $e \mapsto e'$ to get $e \ a \mapsto e' \ a$. 
+
+Now we can apply the inductive hypothesis on $\vdash e \ a : B$, $e \ a \mapsto e' \ a$ and $e' \ a \in Good_B$ to get $e \ a \in Good_B$
+
+Therefore $\forall a \in Good_A. e \ a \in Good_B$, so $e \in Good_{A \to B}$
+
+Now we have proved all of the cases, so we know the lemma holds for expressions of any type $A$.
+
+\end{proof}
+
+\input{lemmasREPORT.tex}
+
+\section{Main Lemma}
+ 
+Now we can prove the Main Lemma:
+
+\begin{proof}
+By induction on $\Gamma \vdash e : A$
+
+\paragraph{Variables} 
+Given $\Gamma \vdash x : A$, from the typing rule we know that $\Gamma(x) = A$. Therefore we always have $x \in dom [\gamma]$.
+
+As we have also assumed $\gamma \in \adeq_{Ctx}(\Gamma)$, we must have $e'/x$ in $\gamma$, where $e' \in \adeq_A$. 
+
+By the definition of substitution on variables, if the variable we are substituting is not $x$, then we just return $x$, so $[ \delta, e'/x, \delta']x = [\delta, e'/x]x = [\delta]e'$. 
+
+As $e' \in \adeq_A$, we know $e'$ is a closed term, so there are no free variables to substitute. Therefore $[\delta]e' = e'$, and $[\gamma]x \in \adeq_A$.  
+
+\paragraph{Zero} $[\gamma](zero) = zero$, so we need to prove that $zero \in \adeq_{\nat}$. Therefore we first prove $\vdash zero : \nat$. As $zero$ is a constant, then we have it in any typing context, including the empty context. We must also prove $\llbracket zero \rrbracket = n \Rightarrow zero \mapsto^* \underline{n}$. 0 is the only possible value of $n$, as defined by the denotational semantics, so we need $zero \mapsto^* \underline{0}$. $zero$ is our representation of the numeral $\underline{0}$, so it maps to this in 0 steps. Therefore $zero \in \adeq_{\nat}$.
+
+\paragraph{Successor}$[\gamma]s(e) = s([\gamma]e)$, so we must prove $s([\gamma]e) \in \adeq_{\nat}$. As we have a derivation of $\Gamma \vdash s(e) : \nat$, from the typing rule we also have $\Gamma \vdash e : \nat$. Therefore we can apply the inductive hypothesis to this and $\gamma \in \adeq_{Ctx}(\Gamma)$ to get $[\gamma]e \in Good_{\nat}$. Now there are two things we must show:
+
+\begin{enumerate}
+\item{$\vdash s([\gamma]e) : \nat$ \\
+We have $\vdash [\gamma]e : \nat$ from $[\gamma]e \in \adeq_{\nat}$, so we use the typing rule on this to get $\vdash s([\gamma]e) : \nat$}
+\item{\textbf{$\llbracket s([\gamma]e) \rrbracket = n \Rightarrow s([\gamma]e) \mapsto^* \underline{n}$} \\
+Assume $\llbracket s([\gamma]e) \rrbracket = n$. By the definition of $\llbracket s([\gamma]e) \rrbracket$, we  must have $\llbracket [\gamma]e \rrbracket = n - 1$, because this is the only case that does not give $\bot$ as the final output. From $[\gamma]e \in \adeq_{\nat}$ and this we have $[\gamma]e \mapsto^* \underline{n - 1}$. Using the congruence rule for successor, with this as our assumption, we have $s([\gamma]e) \mapsto^* s(\underline{n -1})$, which is the same as the numeral $\underline{n}$. Therefore $s([\gamma]e) \mapsto^* \underline{n}$
+}\end{enumerate}
+
+Therefore $s([\gamma]e) \in \adeq_{\nat}$, so  by the definition of $[\gamma]$ we have $[\gamma]s(e)  \in \adeq_{\nat}$.
+
+\paragraph{Case} $[\gamma](\case (e, z \mapsto e_0, s(x) \mapsto e_S)) = \case ([\gamma](e), z \mapsto [\gamma](e_0), s(x) \mapsto [\gamma](e_S)$ , so we need to prove that $\case ([\gamma](e), z \mapsto [\gamma](e_0), s(x) \mapsto [\gamma](e_S)) \in \adeq_A$, for some type $A$. As we have a derivation of $\Gamma \vdash \case (e, z \mapsto e_0, s(x) \mapsto e_S : A)$, from the typing rule we also have derivations for $\Gamma \vdash e : \nat$, $\Gamma \vdash e_0 : A$ and $\Gamma , x : \nat \vdash e_S : A$.
+
+ Therefore we can apply the inductive hypothesis to this and $\gamma \in \adeq_{Ctx}(\Gamma)$ to get $[\gamma]e \in \adeq_{\nat}$ and $[\gamma]e_0 \in \adeq_A$. 
+
+ 
+Now we have three cases for the proof, depending on the value of $[\gamma]e$:
+
+\begin{enumerate}
+\item{When $[\gamma]e = zero$, the evaluation rule gives us $[\gamma]e_0$, so we must prove $[\gamma]e_0 \in \adeq_A$. We have the derivation tree for $\Gamma \vdash e_0 : A$, so we apply the inductive hypothesis with this and $\gamma \in \adeq_{Ctx}(\Gamma)$ to get $[\gamma]e_0 \in \adeq_A$. Then we use Lemma \ref{closedgamma} to get that the  whole case expression is a closed term, then use this and the fact we have evaluated the case expression to one in $\adeq_A$ in Lemma \ref{exp} to get $[\gamma]\case(e, z \mapsto e_0, s(x) \mapsto e_S) \in \adeq_A$}
+\item{When $[\gamma]e = s(v)$, the evaluation rule gives us $[v/x]([\gamma]e_S) = [\gamma, v/x]e_S$ so we must show $v \in \adeq_{\nat}$ to be able to use the inductive hypothesis of the main lemma for $e_S$. We know $[\gamma]e \in \adeq_{\nat}$ and $[\gamma]e = s(v)$, so $s(v) \in \adeq_{\nat}$. Therefore we know from the typing rule for successor that $\vdash v : \nat$ and then we must prove $\forall n \in \mathbbm{N}. \ \llbracket v \rrbracket = n \Rightarrow v \mapsto^* \underline{n}$. Assume there is $n$ such that $\llbracket v \rrbracket = n$. Then by the denotational semantics of successor, we have $\llbracket s(v) \rrbracket = n + 1$, and we know $s(v) \mapsto^* \underline{n + 1}$ (because $s(v) \in \adeq_{\nat}$). By the congruence rule for successor, we have $v \mapsto \underline{n}$. Therefore $v \in \adeq_{\nat}$. Now we have $[\gamma'] = [\gamma, v/x] \in \adeq_{Ctx}(\Gamma, \nat)$ and $\Gamma, x : \nat \vdash e_S$, so $[\gamma']e_S \in Good_A$. Then we use Lemma \ref{closedgamma} to get that the  whole case expression is a closed term, then use this and the fact we have evaluated the case expression to one in $\adeq_A$ in Lemma \ref{exp} to get $[\gamma]\case(e, z \mapsto e_0, s(x) \mapsto e_S) \in \adeq_A$}
+   %\textcolor{red}{When $[\gamma]e = s(v)$, the evaluation rule gives us $[v/x]([\gamma]e_S)$, so we must prove $[v/x]([\gamma]e_S) \in \adeq_A$. We have the derivation tree for $\Gamma, x : \nat \vdash e_S : A$, so we apply the inductive hypothesis with this and $\gamma, v/x \in Good_{Ctx}(\Gamma, \nat)$ to get $[\gamma']e_S \in \adeq_A$}}
+\item{When $e$ does not evaluate to a value, we need to show that for any expression $e$, its case statement is still in $\adeq_A$, so we will ultimately use \textbf{Lemma \ref{infinite}}.
+
+By the definition of the denotational semantics, when we have $\llbracket [\gamma]e \rrbracket = \bot$, then $\llbracket case([\gamma]e, z \mapsto [\gamma]e_0, s(v) \mapsto [\gamma]e_S \rrbracket = \bot$.
+
+We know that our case expression is a well typed closed term by \textbf{Lemma \ref{closedgamma}}, as we use our original assumption for $\Gamma \vdash \case(e, z \mapsto e_0, s(v) \mapsto e_S)$ to get $\vdash [\gamma]\case(e, z \mapsto e_0, s(v) \mapsto e_S)$.
+
+Now we know it is a closed term,  we can use the \textbf{Lemma \ref{infinite}}, to get $\case([\gamma]e, z \mapsto [\gamma]e_0, s(v) \mapsto [\gamma]e_S) \in \adeq_A$
+}
+\end{enumerate}
+
+\paragraph{Application} $[\gamma](e_0 \ e_1) = ([\gamma] e_0) ([\gamma] e_1)$, so we need to prove that $([\gamma] e_0) ([\gamma] e_1) \in \adeq_B$. As we have a derivation of $\Gamma \vdash e_0 \ e_1 : B$, from the typing rule, we have derivations for $\Gamma \vdash e_0 : A \to B$ and $\Gamma \vdash e_1 : A$. Therefore we can apply the inductive hypothesis to these derivations and $\gamma \in \adeq_{Ctx}(\Gamma)$ to get $[\gamma]e_0 \in \adeq_{A \to B}$ and $[\gamma]e_1 \in \adeq_A$. 
+
+From $[\gamma]e_0 \in \adeq_{A \to B}$, we know that $\forall e' \in \adeq_A. ([\gamma]e_0 \ e') \in \adeq_B$. As $[\gamma]e_1 \in \adeq_A$, then $([\gamma]e_0)([\gamma]e_1) \in \adeq_B$.
+
+\paragraph{$\lambda$-Abstraction} $[\gamma] (\lambda x:A. \ e) = \lambda x:A. \ [\gamma] e$ so we must prove $\lambda x:A. \ [\gamma] e \in \adeq_{A \to B}$.  
+
+There are two things we need to show:
+
+\begin{enumerate}
+\item{$\vdash \lambda x:A. \ [\gamma] e : A \to B$ \\ 
+We can prove this using \textbf{Lemma \ref{closedgamma}}, as we have $\Gamma \vdash \lambda x : A . \ e : A \to B$. By using the lemma, we have $\vdash [\gamma]\lambda x : A . e : A = \ \vdash \lambda x : A . \ [\gamma] e : A \to B$}
+
+\item{$\forall e' \in \adeq_A. \ (\lambda x:A. \ [\gamma]e) \ e' \in \adeq_B$ \\
+Let $e':A$ be an expression such that $e' \in \adeq_A$. 
+
+As we have a derivation of $\Gamma \vdash \lambda x:A. \ e : A \to B$, from the typing rule, we have $\Gamma, x:A \vdash e: B$. Let $\gamma' = (\gamma, e'/x)$, now we have $\gamma' \in \adeq_{Ctx}(\Gamma, A)$, so we use the induction hypothesis to get $[\gamma']e \in \adeq_B$.
+
+
+Using the evaluation rule for $\lambda$ abstraction we have $(\lambda x:A. \ [\gamma]e) \ e' \mapsto [e'/x][\gamma]e$, which can be simplified to $[\gamma, e'/x]e = [\gamma']e$. We have $\vdash e' : A$ from $e' \in \adeq_A$ and $\vdash \lambda x:A. \ [\gamma] e : A \to B$ from the previous case, so we use the typing rule for function application to get $\vdash (\lambda x:A. \ [\gamma]e) \ e' : B$.
+
+As $[\gamma']e \in \adeq_B$, we can use the Expansion Lemma to get $(\lambda x:A. \ [\gamma]e) \ e' \in \adeq_B$. Therefore we know $\forall e' \in \adeq_A. \ (\lambda x:A. \ [\gamma]e) \ e' \in \adeq_B$.}
+\end{enumerate}
+
+\paragraph{Fixpoint} The strategy we use here is based on Gunter's proof, which is based on Plotkin's, in which we use the following syntactic approximation of recursion:
+
+\begin{defn} \label{un}
+Let $M = \fix x : A. \ e : A$ be a well typed term and define:
+
+\[M^0 = \fix x : A. \ x \]
+\[ M^{k+1} = (\lambda x : A. \ e)(M^k)\]
+\end{defn}
+
+Therefore we can represent $[\gamma]\fix x:A. \ e :A$ in this way and prove $[\gamma]M^k \in \adeq_A$, by induction on $k$:
+
+For the base case, we have $[\gamma] \fix x:A. \ x = [\gamma][\fix x:A. x/x]x = [\gamma] \fix x:A. \ x$, so the evaluation will loop forever. Also its denotation will be $fix (\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma \vdash [\gamma]x:A \rrbracket (\gamma, a/x)) = fix( \lambda a \in \llbracket A \rrbracket. \ a) = \bigsqcup( \lambda a. \ a)^n(\bot)) = \bot$. We also have a closed term $\vdash [\gamma]\fix x:A. x$ from Lemma \ref{closedgamma}
+
+ Therefore we can use Lemma \ref{infinite} to get $[\gamma]M^0 \in \adeq_A$.
+
+As the inductive hypothesis, assume $[\gamma]M^{k=1} \in \adeq_A$. Then we want to show $(\lambda x:A. [\gamma]e)(M^{k-1}) \in \adeq_A$. Then
+
+\[ M^k = (\lambda x : A. [\gamma]e)(([\gamma] \fix x:A. e)^{k - 1})  = [([\gamma] \fix x:A. e)^{k - 1}/x][\gamma]e = [\gamma,([\gamma] \fix x:A. e)^{k - 1}/x] e \]
+
+So now we want to show that $[\gamma,([\gamma] \fix x:A. e)^{k - 1}/x] e \in \adeq_A$.
+
+From the inductive hypothesis, we know that  $([\gamma] \fix x:A. e)^{k - 1} \in \adeq_A$, so $[\gamma'] = [\gamma,([\gamma] (\fix x:A. e)^{k - 1}/x] \in \adeq_{Ctx}(\Gamma, x : A)$. By the typing rule for fixpoint we have $\Gamma, x :A \vdash e : A$, so by the inductive hypothesis of the main lemma, we have $[\gamma']e \in \adeq_A$.  Therefore $[\gamma]M^k \in \adeq_A$.
+
+As we have now proved $[\gamma]M^k \in \adeq_A$ for any $k$, we know that $[\gamma] \fix x:A. e:A \in \adeq_A$.
+
+%\paragraph{\textcolor{red}{Fixpoint}} $[\gamma] (\fix \ x:A. e) = \fix \ x:A. [\gamma] e$ so we must prove $\fix \ x:A. [\gamma] e  \in \adeq_A$. As we have a derivation of $\Gamma \vdash \fix \ x:A. \ e : A$, from the typing rule, we have $\Gamma, x:A \vdash e: A$. \textcolor{red}{Let $\gamma' = (\gamma, e'/x)$ for some expression $e' \in \adeq_{A}$ (so we have $\gamma' \in \adeq_{Ctx}(\Gamma, A))$.  Then using the induction hypothesis we have $[\gamma']e \in \adeq_A$. 
+%Let $e' = \fix \ x:A \ e$. Then $[\gamma']e = [\gamma,\fix \ x:A \ e/x] e = [\gamma][\fix \ x:A \ e/x]e$.
+%Then as $[\gamma](\fix \ x:A. e) \mapsto [\gamma]([\fix \ x:A \ e/x]e)$ and $[\gamma]([\fix \ x:A \ e/x]e) \in Good_A$, we use the Expansion Lemma with $\vdash \fix \ x:A \ e : A$ to get  $[\gamma](\fix \ x:A. e) \in \adeq_A$.}
+
+\end{proof}
+
+We can now prove the second direction of Adequacy as a corollary of the Main Lemma:
+
+\vspace{0.5cm}
+
+\begin{cor}
+If $\vdash e : \nat$ and $\llbracket e \rrbracket = n$ then $\llbracket e \rrbracket = n \Rightarrow e \mapsto^* \underline{n}$
+\end{cor}
+
+\begin{proof}
+Using the Main Lemma, as we have $\vdash e : \nat$ and the empty substitution will be in $\adeq_{Ctx}(\cdot)$, we will have $[<>]e \in \adeq_{\nat}$. $[<>]e = e$, so we have $e \in \adeq_{\nat}$.
+
+Expanding this definition gives us $\llbracket e \rrbracket = n \Rightarrow e \mapsto^* \underline{n}$, which is what we wanted to prove.
+\end{proof}

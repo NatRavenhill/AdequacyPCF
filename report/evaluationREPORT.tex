@@ -1,0 +1,68 @@
+\section{What did I learn/achieve?}
+Before I started this project I knew very little about domain theory, but I knew it featured prominently in research in programming language semantics. Now I know what a domain is (see \ref{dom}), how to prove given structures are domains and how certain domains can be used to give models of programming languages (see Chapter \ref{ch6}).
+
+I also knew nothing about Logical Relations (see \ref{log}), but now know how to construct them and prove properties using them.
+
+I now also know that Type Safety is expressed by two lemmas (see \ref{pres} and \ref{prog}) and how to prove them. Type Safety is an important theorem in programming language semantics, so now I can apply this knowledge to prove type safety for other type systems.
+
+I previously proved Soundness (see \ref{sound}) before (for an imperative language in my mini-project), but now I have proved it for a new language and semantics, so I am applying the skills from my mini project to a new situation. Type Safety and Soundness are common theorems in semantics, so I am also finding it easier to read new papers in the area now.
+
+Finishing the Adequacy proof (see Theorem \ref{adeq}) was rewarding, as in the more simple language I previously studied, we proved a theorem called Completeness, that was less challenging to prove and required less mathematical background.
+ 
+\section{Evaluation of the Product}
+My product is the proofs and analysis of these proofs. The proofs on domains were mostly proofs that the definitions were satisfied. Proving partial orders was quite easy as the properties they must satisfy were studied in the Maths Techniques module in 2nd year. Proving that all chains have limits was the most difficult bit. The proof of the fixpoint theorem (see \ref{fixpoint}) was the most difficult domain theory proof, but it had clear stages that made it easier to prove.
+
+Many of the proofs on the operational semantics and typing rules were by induction. Having now completed more difficult proofs, they seem easier than they were at the time. The number of cases involved make the proofs very long, but each case uses the inductive hypothesis in a similar way.  
+
+The Adequacy proof was the hardest proof, as I had to come up with a logical relation that described our property in a way that it would be correct and actually used to prove Adequacy. The first attempt I made at this did not give enough information for the fixpoint case, as it was only defined on the syntax and we couldn't use our fixpoint theorem (see \ref{fixpoint}) in the proof. I spent a lot of time trying to make this proof work, but ultimately I had to try another approach. In all the other  proofs in my dissertation, I did not hit a wall like this, so this proof took significantly longer.
+
+Eventually I realised that we needed to include the semantics in the definition of the relation and a binary relation , like that defined by  \citep{Streicher06} would be required, which made the proof much easier.
+
+\section{Evaluation of the Process} 
+My problem statement was to prove Adequacy for PCF. I completed this by defining the operational and denotational semantics for PCF, then proving both directions of the theorem. Therefore I believe I have fully solved the problem stated in the introduction. 
+
+Every thing we proved in the preceeding sections is necessary to show that our domains are appropriate for modelling the language, its typing system is correct and that the semantics can be related and ordered in a way that no proof needs content given later in the report to understand. 
+
+\section{Review of Project Plan}
+%This was the plan for my project:
+
+%\begin{tabular}{ c | c || c }
+%  Week & Date & Task \\
+% \hline
+%  1 & 06/06/16 &  Domains \\
+%  2 & 13/06/16 &   Domains \\
+%  3 & 20/06/16 &  Denotational Semantics \\
+%  4 & 27/06/16 &  Denotational Semantics \\
+%  5 & 04/07/16 &  Operational Semantics\\
+%  6 & 11/07/16 &  Operational Semantics \emph{(Inspection Week)}\\
+%  7 & 18/07/16 &  Logical Relations \\
+%  8 & 25/07/16 &  Logical Relations \\
+%  9 & 01/08/16 &  Adequacy \\
+%  10 & 08/08/16 &  Adequacy \\
+%  11 & 15/08/16 &  Presentation preparation \\
+%  12 & 22/08/16 &  \emph{(Presentation Week)} \\
+%  13 & 29/08/16 &  Writing report \\
+%  14 & 05/09/16 &  Writing report \\
+%\end{tabular}
+
+I followed my project plan up until the later stages, when we got to Adequacy. This proof took much longer than expected, the reason being that I underestimated its difficulty. As I was unfamiliar with the logical relations technique, it was hard to know exactly how long it would take to  prove a theorem in this way.
+
+ Luckily I had no further work planned past this point, as Adequacy was the main goal of the report. This ensured I had enough time to fall back on this, as I had not overplanned my time with no room to manoeuvre. 
+
+\section{Limitations and ideas for future work}
+Having now proved Adequacy for PCF in the Domain Theoretic model, I could apply my knowledge to other models and/or other languages.
+
+%other models?
+
+For example FPC is a language similar to PCF in which we have recursive types, so I could try to prove the same theorem with this addition to the possible types we can form.
+
+I could also try different ways of constructing the logical relation to describe Adequacy.
+
+%Applicative structures? 
+
+ %Other models of PCF? Syntehtic Domain Theory. Of course all of this has already been studied. (give references)
+
+%So what else can we apply such common techniques to? (Look to references from recent conferences and their future work).
+
+
+

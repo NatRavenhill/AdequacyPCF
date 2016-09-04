@@ -1,0 +1,143 @@
+\begin{thebibliography}{22}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Gordon(1973)]{Gordon73}
+Michael~JC Gordon.
+\newblock Evaluation and denotation of pure lisp programs: a worked example in
+  semantics.
+\newblock 1973.
+
+\bibitem[Gordon(2000)]{Gordon00}
+Mike Gordon.
+\newblock Proof, language, and interaction.
+\newblock chapter From LCF to HOL: A Short History, pages 169--185. MIT Press,
+  Cambridge, MA, USA, 2000.
+\newblock ISBN 0-262-16188-5.
+\newblock URL \url{http://dl.acm.org/citation.cfm?id=345868.345890}.
+
+\bibitem[Gunter(1992)]{Gunter92}
+Carl~A Gunter.
+\newblock \emph{{Semantics of programming languages: Structures and
+  Techniques}}.
+\newblock MIT press, 1992.
+
+\bibitem[Hoare(1969)]{Hoare69}
+Charles Antony~Richard Hoare.
+\newblock An axiomatic basis for computer programming.
+\newblock \emph{Communications of the ACM}, 12\penalty0 (10):\penalty0
+  576--580, 1969.
+
+\bibitem[Hutton(2014)]{Hutton14}
+G.~Hutton.
+\newblock {Introduction to Domain Theory (Course Notes)}.
+\newblock 2014.
+
+\bibitem[Landin(1965)]{Landin65}
+P.~J. Landin.
+\newblock Correspondence between algol 60 and church's lambda-notation: Part i.
+\newblock \emph{Commun. ACM}, 8\penalty0 (2):\penalty0 89--101, February 1965.
+\newblock ISSN 0001-0782.
+\newblock \doi{10.1145/363744.363749}.
+\newblock URL \url{http://doi.acm.org/10.1145/363744.363749}.
+
+\bibitem[Landin(1964)]{Landin64}
+Peter~J Landin.
+\newblock The mechanical evaluation of expressions.
+\newblock \emph{The Computer Journal}, 6\penalty0 (4):\penalty0 308--320, 1964.
+
+\bibitem[Marlow et~al.(2010)]{Marlow10}
+Simon Marlow et~al.
+\newblock Haskell 2010 language report.
+\newblock 2010.
+
+\bibitem[Milner(1997)]{Milner97}
+R.~Milner.
+\newblock \emph{The Definition of Standard ML: Revised}.
+\newblock MIT Press, 1997.
+\newblock ISBN 9780262631815.
+
+\bibitem[Milner(1972{\natexlab{a}})]{Milner72a}
+Robin Milner.
+\newblock {Logic for Computable Functions: Description of a Machine
+  Implementation}.
+\newblock Technical report, Stanford, CA, USA, 1972{\natexlab{a}}.
+
+\bibitem[Milner(1972{\natexlab{b}})]{Milner72b}
+Robin Milner.
+\newblock {Implementation and Applications of Scott's Logic for Computable
+  Functions}.
+\newblock \emph{SIGACT News}, \penalty0 (14):\penalty0 1--6, January
+  1972{\natexlab{b}}.
+\newblock ISSN 0163-5700.
+
+\bibitem[Milner(1973)]{Milner73}
+Robin Milner.
+\newblock {Models of LCF}.
+\newblock Technical report, Stanford, CA, USA, 1973.
+
+\bibitem[Milner and Weyhrauch(1972)]{Milner72c}
+Robin Milner and Richard Weyhrauch.
+\newblock Proving compiler correctness in a mechanized logic.
+\newblock \emph{Machine Intelligence}, 7:\penalty0 51--70, 1972.
+
+\bibitem[Nipkow et~al.(2002)Nipkow, Paulson, and Wenzel]{Nipkow02}
+Tobias Nipkow, Lawrence~C Paulson, and Markus Wenzel.
+\newblock \emph{Isabelle/HOL: a proof assistant for higher-order logic}, volume
+  2283.
+\newblock Springer Science \& Business Media, 2002.
+
+\bibitem[Plotkin(1973)]{Plotkin73}
+Gordon~D. Plotkin.
+\newblock Lambda-definability and logical relations.
+\newblock Memorandum SAI--RM--4, University of Edinburgh, Edinburgh, Scotland,
+  October 1973.
+
+\bibitem[Plotkin(1977)]{Plotkin77}
+Gordon~D. Plotkin.
+\newblock {LCF considered as a programming language}.
+\newblock \emph{Theoretical computer science}, 5\penalty0 (3):\penalty0
+  223--255, 1977.
+
+\bibitem[Plotkin(1981)]{Plotkin81}
+Gordon~D Plotkin.
+\newblock A structural approach to operational semantics, 1981.
+
+\bibitem[Scott(1993)]{Scott93}
+Dana~S. Scott.
+\newblock {A Type-theoretical Alternative to ISWIM, CUCH, OWHY}.
+\newblock \emph{Theor. Comput. Sci.}, 121\penalty0 (1-2):\penalty0 411--440,
+  December 1993.
+\newblock ISSN 0304-3975.
+\newblock \doi{10.1016/0304-3975(93)90095-B}.
+\newblock URL \url{http://dx.doi.org/10.1016/0304-3975(93)90095-B}.
+
+\bibitem[Statman(1985)]{Statman85}
+R.~Statman.
+\newblock Logical relations and the typed λ-calculus.
+\newblock \emph{Information and Control}, 65\penalty0 (2):\penalty0 85 -- 97,
+  1985.
+\newblock ISSN 0019-9958.
+
+\bibitem[Streicher(2006)]{Streicher06}
+Thomas Streicher.
+\newblock \emph{{Domain-theoretic foundations of functional programming}}.
+\newblock World Scientific, 2006.
+
+\bibitem[Tait(1967)]{Tait67}
+W.~W. Tait.
+\newblock Intensional interpretations of functionals of finite type i.
+\newblock \emph{The Journal of Symbolic Logic}, 32:\penalty0 198--212, 8 1967.
+\newblock ISSN 1943-5886.
+
+\bibitem[Wright and Felleisen(1994)]{Wright94}
+A.K. Wright and M.~Felleisen.
+\newblock A syntactic approach to type soundness.
+\newblock \emph{Information and Computation}, 115\penalty0 (1):\penalty0 38 --
+  94, 1994.
+\newblock ISSN 0890-5401.
+
+\end{thebibliography}
