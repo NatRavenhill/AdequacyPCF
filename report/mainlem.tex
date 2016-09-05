@@ -49,7 +49,10 @@ The result of the denotation depends on the value of $e$, so we have three cases
 
 \begin{enumerate}
 \item{$\llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = \bot$, then we must show $\bot \ R_A \ [e_1/x_1, \dots, e_n/x_n] \\ \case (z \mapsto e_0, s(x) \mapsto e_S)$, which we get by applying Lemma \ref{bot}.}
-\item{$\llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = 0$, then we want to show $\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ \\ R_A [e_1/x_1, \dots, e_n/x_n]\case (z \mapsto e_0, s(x) \mapsto e_S)$. As we have $\Gamma \vdash e_0 : A$ from the typing rule of case, we can get $\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ R_A [e_1/x_1, \dots, e_n/x_n]e_0$ by the induction hypothesis. We can now use this in Lemma \ref{exp}, with the operational semantics rule for case when the expression is zero, to get $\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ R_A [e_1/x_1, \dots, e_n/x_n]\case (z \mapsto e_0, s(x) \mapsto e_S)$}
+\item{$\llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = 0$, then we want to show $\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ \\ R_A [e_1/x_1, \dots, e_n/x_n]\case (z \mapsto e_0, s(x) \mapsto e_S)$. As we have $\Gamma \vdash e_0 : A$ from the typing rule of case, we can get $\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ R_A [e_1/x_1, \dots, e_n/x_n]e_0$ by the induction hypothesis. We can now use this in Lemma \ref{exp}, with the operational semantics rule for case when the expression is zero, to get 
+
+\[\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ R_A [e_1/x_1, \dots, e_n/x_n]\case (z \mapsto e_0, s(x) \mapsto e_S)\]
+}
 \item{$\llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = n+1$ we want to show
 \[ \llbracket \Gamma, x : \nat \vdash e_S : \nat \rrbracket(d_1, \dots , d_n, d) \]
 \[\ R_A \]
@@ -86,7 +89,9 @@ By the inductive hypothesis we have
 \[\llbracket \Gamma \vdash  e : A \to B \rrbracket (d_1, \dots, d_n) \ R_{A \to B} \ [e_1/x_1, \dots, e_n/x_n]e\]
 
 
-Expanding this gives us $ \forall d \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ d R_A e' \Rightarrow \llbracket \Gamma \vdash  e : A \to B \rrbracket (d_1, \dots, d_n) (d) \  R_B \ [e_1/x_1, \dots, e_n/x_n]e \ e'$. Let $d = \llbracket \Gamma \vdash e' : B \rrbracket (d_1, \dots, d_n)$ and $e' = [e_1/x_1, \dots, e_n/x_n]e'$. Then we have $\llbracket \Gamma \vdash  e : A \to B \rrbracket (d_1, \dots, d_n) (\llbracket \Gamma \vdash e' : B \rrbracket (d_1, \dots, d_n) \ R_B \ ([e_1/x_1, \dots, e_n/x_n]e) ([e_1/x_1, \dots, e_n/x_n] e')$.
+Expanding this gives us $ \forall d \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ d R_A e' \Rightarrow \llbracket \Gamma \vdash  e : A \to B \rrbracket (d_1, \dots, d_n) (d) \  R_B \ [e_1/x_1, \dots, e_n/x_n]e \ e'$. Let $d = \llbracket \Gamma \vdash e' : B \rrbracket (d_1, \dots, d_n)$ and $e' = [e_1/x_1, \dots, e_n/x_n]e'$. Then we have 
+
+\[\llbracket \Gamma \vdash  e : A \to B \rrbracket (d_1, \dots, d_n) (\llbracket \Gamma \vdash e' : B \rrbracket (d_1, \dots, d_n) \ R_B \ ([e_1/x_1, \dots, e_n/x_n]e) ([e_1/x_1, \dots, e_n/x_n] e')\]
 
 \paragraph{$\lambda$-Abstraction} 
 For $x_1 : A_1, \dots, x_n : A_n \vdash \lambda x : A. \ e : A \to B$, assume for any $i = 1, \dots, n$ that $d_i R_{A_i} e_i$. Then we want to show:

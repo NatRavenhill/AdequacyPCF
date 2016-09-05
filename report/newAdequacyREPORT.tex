@@ -16,7 +16,7 @@ where $\llbracket e \rrbracket$ = $\llbracket \vdash e : \nat \rrbracket$ and $\
 %EXPLAIN WHY ONLY AT BASE TYPE.
 
 %Correctness as in before
-The theorem has two directions. We have mostly proved the backwards direction because of the Soundness proof we proved in the previous chapter (see Section \ref{sound}) we have proved half of Adequacy.
+The theorem has two directions. We have mostly proved the backwards direction because of the Soundness proof we proved in the previous chapter (see Section \ref{sound}). Therefore we have proved half of Adequacy.
 
 Therefore, the right to left direction of adequacy is a corollary of the soundness proof:
 
@@ -44,7 +44,7 @@ Therefore $\forall n \in \mathbb{N}. \llbracket \underline{n} \rrbracket  = n$, 
 
 \end{proof}
 
-To prove the forwards direction, we could naively try to prove it by induction on the denotations of each expression. However, because although we only consider closed expressions of base type, if it has sub-expressions then they may not be closed or of type $\nat$, so we have no inductive hypothesis to provide in these cases.
+To prove the forwards direction, we could naively try to prove it by induction on the denotations of each expression. However,  although we only consider closed expressions of base type, if it has sub-expressions then they may not be closed or of type $\nat$, so we have no inductive hypothesis to provide in these cases.
 
 Therefore, instead we use the Logical Relations approach that we described in Section \ref{log}.
 

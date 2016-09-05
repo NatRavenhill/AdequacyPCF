@@ -18,7 +18,7 @@ Parallel or (por) is the function defined in the following way (where $0 = true$
 	\end{array}
 \right.\]
 
-Gives us the following table:
+which gives us the following truth table:
 \begin{center}
 \begin{tabular}{ c | c | c | c}
     & 0 & 1 & $\bot$ \\
@@ -32,13 +32,13 @@ Gives us the following table:
 \vspace{0.5cm}
 
 %prove it is undefinable in PCF
-As we are using Call by Name evaluation, $por$ evaluates $x$ and $y$ in the context of the function. As the function depends on $x$ and $y$, it must evaluate them before $por$ is fully evaluated. If the first argument we evaluate diverges, then the second may be true, but we will never know.
+As we are using call by name evaluation, (see Chapter \ref{ch4}) $por$ evaluates $x$ and $y$ while it is evaluating the $por$  function, and not before. However, as the function depends on $x$ and $y$, it must evaluate them before $por$ is fully evaluated. If the first argument we evaluate diverges, then the second may be true, but we will never know.
 
-We can formally prove this using logical relations but first we need another definition on Logical Relations:
+We can formally prove that $por$ is non-definable by using logical relations, but first we need another definition on logical relations:
 
 \section{R-invariant}
 
-When a term $e$ of type $A$ is $R$-invariant, there is an element in $R_A$ of the form $(\llbracket \Gamma \vdash e \rrbracket d^*, \dots , \llbracket \Gamma \vdash e \rrbracket d^*) \in R_A$
+When an expression $e$ of type $A$ is \textbf{$R$-invariant}, there is an element in $R_A$ of the form $(\llbracket \Gamma \vdash e \rrbracket d^*, \dots , \llbracket \Gamma \vdash e \rrbracket d^*) \in R_A$
 
 We can define this in general for an denotation $d \in \llbracket A \rrbracket$:
 
@@ -52,7 +52,7 @@ Let $R$ be a logical relation of arity $W$. Then an denotation $d \in \llbracket
 
 Therefore we can also say that if $R$ is a logical relation of arity $W$ and $e$ is a closed term of type $A$ then the denotation of $e$ is $R$-invariant.
 
-We can prove for terms that are not closed that as long as the denotations of all the terms in the substitution are $R$-invariant, then the denotation of these whole terms are also $R$-invariant,as a corollary of the main lemma (see Lemma \ref{main2}):
+For non-closed expressions, we can prove that as long as the denotations of all the expressions in the substitution are $R$-invariant, then the denotation of the entire non closed expression is also $R$-invariant, as a corollary of the main lemma (see Lemma \ref{main2}):
 
 \vspace{0.5cm}
 
@@ -70,7 +70,7 @@ Therefore an \textbf{element of the denotational model} is $R$-invariant as long
 
 As we know that all the denotations of closed $\lambda$ terms are $R$-invariant, any \textbf{closed} PCF term that can be written as a $\lambda$ term will have  an $R$-invariant denotation. If we can show that the syntax of PCF can be written as $\lambda$ terms, then these $\lambda$ terms can be composed to create $\lambda$ terms for any closed PCF term, so any closed PCF term will be $R$-invariant.
 
-Therefore, we want to see if the following terms are $R$-invariant:
+Therefore, we want to ensure that the following expressions are $R$-invariant:
 
 \begin{itemize}
 \item{$z$}
@@ -79,7 +79,7 @@ Therefore, we want to see if the following terms are $R$-invariant:
 \item{$\lambda e: A . \ \fix x:A \ e $}
 \end{itemize} 
 
-The most difficult term to check is $R$-invariant is $\lambda e: A . \ \fix x:A \ e $, so we require another property on logical relations:
+The most difficult expression to check is $R$-invariant is $\lambda e: A . \ \fix x:A \ e $, so we require another property on logical relations:
 
 \section{Admissible Logical Relations}
 
@@ -88,9 +88,10 @@ An admissible logical relation is the following:
 \vspace{0.5cm}
 
 \begin{defn}
-A logical relation $R$ of base type and arity $W$ is called \textbf{admissible} if $\delta_W(\bot) \in R_{Nat}$ and for all chains $d_1 \sqsubseteq d_2 \sqsubseteq \dots$, if  $d_i \in R_{\nat}$, then $\bigsqcup d_n \in R_{\nat}$.
+A logical relation $R$ of arity $W$ is called \textbf{admissible} if $\delta_W(\bot) \in R_{Nat}$ and for all chains $d_1 \sqsubseteq d_2 \sqsubseteq \dots$, if  $d_i \in R_{\nat}$, then $\bigsqcup d_n \in R_{\nat}$.
 \end{defn}
 
+In \citep{Streicher06}, the above definition is defined for directed sets. If $R_{\nat}$ is closed under directed suprema, this is the same as saying that if we form chains $d_0 \sqsubseteq d_1 \sqsubseteq \dots$ of $W$-tuples of elements in $\mathbb{N}_\bot$'s underlying set, if $d_i \in R_{\nat}$, then $\bigsqcup d_n \in R_{\nat}$. This is how obtained our definition of admissible.
 
 We can prove the following theorem:
 
@@ -116,8 +117,6 @@ Let $d \in R_A$. Then we must show $\lambda i \in W. \bot \in R_B$. This is the 
 
 \vspace{0.5cm}
 
-\emph{Note that this is a more general form of the function types case of the Chains Lemma}
-
 To show that the limit of chains of elements in  $R_{A \to B}$ is also in $R_{A \to B}$, we first assume we have a chain of functions $f_1 \sqsubseteq f_2 \sqsubseteq \dots$, where $f_m \in R_{A \to B}$ for every element in the chain. Expanding any one of these definitions gives us:
 
 \[ \forall d \in R_A. \ \lambda i \in W. f_m(i)d(i) \in R_B\]
@@ -126,10 +125,14 @@ Let $d$ be a tuple of elements of $\llbracket A \rrbracket$'s underlying set tha
 
 Therefore $\forall d \in R_A. \ \lambda i \in W. \ \bigsqcup f_n(i)d(i) \in R_B$, so $\bigsqcup f_n \in R_{A \to B}$.
 
+\emph{Note that this is a more general form of the function types case of the Chains Lemma (see Lemma \ref{chain})}
+
 \vspace{0.5cm}
 
 %%% NOW THE FIX CASE %%%%
 \textcolor{red}{Fix case as in written notes}
+
+We prove \emph{2} by 
 \end{proof}
 
 %\textcolor{red}{I need to prove something like this for case too? (as it's not a natural number anymore...)}

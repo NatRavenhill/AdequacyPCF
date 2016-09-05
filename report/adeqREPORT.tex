@@ -15,7 +15,7 @@ The following definition of a computable term in PCF is given by \citep{Gunter92
 
 \vspace{0.5cm}
 
-\textcolor{red}{compare to mine!}
+%\textcolor{red}{compare to mine!}
 
 %Therefore if any closed terms $e : A$ are computable, then this is the same as saying $e \in \adeq_a$.
 
@@ -49,7 +49,7 @@ For the inductive case, we assume $\sigma M^{k-1}$ is closed computable, and the
 
 By the inductive hypothesis, we know $\sigma  M^{k-1}$ and $e$ are closed computable, so    $[\sigma, \sigma M^{k-1}/x]e$ is too.
 
-Now we know $\sigma M^k$ is computable, we must show $\sigma M^k (e'_1, \dots, e'_n)$ is too. This will be a closed term of ??? The denotation of $M^k$ is $\bigsqcup n M^n$, so we must prove $\llbracket M^n \rrbracket = n$
+Now we know $\sigma M^k$ is computable, we must show $\sigma M^k (e'_1, \dots, e'_n)$ is too. The denotation of $M^k$ is $\bigsqcup n M^n$, so we must prove $\llbracket M^n \rrbracket = n$
 %continue with this.  
 \end{proof}
 
@@ -63,7 +63,7 @@ This is the same for zero, $\case$ and $\fix$.
 
 Alternatively, we could have defined these operations as constants, for example, $\succ : \nat \to \nat$ is a function in the language that has a pre defined definition that never changes. We then also define $zero : \nat$, $\case : \nat \to \nat \to \nat$ (just on Natural numbers) and $\fix : (A \to A) \to A$.
 
-This is the way PCF is defined in \citep{Streicher06}. Also Plotkin uses this definition, with the addition of a Boolean base type in \citep{Plotkin77}. (?)
+This is the way PCF is defined in \citep{Streicher06}. Also Plotkin uses this definition, with the addition of a Boolean base type in \citep{Plotkin77}.
 
 \section{Proof using Binary Logical Relation}
 

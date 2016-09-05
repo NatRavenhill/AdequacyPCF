@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.6.30)  4 SEP 2016 23:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.6.30)  5 SEP 2016 09:52
 entering extended mode
 **./report.tex
 (report.tex
@@ -575,11 +575,7 @@ Package: amsthm 2015/03/04 v2.20.2
 Package: changepage 2009/10/20 v1.0c check page and change page layout
 \c@cp@cntr=\count135
 \cp@tempcnt=\count136
-) (report.aux
-
-LaTeX Warning: Label `exp' multiply defined.
-
-)
+) (report.aux)
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
@@ -666,41 +662,168 @@ l.52 \end{abstract}
 
 ] [2
 
-] (report.toc
-LaTeX Font Info:    Try loading font information for U+msa on input line 2.
+]
 
+Package hyperref Warning: old toc file detected, not used; run LaTeX again.
+
+\tf@toc=\write5
+\openout5 = `report.toc'.
+
+[3
+
+]
+Chapter 1.
+(intoREPORT.tex
+
+Package natbib Warning: Citation `Plotkin81' on page 4 undefined on input line 
+2.
+
+
+Package natbib Warning: Citation `Scott93' on page 4 undefined on input line 2.
+
+
+
+Package natbib Warning: Citation `Hoare69' on page 4 undefined on input line 2.
+
+
+
+LaTeX Warning: Reference `sound' on page 4 undefined on input line 6.
+
+
+LaTeX Warning: Reference `Adequacy' on page 4 undefined on input line 6.
+
+
+LaTeX Warning: Reference `safe' on page 4 undefined on input line 6.
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 9.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 2.
+LaTeX Font Info:    Try loading font information for U+msb on input line 9.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+stmry on input line 2.
+LaTeX Font Info:    Try loading font information for U+stmry on input line 9.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\stmaryrd\ustmry.fd") [3
+("C:\Program Files\MiKTeX 2.9\tex\latex\stmaryrd\ustmry.fd")
 
-])
-\tf@toc=\write5
-\openout5 = `report.toc'.
+Package natbib Warning: Citation `Landin64' on page 4 undefined on input line 9
+.
 
- [4]
-Chapter 1.
-(intoREPORT.tex
+
+Package natbib Warning: Citation `Landin65' on page 4 undefined on input line 9
+.
+
+
+Package natbib Warning: Citation `Gordon73' on page 4 undefined on input line 1
+0.
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [5
+ [4
 
 ]
-[6]) [7]
+
+Package natbib Warning: Citation `Milner97' on page 5 undefined on input line 1
+3.
+
+
+Package natbib Warning: Citation `Marlow10' on page 5 undefined on input line 1
+3.
+
+
+Package natbib Warning: Citation `Plotkin77' on page 5 undefined on input line 
+15.
+
+
+Package natbib Warning: Citation `Scott93' on page 5 undefined on input line 15
+.
+
+
+Package natbib Warning: Citation `Milner73' on page 5 undefined on input line 1
+5.
+
+
+LaTeX Warning: Reference `dom' on page 5 undefined on input line 15.
+
+
+Package natbib Warning: Citation `Milner72a' on page 5 undefined on input line 
+17.
+
+
+Package natbib Warning: Citation `Milner72b' on page 5 undefined on input line 
+17.
+
+
+Package natbib Warning: Citation `Milner72c' on page 5 undefined on input line 
+17.
+
+
+Package natbib Warning: Citation `Nipkow02' on page 5 undefined on input line 1
+9.
+
+
+Package natbib Warning: Citation `Gordon00' on page 5 undefined on input line 1
+9.
+
+
+Package natbib Warning: Citation `Plotkin77' on page 5 undefined on input line 
+21.
+
+
+Package natbib Warning: Citation `Streicher06' on page 5 undefined on input lin
+e 21.
+
+
+LaTeX Warning: Reference `ch2' on page 5 undefined on input line 32.
+
+
+LaTeX Warning: Reference `ch3' on page 5 undefined on input line 34.
+
+
+LaTeX Warning: Reference `ch4' on page 5 undefined on input line 34.
+
+
+LaTeX Warning: Reference `safe' on page 5 undefined on input line 34.
+
+
+LaTeX Warning: Reference `ch6' on page 5 undefined on input line 36.
+
+
+LaTeX Warning: Reference `Adequacy' on page 5 undefined on input line 36.
+
+
+LaTeX Warning: Reference `ch8' on page 5 undefined on input line 36.
+
+[5]
+
+LaTeX Warning: Reference `ch9' on page 6 undefined on input line 38.
+
+
+LaTeX Warning: Reference `ch10' on page 6 undefined on input line 38.
+
+) [6]
 Chapter 2.
+
+LaTeX Warning: Reference `fixpoint' on page 7 undefined on input line 67.
+
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 76.
 (domaintheory.tex
+
+Package natbib Warning: Citation `Gunter92' on page 7 undefined on input line 2
+.
+
+
+Package natbib Warning: Citation `Hutton14' on page 7 undefined on input line 2
+.
+
+
 Underfull \vbox (badness 2269) has occurred while \output is active []
 
- [8
+ [7
 
 ]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
@@ -709,12 +832,12 @@ LaTeX Font Info:    Try loading font information for U+bbm on input line 24.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\bbm\ubbm.fd"
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [9] [10] [11] [12]
+) [8] [9] [10] [11]
 Underfull \hbox (badness 10000) in paragraph at lines 173--174
 
  []
 
-[13] [14]
+[12] [13]
 Overfull \hbox (6.49817pt too wide) in paragraph at lines 252--253
 []\OT1/cmr/m/n/10 Given two do-mains, $\U/msb/m/n/10 X \OT1/cmr/m/n/10 = (\OML/
 cmm/m/it/10 X; \OMS/cmsy/m/n/10 ?[]\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 v[]\OT1/
@@ -723,7 +846,7 @@ cmsy/m/n/10 ?[]\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 []\OT1/cmr/m/n/10 )$, we ca
 n form the set $[](\OML/cmm/m/it/10 X; Y\OT1/cmr/m/n/10 ) =
  []
 
-[15]
+[14]
 Overfull \hbox (16.82669pt too wide) detected at line 288
 \OMS/cmsy/m/n/10 8\OML/cmm/m/it/10 f; g; h \OMS/cmsy/m/n/10 2 []\OT1/cmr/m/n/10
  (\OML/cmm/m/it/10 X; Y\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 : \OT1/cmr/m/n/10 (\OM
@@ -743,87 +866,269 @@ Underfull \hbox (badness 10000) in paragraph at lines 292--293
 
  []
 
-[16] (fixpointREPORT.tex [17])) (logicalREPORT.tex [18] [19] [20]) [21]
+[15] (fixpointREPORT.tex
+
+LaTeX Warning: Reference `cont' on page 16 undefined on input line 7.
+
+[16])) (logicalREPORT.tex
+
+Package natbib Warning: Citation `Tait67' on page 17 undefined on input line 1.
+
+
+
+Package natbib Warning: Citation `Plotkin73' on page 17 undefined on input line
+ 1.
+
+
+Package natbib Warning: Citation `Statman85' on page 17 undefined on input line
+ 1.
+
+
+Package natbib Warning: Citation `Streicher06' on page 17 undefined on input li
+ne 6.
+
+[17] [18]
+
+Package natbib Warning: Citation `Streicher06' on page 19 undefined on input li
+ne 94.
+
+
+LaTeX Warning: Reference `ch6' on page 19 undefined on input line 94.
+
+[19]) [20]
 Chapter 3.
 (typesREPORT.tex
+
+Package natbib Warning: Citation `Plotkin77' on page 21 undefined on input line
+ 6.
+
+
+Package natbib Warning: Citation `Gunter92' on page 21 undefined on input line 
+6.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 6--7
 
  []
 
-[22
+[21
 
-] [23] [24]
+] [22] [23]
 Chapter 4.
-[25
+[24
 
 ] (progREPORT.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [26])
-[27]
+ [25])
+[26]
 Chapter 5.
-[28
 
-] [29] [30] [31]
+LaTeX Warning: Reference `ch4' on page 27 undefined on input line 140.
+
+
+LaTeX Warning: Reference `pres' on page 27 undefined on input line 140.
+
+
+LaTeX Warning: Reference `prog' on page 27 undefined on input line 140.
+
+[27
+
+] [28] [29] [30]
 Underfull \vbox (badness 2050) has occurred while \output is active []
 
- [32]
-[33] [34] [35] [36] [37] [38] [39] [40] [41] [42]) [43]
+ [31]
+[32] [33]
+
+LaTeX Warning: Reference `weak' on page 34 undefined on input line 391.
+
+[34] [35] [36] [37] [38] [39] [40]
+
+Package natbib Warning: Citation `Wright94' on page 41 undefined on input line 
+657.
+
+[41]) [42]
 Chapter 6.
-(denotationalREPORT.tex [44
+(denotationalREPORT.tex
 
-] [45]
-Underfull \vbox (badness 8132) has occurred while \output is active []
+LaTeX Warning: Reference `ch1' on page 43 undefined on input line 1.
 
- [46]
-[47] [48] [49] [50]
-Underfull \vbox (badness 1577) has occurred while \output is active []
 
- [51]
-[52] [53]) [54]
-Chapter 7.
-(newAdequacyREPORT.tex [55
+LaTeX Warning: Reference `dom' on page 43 undefined on input line 1.
 
-] [56] [57] [58] (mainlem.tex [59]
-Overfull \hbox (44.99736pt too wide) in paragraph at lines 52--53
-\OT1/cmr/m/n/10 for case when the ex-pres-sion is zero, to get $\U/stmry/m/n/10
- J\OT1/cmr/m/n/10   \OMS/cmsy/m/n/10 ` \OML/cmm/m/it/10 e[] \OT1/cmr/m/n/10 : \
-OML/cmm/m/it/10 A\U/stmry/m/n/10 K\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 d[]; [] ; d
-[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10 R[]\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 e[]=x
-[]; [] ; e[]=x[]\OT1/cmr/m/n/10 ] [](\OML/cmm/m/it/10 z \OMS/cmsy/m/n/10 7!
- []
 
-[60]
-Overfull \hbox (185.56628pt too wide) in paragraph at lines 89--90
-\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 e[]=x[]; [] ; e[]=x[]\OT1/cmr/m/n/10 ]\OML/cm
-m/m/it/10 e[]$\OT1/cmr/m/n/10 . Then we have $\U/stmry/m/n/10 J\OT1/cmr/m/n/10 
-  \OMS/cmsy/m/n/10 ` \OML/cmm/m/it/10 e \OT1/cmr/m/n/10 : \OML/cmm/m/it/10 A \O
-MS/cmsy/m/n/10 ! \OML/cmm/m/it/10 B\U/stmry/m/n/10 K\OT1/cmr/m/n/10 (\OML/cmm/m
-/it/10 d[]; [] ; d[]\OT1/cmr/m/n/10 )(\U/stmry/m/n/10 J\OT1/cmr/m/n/10   \OMS/c
-msy/m/n/10 ` \OML/cmm/m/it/10 e[] \OT1/cmr/m/n/10 : \OML/cmm/m/it/10 B\U/stmry/
-m/n/10 K\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 d[]; [] ; d[]\OT1/cmr/m/n/10 ) \OML/c
-mm/m/it/10 R[] \OT1/cmr/m/n/10 ([\OML/cmm/m/it/10 e[]=x[]; [] ; e[]=x[]\OT1/cmr
-/m/n/10 ]\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 )([\OML/cmm/m/it/10 e[]=x[]; [] ; e[
-]=x[]\OT1/cmr/m/n/10 ]\OML/cmm/m/it/10 e[]\OT1/cmr/m/n/10 )$. 
- []
+LaTeX Warning: Reference `flat' on page 43 undefined on input line 14.
 
-[61] [62] [63])) [64]
-Chapter 8.
-(adeqREPORT.tex [65
+
+LaTeX Warning: Reference `cont' on page 43 undefined on input line 19.
+
+[43
 
 ]
 
-LaTeX Warning: Reference `un' on page 66 undefined on input line 44.
+LaTeX Warning: Reference `prod' on page 44 undefined on input line 31.
 
 
-LaTeX Warning: Reference `non' on page 66 undefined on input line 46.
+LaTeX Warning: Reference `single' on page 44 undefined on input line 37.
 
-[66]) [67]
+[44]
+Underfull \vbox (badness 8132) has occurred while \output is active []
+
+ [45]
+[46] [47] [48] [49]
+Underfull \vbox (badness 1577) has occurred while \output is active []
+
+ [50]
+[51] [52]) [53]
+Chapter 7.
+(newAdequacyREPORT.tex
+
+LaTeX Warning: Reference `ch4' on page 54 undefined on input line 2.
+
+
+LaTeX Warning: Reference `ch6' on page 54 undefined on input line 2.
+
+
+LaTeX Warning: Reference `sound' on page 54 undefined on input line 19.
+
+[54
+
+]
+
+LaTeX Warning: Reference `log' on page 55 undefined on input line 49.
+
+
+LaTeX Warning: Reference `log' on page 55 undefined on input line 68.
+
+[55]
+
+LaTeX Warning: Reference `safe' on page 56 undefined on input line 86.
+
+[56]
+
+LaTeX Warning: Reference `bot' on page 57 undefined on input line 176.
+
+[57]
+
+LaTeX Warning: Reference `main' on page 58 undefined on input line 184.
+
+(mainlem.tex [58]
+
+LaTeX Warning: Reference `bot' on page 59 undefined on input line 37.
+
+
+LaTeX Warning: Reference `exp' on page 59 undefined on input line 38.
+
+
+LaTeX Warning: Reference `bot' on page 59 undefined on input line 51.
+
+
+LaTeX Warning: Reference `exp' on page 59 undefined on input line 52.
+
+[59]
+
+LaTeX Warning: Reference `exp' on page 60 undefined on input line 65.
+
+[60]
+Overfull \hbox (29.53955pt too wide) detected at line 94
+\U/stmry/m/n/10 J\OT1/cmr/m/n/10   \OMS/cmsy/m/n/10 ` \OML/cmm/m/it/10 e \OT1/c
+mr/m/n/10 : \OML/cmm/m/it/10 A \OMS/cmsy/m/n/10 ! \OML/cmm/m/it/10 B\U/stmry/m/
+n/10 K\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 d[]; [] ; d[]\OT1/cmr/m/n/10 )(\U/stmry
+/m/n/10 J\OT1/cmr/m/n/10   \OMS/cmsy/m/n/10 ` \OML/cmm/m/it/10 e[] \OT1/cmr/m/n
+/10 : \OML/cmm/m/it/10 B\U/stmry/m/n/10 K\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 d[];
+ [] ; d[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10 R[] \OT1/cmr/m/n/10 ([\OML/cmm/m/it
+/10 e[]=x[]; [] ; e[]=x[]\OT1/cmr/m/n/10 ]\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 )([
+\OML/cmm/m/it/10 e[]=x[]; [] ; e[]=x[]\OT1/cmr/m/n/10 ]\OML/cmm/m/it/10 e[]\OT1
+/cmr/m/n/10 )
+ []
+
+
+LaTeX Warning: Reference `exp' on page 61 undefined on input line 121.
+
+[61]
+
+LaTeX Warning: Reference `chain' on page 62 undefined on input line 136.
+
+
+LaTeX Warning: Reference `bot' on page 62 undefined on input line 138.
+
+[62]
+
+LaTeX Warning: Reference `exp' on page 63 undefined on input line 169.
+
+)) [63]
+Chapter 8.
+(adeqREPORT.tex
+
+Package natbib Warning: Citation `Gunter92' on page 64 undefined on input line 
+4.
+
+
+Package natbib Warning: Citation `Plotkin77' on page 64 undefined on input line
+ 4.
+
+[64
+
+]
+
+LaTeX Warning: Reference `un' on page 65 undefined on input line 44.
+
+
+LaTeX Warning: Reference `non' on page 65 undefined on input line 46.
+
+[65]
+
+Package natbib Warning: Citation `Streicher06' on page 66 undefined on input li
+ne 66.
+
+
+Package natbib Warning: Citation `Plotkin77' on page 66 undefined on input line
+ 66.
+
+
+Package natbib Warning: Citation `Streicher06' on page 66 undefined on input li
+ne 70.
+
+) [66]
 Chapter 9.
-(por.tex [68
+(por.tex
 
-] [69] [70] [71] [72] [73] [74] [75]
-Overfull \hbox (20.54646pt too wide) in paragraph at lines 367--368
+LaTeX Warning: Reference `ch4' on page 67 undefined on input line 35.
+
+[67
+
+]
+
+LaTeX Warning: Reference `main2' on page 68 undefined on input line 55.
+
+
+Package natbib Warning: Citation `Streicher06' on page 68 undefined on input li
+ne 59.
+
+[68]
+
+Package natbib Warning: Citation `Streicher06' on page 69 undefined on input li
+ne 94.
+
+[69]
+
+LaTeX Warning: Reference `chain' on page 70 undefined on input line 128.
+
+
+Package natbib Warning: Citation `Streicher06' on page 70 undefined on input li
+ne 144.
+
+[70] [71] [72] [73]
+
+Package natbib Warning: Citation `Streicher06' on page 74 undefined on input li
+ne 314.
+
+[74]
+
+LaTeX Warning: Reference `stable' on page 75 undefined on input line 357.
+
+
+Overfull \hbox (20.54646pt too wide) in paragraph at lines 370--371
 []$\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 ?\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 0\OML/
 cmm/m/it/10 ; \OT1/cmr/m/n/10 1)$ and $(0\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 ?\
 OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1)$ are in $\OML/cmm/m/it/10 R[]$\OT1/cmr/m/n
@@ -833,30 +1138,75 @@ ld have $\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ((\OMS/cmsy/m/n/10 ?\OML/cmm/m/it/10
 OMS/cmsy/m/n/10 ?\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1) \OMS/cmsy/m/n/10 2
  []
 
-) [76]
+) [75]
 Chapter 10.
 (evaluationREPORT.tex
+
+LaTeX Warning: Reference `dom' on page 76 undefined on input line 2.
+
+
+LaTeX Warning: Reference `ch6' on page 76 undefined on input line 2.
+
+
+LaTeX Warning: Reference `log' on page 76 undefined on input line 4.
+
+
+LaTeX Warning: Reference `pres' on page 76 undefined on input line 6.
+
+
+LaTeX Warning: Reference `prog' on page 76 undefined on input line 6.
+
+
+LaTeX Warning: Reference `sound' on page 76 undefined on input line 8.
+
+
+LaTeX Warning: Reference `adeq' on page 76 undefined on input line 10.
+
+
+LaTeX Warning: Reference `fixpoint' on page 76 undefined on input line 13.
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [77
+ [76
 
 ]
+
+LaTeX Warning: Reference `fixpoint' on page 77 undefined on input line 17.
+
+
+Package natbib Warning: Citation `Streicher06' on page 77 undefined on input li
+ne 19.
+
+
 Underfull \vbox (badness 7133) has occurred while \output is active []
 
- [78])
-[79]
+ [77])
+[78]
 Chapter 11.
-(report.bbl [80
 
-] [81
+LaTeX Warning: Reference `ch1' on page 79 undefined on input line 126.
+
+(report.bbl [79
+
+] [80
 
 ]
 Missing character: There is no Î in font cmr10!
 Missing character: There is no » in font cmr10!
-) [82]
+)
+
+Package natbib Warning: There were undefined citations.
+
+[81]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 131.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 131.
- (report.aux)
+ (report.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 131.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 131.
 Package rerunfilecheck Info: File `report.out' has not changed.
@@ -866,18 +1216,18 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 131.
  ) 
 Here is how much of TeX's memory you used:
- 17298 strings out of 493335
- 313717 string characters out of 3139254
- 374517 words of memory out of 3000000
+ 17295 strings out of 493335
+ 313690 string characters out of 3139254
+ 372598 words of memory out of 3000000
  20127 multiletter control sequences out of 15000+200000
  16505 words of font info for 67 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,22n,54p,1164b,542s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 55i,22n,54p,1161b,542s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Natalie\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\public\bbm\dpi600
 \bbm10.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
@@ -898,9 +1248,9 @@ e1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 s/cm/cmtt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbol
 s/msbm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/hoekwater/stmary10
 .pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/hoekwater/stmary7.pfb>
-Output written on report.pdf (83 pages, 785114 bytes).
+Output written on report.pdf (82 pages, 743713 bytes).
 PDF statistics:
- 1118 PDF objects out of 1200 (max. 8388607)
- 342 named destinations out of 1000 (max. 500000)
+ 904 PDF objects out of 1000 (max. 8388607)
+ 341 named destinations out of 1000 (max. 500000)
  346 words of extra memory for PDF output out of 10000 (max. 10000000)
 
