@@ -1,139 +1,139 @@
-\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}
-\contentsline {section}{\numberline {1.1}History}{5}{section.1.1}
-\contentsline {section}{\numberline {1.2}Structure}{5}{section.1.2}
-\contentsline {chapter}{\numberline {2}Background}{7}{chapter.2}
-\contentsline {section}{\numberline {2.1}Domain Theory}{8}{section.2.1}
-\contentsline {section}{\numberline {2.2}Examples of Domains}{9}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Single Element Domain}{9}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Flat Natural Numbers}{10}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Product of domains}{11}{subsection.2.2.3}
-\contentsline {section}{\numberline {2.3}Monotone and Continuous Functions}{13}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Domain of Continuous Functions}{14}{subsection.2.3.1}
-\contentsline {section}{\numberline {2.4}Fixpoint Theorem}{16}{section.2.4}
-\contentsline {paragraph}{$\DOTSB \bigsqcup@ \slimits@ f^n (\bot )$ is a fixpoint}{16}{section*.4}
-\contentsline {paragraph}{$\DOTSB \bigsqcup@ \slimits@ f^n (\bot )$ is the least fixpoint}{16}{section*.5}
-\contentsline {section}{\numberline {2.5}Logical Relations}{17}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}Definition}{17}{subsection.2.5.1}
-\contentsline {paragraph}{Logical Relations at Function Types}{18}{section*.6}
-\contentsline {subsection}{\numberline {2.5.2}Examples and Non-Examples}{18}{subsection.2.5.2}
-\contentsline {paragraph}{Union of two logical relations}{18}{section*.7}
-\contentsline {paragraph}{Intersection of two logical relations}{18}{section*.8}
-\contentsline {paragraph}{Composition of two binary logical relations}{18}{section*.9}
-\contentsline {subsection}{\numberline {2.5.3}Main Lemma}{19}{subsection.2.5.3}
-\contentsline {chapter}{\numberline {3}Definition of PCF and Syntax}{21}{chapter.3}
-\contentsline {section}{\numberline {3.1}Definition of PCF}{21}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Types}{21}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Expressions}{21}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}Type System for PCF}{22}{section.3.2}
-\contentsline {chapter}{\numberline {4}Operational Semantics of PCF}{24}{chapter.4}
-\contentsline {section}{\numberline {4.1}Example programs in PCF}{26}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Addition}{26}{subsection.4.1.1}
-\contentsline {chapter}{\numberline {5}Type Safety}{27}{chapter.5}
-\contentsline {section}{\numberline {5.1}Lemmas for Type Safety}{27}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Weakening}{27}{subsection.5.1.1}
-\contentsline {paragraph}{Variables}{28}{section*.10}
-\contentsline {paragraph}{Zero}{28}{section*.11}
-\contentsline {paragraph}{Successor}{28}{section*.12}
-\contentsline {paragraph}{Case}{29}{section*.13}
-\contentsline {paragraph}{Application}{29}{section*.14}
-\contentsline {paragraph}{Abstraction}{29}{section*.15}
-\contentsline {paragraph}{Fixpoint}{30}{section*.16}
-\contentsline {subsection}{\numberline {5.1.2}Substitution Rules}{30}{subsection.5.1.2}
-\contentsline {paragraph}{Variables}{31}{section*.17}
-\contentsline {paragraph}{Zero}{31}{section*.18}
-\contentsline {paragraph}{Successor}{31}{section*.19}
-\contentsline {paragraph}{Case}{31}{section*.20}
-\contentsline {paragraph}{Application}{32}{section*.21}
-\contentsline {paragraph}{$\lambda $ Abstraction}{32}{section*.22}
-\contentsline {paragraph}{Fixpoint}{32}{section*.23}
-\contentsline {subsection}{\numberline {5.1.3}Substitution}{33}{subsection.5.1.3}
-\contentsline {paragraph}{Variables}{33}{section*.24}
-\contentsline {paragraph}{Zero}{34}{section*.25}
-\contentsline {paragraph}{Successor}{34}{section*.26}
-\contentsline {paragraph}{Case}{34}{section*.27}
-\contentsline {paragraph}{Application}{35}{section*.28}
-\contentsline {paragraph}{Abstraction}{35}{section*.29}
-\contentsline {paragraph}{Fixpoint}{36}{section*.30}
-\contentsline {section}{\numberline {5.2}Type Safety}{36}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Type Preservation}{36}{subsection.5.2.1}
-\contentsline {paragraph}{Variables}{37}{section*.31}
-\contentsline {paragraph}{Zero}{37}{section*.32}
-\contentsline {paragraph}{Successor}{37}{section*.33}
-\contentsline {paragraph}{Case}{37}{section*.34}
-\contentsline {paragraph}{Application}{38}{section*.35}
-\contentsline {paragraph}{$\lambda $-abstraction}{39}{section*.36}
-\contentsline {paragraph}{Fixpoint}{39}{section*.37}
-\contentsline {subsection}{\numberline {5.2.2}Type Progress}{39}{subsection.5.2.2}
-\contentsline {paragraph}{Zero}{40}{section*.38}
-\contentsline {paragraph}{Variables}{40}{section*.39}
-\contentsline {paragraph}{Successor}{40}{section*.40}
-\contentsline {paragraph}{Case}{40}{section*.41}
-\contentsline {paragraph}{Application}{41}{section*.42}
-\contentsline {paragraph}{$\lambda $-abstraction}{41}{section*.43}
-\contentsline {paragraph}{Fixpoint}{41}{section*.44}
-\contentsline {chapter}{\numberline {6}Denotational Semantics}{43}{chapter.6}
-\contentsline {section}{\numberline {6.1}Denotational Model of PCF}{43}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Denotation of Types}{43}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Denotation of Typing Contexts}{44}{subsection.6.1.2}
-\contentsline {subsection}{\numberline {6.1.3}Denotation of well typed terms}{44}{subsection.6.1.3}
-\contentsline {paragraph}{Variables}{45}{section*.45}
-\contentsline {paragraph}{Zero}{45}{section*.46}
-\contentsline {paragraph}{Successor}{45}{section*.47}
-\contentsline {paragraph}{Case}{45}{section*.48}
-\contentsline {paragraph}{Application}{46}{section*.49}
-\contentsline {paragraph}{$\lambda $ abstraction}{46}{section*.50}
-\contentsline {paragraph}{Fixpoint}{46}{section*.51}
-\contentsline {section}{\numberline {6.2}Substitution Theorem}{47}{section.6.2}
-\contentsline {paragraph}{Variables}{47}{section*.52}
-\contentsline {paragraph}{Zero}{47}{section*.53}
-\contentsline {paragraph}{Successor}{47}{section*.54}
-\contentsline {paragraph}{Case}{48}{section*.55}
-\contentsline {paragraph}{Application}{48}{section*.56}
-\contentsline {paragraph}{$\lambda $-Abstraction}{49}{section*.57}
-\contentsline {paragraph}{Fixpoint}{49}{section*.58}
-\contentsline {section}{\numberline {6.3}Soundness}{49}{section.6.3}
-\contentsline {paragraph}{Variables}{50}{section*.59}
-\contentsline {paragraph}{Zero}{50}{section*.60}
-\contentsline {paragraph}{Successor}{50}{section*.61}
-\contentsline {paragraph}{Case}{50}{section*.62}
-\contentsline {paragraph}{Application}{52}{section*.63}
-\contentsline {paragraph}{$\lambda $-Abstraction}{52}{section*.64}
-\contentsline {paragraph}{Fixpoint}{53}{section*.65}
-\contentsline {chapter}{\numberline {7}Adequacy}{54}{chapter.7}
-\contentsline {section}{\numberline {7.1}Logical Relation}{55}{section.7.1}
-\contentsline {subsection}{\numberline {7.1.1}Substitution Function}{56}{subsection.7.1.1}
-\contentsline {section}{\numberline {7.2}Lemmas for Main Lemma}{56}{section.7.2}
-\contentsline {subsection}{\numberline {7.2.1}Bottom Element Lemma}{57}{subsection.7.2.1}
-\contentsline {subsection}{\numberline {7.2.2}Expansion Lemma}{57}{subsection.7.2.2}
-\contentsline {subsection}{\numberline {7.2.3}Chains Lemma}{57}{subsection.7.2.3}
-\contentsline {section}{\numberline {7.3}Main Lemma}{58}{section.7.3}
-\contentsline {paragraph}{Variables}{58}{section*.66}
-\contentsline {paragraph}{Zero}{58}{section*.67}
-\contentsline {paragraph}{Successor}{58}{section*.68}
-\contentsline {paragraph}{Case}{59}{section*.69}
-\contentsline {paragraph}{Application}{60}{section*.70}
-\contentsline {paragraph}{$\lambda $-Abstraction}{61}{section*.71}
-\contentsline {paragraph}{Fixpoint}{61}{section*.72}
-\contentsline {chapter}{\numberline {8}Other Proofs of Adequacy}{64}{chapter.8}
-\contentsline {section}{\numberline {8.1}Proof using "Computable Terms"}{64}{section.8.1}
-\contentsline {section}{\numberline {8.2}PCF with fixpoint constant}{65}{section.8.2}
-\contentsline {section}{\numberline {8.3}Proof using Binary Logical Relation}{66}{section.8.3}
-\contentsline {chapter}{\numberline {9}Non-Definability of Parallel-Or}{67}{chapter.9}
-\contentsline {section}{\numberline {9.1}The Domain Model for PCF is not fully abstract}{67}{section.9.1}
-\contentsline {subsection}{\numberline {9.1.1}Parallel Or}{67}{subsection.9.1.1}
-\contentsline {section}{\numberline {9.2}R-invariant}{68}{section.9.2}
-\contentsline {section}{\numberline {9.3}Admissible Logical Relations}{69}{section.9.3}
-\contentsline {section}{\numberline {9.4}Logical Relation Examples}{70}{section.9.4}
-\contentsline {paragraph}{$R_1$ is admissible}{71}{section*.73}
-\contentsline {paragraph}{$R_2$ is admissible}{71}{section*.74}
-\contentsline {subsection}{\numberline {9.4.1}Constructors are in $R_1$}{71}{subsection.9.4.1}
-\contentsline {subsection}{\numberline {9.4.2}Constructors are in $R_2$}{73}{subsection.9.4.2}
-\contentsline {subsection}{\numberline {9.4.3}Stable PCF functions}{74}{subsection.9.4.3}
-\contentsline {subsection}{\numberline {9.4.4}Showing por cannot be defined with $R^2$}{75}{subsection.9.4.4}
-\contentsline {chapter}{\numberline {10}Evaluation}{76}{chapter.10}
-\contentsline {section}{\numberline {10.1}What did I learn/achieve?}{76}{section.10.1}
-\contentsline {section}{\numberline {10.2}Evaluation of the Product}{77}{section.10.2}
-\contentsline {section}{\numberline {10.3}Evaluation of the Process}{77}{section.10.3}
-\contentsline {section}{\numberline {10.4}Review of Project Plan}{78}{section.10.4}
-\contentsline {section}{\numberline {10.5}Limitations and ideas for future work}{78}{section.10.5}
-\contentsline {chapter}{\numberline {11}Conclusion}{79}{chapter.11}
+\contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}History}{6}{section.1.1}
+\contentsline {section}{\numberline {1.2}Structure}{6}{section.1.2}
+\contentsline {chapter}{\numberline {2}Background}{8}{chapter.2}
+\contentsline {section}{\numberline {2.1}Domain Theory}{9}{section.2.1}
+\contentsline {section}{\numberline {2.2}Examples of Domains}{10}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Single Element Domain}{10}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Flat Natural Numbers}{11}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Product of domains}{12}{subsection.2.2.3}
+\contentsline {section}{\numberline {2.3}Monotone and Continuous Functions}{14}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Domain of Continuous Functions}{15}{subsection.2.3.1}
+\contentsline {section}{\numberline {2.4}Fixpoint Theorem}{17}{section.2.4}
+\contentsline {paragraph}{$\DOTSB \bigsqcup@ \slimits@ f^n (\bot )$ is a fixpoint}{17}{section*.4}
+\contentsline {paragraph}{$\DOTSB \bigsqcup@ \slimits@ f^n (\bot )$ is the least fixpoint}{17}{section*.5}
+\contentsline {section}{\numberline {2.5}Logical Relations}{18}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Definition}{18}{subsection.2.5.1}
+\contentsline {paragraph}{Logical Relations at Function Types}{19}{section*.6}
+\contentsline {subsection}{\numberline {2.5.2}Examples and Non-Examples}{19}{subsection.2.5.2}
+\contentsline {paragraph}{Union of two logical relations}{19}{section*.7}
+\contentsline {paragraph}{Intersection of two logical relations}{19}{section*.8}
+\contentsline {paragraph}{Composition of two binary logical relations}{19}{section*.9}
+\contentsline {subsection}{\numberline {2.5.3}Main Lemma}{20}{subsection.2.5.3}
+\contentsline {chapter}{\numberline {3}Definition of PCF and Syntax}{22}{chapter.3}
+\contentsline {section}{\numberline {3.1}Definition of PCF}{22}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Types}{22}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Expressions}{22}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.2}Type System for PCF}{23}{section.3.2}
+\contentsline {chapter}{\numberline {4}Operational Semantics of PCF}{25}{chapter.4}
+\contentsline {section}{\numberline {4.1}Example programs in PCF}{27}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Addition}{27}{subsection.4.1.1}
+\contentsline {chapter}{\numberline {5}Type Safety}{28}{chapter.5}
+\contentsline {section}{\numberline {5.1}Lemmas for Type Safety}{28}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Weakening}{28}{subsection.5.1.1}
+\contentsline {paragraph}{Variables}{29}{section*.10}
+\contentsline {paragraph}{Zero}{29}{section*.11}
+\contentsline {paragraph}{Successor}{29}{section*.12}
+\contentsline {paragraph}{Case}{30}{section*.13}
+\contentsline {paragraph}{Application}{30}{section*.14}
+\contentsline {paragraph}{Abstraction}{30}{section*.15}
+\contentsline {paragraph}{Fixpoint}{31}{section*.16}
+\contentsline {subsection}{\numberline {5.1.2}Substitution Rules}{31}{subsection.5.1.2}
+\contentsline {paragraph}{Variables}{32}{section*.17}
+\contentsline {paragraph}{Zero}{32}{section*.18}
+\contentsline {paragraph}{Successor}{32}{section*.19}
+\contentsline {paragraph}{Case}{32}{section*.20}
+\contentsline {paragraph}{Application}{33}{section*.21}
+\contentsline {paragraph}{$\lambda $ Abstraction}{33}{section*.22}
+\contentsline {paragraph}{Fixpoint}{33}{section*.23}
+\contentsline {subsection}{\numberline {5.1.3}Substitution}{34}{subsection.5.1.3}
+\contentsline {paragraph}{Variables}{34}{section*.24}
+\contentsline {paragraph}{Zero}{35}{section*.25}
+\contentsline {paragraph}{Successor}{35}{section*.26}
+\contentsline {paragraph}{Case}{35}{section*.27}
+\contentsline {paragraph}{Application}{36}{section*.28}
+\contentsline {paragraph}{Abstraction}{36}{section*.29}
+\contentsline {paragraph}{Fixpoint}{37}{section*.30}
+\contentsline {section}{\numberline {5.2}Type Safety}{37}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Type Preservation}{37}{subsection.5.2.1}
+\contentsline {paragraph}{Variables}{38}{section*.31}
+\contentsline {paragraph}{Zero}{38}{section*.32}
+\contentsline {paragraph}{Successor}{38}{section*.33}
+\contentsline {paragraph}{Case}{38}{section*.34}
+\contentsline {paragraph}{Application}{39}{section*.35}
+\contentsline {paragraph}{$\lambda $-abstraction}{40}{section*.36}
+\contentsline {paragraph}{Fixpoint}{40}{section*.37}
+\contentsline {subsection}{\numberline {5.2.2}Type Progress}{40}{subsection.5.2.2}
+\contentsline {paragraph}{Zero}{41}{section*.38}
+\contentsline {paragraph}{Variables}{41}{section*.39}
+\contentsline {paragraph}{Successor}{41}{section*.40}
+\contentsline {paragraph}{Case}{41}{section*.41}
+\contentsline {paragraph}{Application}{42}{section*.42}
+\contentsline {paragraph}{$\lambda $-abstraction}{42}{section*.43}
+\contentsline {paragraph}{Fixpoint}{42}{section*.44}
+\contentsline {chapter}{\numberline {6}Denotational Semantics}{44}{chapter.6}
+\contentsline {section}{\numberline {6.1}Denotational Model of PCF}{44}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Denotation of Types}{44}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Denotation of Typing Contexts}{45}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}Denotation of well typed terms}{45}{subsection.6.1.3}
+\contentsline {paragraph}{Variables}{46}{section*.45}
+\contentsline {paragraph}{Zero}{46}{section*.46}
+\contentsline {paragraph}{Successor}{46}{section*.47}
+\contentsline {paragraph}{Case}{46}{section*.48}
+\contentsline {paragraph}{Application}{47}{section*.49}
+\contentsline {paragraph}{$\lambda $ abstraction}{47}{section*.50}
+\contentsline {paragraph}{Fixpoint}{47}{section*.51}
+\contentsline {section}{\numberline {6.2}Substitution Theorem}{48}{section.6.2}
+\contentsline {paragraph}{Variables}{48}{section*.52}
+\contentsline {paragraph}{Zero}{48}{section*.53}
+\contentsline {paragraph}{Successor}{48}{section*.54}
+\contentsline {paragraph}{Case}{49}{section*.55}
+\contentsline {paragraph}{Application}{49}{section*.56}
+\contentsline {paragraph}{$\lambda $-Abstraction}{50}{section*.57}
+\contentsline {paragraph}{Fixpoint}{50}{section*.58}
+\contentsline {section}{\numberline {6.3}Soundness}{50}{section.6.3}
+\contentsline {paragraph}{Variables}{51}{section*.59}
+\contentsline {paragraph}{Zero}{51}{section*.60}
+\contentsline {paragraph}{Successor}{51}{section*.61}
+\contentsline {paragraph}{Case}{51}{section*.62}
+\contentsline {paragraph}{Application}{53}{section*.63}
+\contentsline {paragraph}{$\lambda $-Abstraction}{53}{section*.64}
+\contentsline {paragraph}{Fixpoint}{54}{section*.65}
+\contentsline {chapter}{\numberline {7}Adequacy}{55}{chapter.7}
+\contentsline {section}{\numberline {7.1}Logical Relation}{56}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Substitution Function}{57}{subsection.7.1.1}
+\contentsline {section}{\numberline {7.2}Lemmas for Main Lemma}{57}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Bottom Element Lemma}{58}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Expansion Lemma}{58}{subsection.7.2.2}
+\contentsline {subsection}{\numberline {7.2.3}Chains Lemma}{58}{subsection.7.2.3}
+\contentsline {section}{\numberline {7.3}Main Lemma}{59}{section.7.3}
+\contentsline {paragraph}{Variables}{59}{section*.66}
+\contentsline {paragraph}{Zero}{59}{section*.67}
+\contentsline {paragraph}{Successor}{59}{section*.68}
+\contentsline {paragraph}{Case}{60}{section*.69}
+\contentsline {paragraph}{Application}{61}{section*.70}
+\contentsline {paragraph}{$\lambda $-Abstraction}{62}{section*.71}
+\contentsline {paragraph}{Fixpoint}{62}{section*.72}
+\contentsline {chapter}{\numberline {8}Other Proofs of Adequacy}{65}{chapter.8}
+\contentsline {section}{\numberline {8.1}Proof using "Computable Terms"}{65}{section.8.1}
+\contentsline {section}{\numberline {8.2}PCF with fixpoint constant}{66}{section.8.2}
+\contentsline {section}{\numberline {8.3}Proof using Binary Logical Relation}{67}{section.8.3}
+\contentsline {chapter}{\numberline {9}Non-Definability of Parallel-Or}{68}{chapter.9}
+\contentsline {section}{\numberline {9.1}The Domain Model for PCF is not fully abstract}{68}{section.9.1}
+\contentsline {subsection}{\numberline {9.1.1}Parallel Or}{68}{subsection.9.1.1}
+\contentsline {section}{\numberline {9.2}R-invariant}{69}{section.9.2}
+\contentsline {section}{\numberline {9.3}Admissible Logical Relations}{70}{section.9.3}
+\contentsline {section}{\numberline {9.4}Logical Relation Examples}{71}{section.9.4}
+\contentsline {paragraph}{$R_1$ is admissible}{72}{section*.73}
+\contentsline {paragraph}{$R_2$ is admissible}{72}{section*.74}
+\contentsline {subsection}{\numberline {9.4.1}Constructors are in $R_1$}{72}{subsection.9.4.1}
+\contentsline {subsection}{\numberline {9.4.2}Constructors are in $R_2$}{74}{subsection.9.4.2}
+\contentsline {subsection}{\numberline {9.4.3}Stable PCF functions}{75}{subsection.9.4.3}
+\contentsline {subsection}{\numberline {9.4.4}Showing por cannot be defined with $R^2$}{76}{subsection.9.4.4}
+\contentsline {chapter}{\numberline {10}Evaluation}{77}{chapter.10}
+\contentsline {section}{\numberline {10.1}What did I learn/achieve?}{77}{section.10.1}
+\contentsline {section}{\numberline {10.2}Evaluation of the Product}{78}{section.10.2}
+\contentsline {section}{\numberline {10.3}Evaluation of the Process}{78}{section.10.3}
+\contentsline {section}{\numberline {10.4}Review of Project Plan}{79}{section.10.4}
+\contentsline {section}{\numberline {10.5}Limitations and ideas for future work}{79}{section.10.5}
+\contentsline {chapter}{\numberline {11}Conclusion}{80}{chapter.11}
