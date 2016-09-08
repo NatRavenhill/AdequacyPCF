@@ -1,0 +1,37 @@
+To prove \emph{2}, we must show 
+
+\[ \lambda i \in W. \ \llbracket \lambda x : A. \ \lambda e : A. \ \fix x : A. \ e : A \rrbracket \in R_{A \to A \to A} \]
+
+By the definition of the denotational semantics, this is the same as:
+
+\[ \lambda i \in W. \ (\lambda x' \in \llbracket A \rrbracket. \lambda e' \in \llbracket A \rrbracket. \ \llbracket x:A, e :A \vdash \fix x : A. \ e : A \rrbracket (x',e')) \in R_{A \to A \to A} \]
+
+As this is a function type, we should have:
+
+\[ \lambda i \in W. (\forall d_x \in R_A. \forall d_e \in R_A. \]
+\[ \lambda i \in W. \ (\lambda x' \in \llbracket A \rrbracket. \lambda e' \in \llbracket A \rrbracket. \ \llbracket x:A, e :A \vdash \fix x : A. \ e : A \rrbracket (e',x'))(d_x(i))(d_e(i)) \in R_A \]
+
+Therefore we assume that we have a logical relation $R_A$ of arity $W$ and that $d_x \in R_A$ and $d_e \in R_A$. Then we want to show:
+
+\[ \lambda i \in W. \  \llbracket x:A, e :A \vdash \fix x : A. \ e : A \rrbracket (d_x(i),d_e(i)) \in R_A \]
+
+Using the denotational semantics for the fixpoint case, we have:
+
+\[ \lambda i \in W. \  \Fix (\lambda a \in \llbracket A \rrbracket. \llbracket x:A, e :A \vdash  e : A \rrbracket (d_x(i),d_e(i),a) \in R_A \]
+
+Which reduces to the following by using the denotational semantics for variables:
+
+\[ \lambda i \in W. \  \Fix (\lambda a \in \llbracket A \rrbracket . d_e(i)) \in R_A \]
+
+By using the fixpoint theorem (Lemma \ref{fixpoint}), we know that this is the same as:
+
+\[ \lambda i \in W. \ \bigsqcup (\lambda a \in \llbracket A \rrbracket . d_e(i))^n(\bot) \in R_A \]
+
+
+So we prove that $\forall n. \lambda i \in W. (\lambda a \in \llbracket A \rrbracket . d_e(i))^n(\bot) \in R_A$, by induction on $n$.
+
+When $n = 0$, we have $\lambda i \in W. \bot$, which we know is in $R_A$ from part \emph{1} of this proof.
+
+When $n = n+1$, we know $\lambda i \in W. (\lambda a \in \llbracket A \rrbracket . d_e(i))^n(\bot) \in R_A$, as this is the inductive hypothesis. As all denotations of PCF functions are continuous, and continuous functions are monotone, we can have $\lambda i \in W. (\lambda a \in \llbracket A \rrbracket . d_e(i)) (\lambda a \in \llbracket A \rrbracket . d_e(i)^n(\bot)) = \lambda i \in W.  d_e(i) \in R_A$.
+
+Therefore $\lambda i \in W. \bigsqcup (\lambda a \in \llbracket A \rrbracket . d_e(i))^n(\bot) \in R_A$ , so the whole fixpoint $\lambda$ term is $R$-invariant and we have completed the proof. 

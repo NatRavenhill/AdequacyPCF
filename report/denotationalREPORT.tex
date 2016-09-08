@@ -105,9 +105,9 @@ $\llbracket \Gamma \vdash e \ e' : B \rrbracket d^* =$ Let $f = \llbracket \Gamm
 
 \[\llbracket \Gamma \vdash \lambda x : A. e : A \to B \rrbracket d^* = \lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a)\]
  
-\paragraph{Fixpoint} For fixpoint, by its typing rule we already have a denotation for $\llbracket \Gamma , x : A \vdash e : A \rrbracket d^*$ This is a function of type $\llbracket \Gamma \rrbracket \times \llbracket A \rrbracket \to \llbracket A \rrbracket$. The function we want to obtain is of type $\llbracket \Gamma \rrbracket \to  \llbracket A \rrbracket$ To get an element of $\llbracket A \rrbracket$, we use the fixpoint function, $fix_{\llbracket A \rrbracket}$, which is a continuous function of type $(\llbracket A \rrbracket \to \llbracket A \rrbracket) \to \llbracket A \rrbracket$. the function we give to the fixpoint is the one that maps any given $a \in \llbracket A \rrbracket$ to the denotation of $ \Gamma , x : A \vdash e : A$ in a context where $a$ is the value of $x$:
+\paragraph{Fixpoint} For fixpoint, by its typing rule we already have a denotation for $\llbracket \Gamma , x : A \vdash e : A \rrbracket d^*$ This is a function of type $\llbracket \Gamma \rrbracket \times \llbracket A \rrbracket \to \llbracket A \rrbracket$. The function we want to obtain is of type $\llbracket \Gamma \rrbracket \to  \llbracket A \rrbracket$ To get an element of $\llbracket A \rrbracket$, we use the fixpoint function, $\Fix_{\llbracket A \rrbracket}$, which is a continuous function of type $(\llbracket A \rrbracket \to \llbracket A \rrbracket) \to \llbracket A \rrbracket$. the function we give to the fixpoint is the one that maps any given $a \in \llbracket A \rrbracket$ to the denotation of $ \Gamma , x : A \vdash e : A$ in a context where $a$ is the value of $x$:
 
-\[\llbracket \Gamma \vdash \fix \ x : A. e : A \rrbracket d^* = fix_{\llbracket A \rrbracket} (\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a)\] 
+\[\llbracket \Gamma \vdash \fix \ x : A. e : A \rrbracket d^* = \Fix_{\llbracket A \rrbracket} (\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a)) \] 
 
 \section{Substitution Theorem}
 The following theorem says that given a well typed expression $e : A$ and another expression $e' : C$, which is well typed in the context with $x:A$ added, then the denotation of $e'$ with $e$ substituted for $x$ is the same as the denotation of the original expression in the context with $x:A$ added and valuation with the denotation of $e$ as the value of $x$:
@@ -192,17 +192,17 @@ Therefore $\llbracket \Gamma \vdash [e/x](\lambda y : A.e') : A \to B \rrbracket
 
 \paragraph{Fixpoint} Using the substitution rule for fixpoint, $\llbracket \Gamma \vdash [e/x](\fix \ y : C . e' : C) \rrbracket d^* = \llbracket \Gamma \vdash \fix \ y : C . [e/x]e' : C \rrbracket d^*$. The denotation of this is the following:
 
-\[fix_{\llbracket C \rrbracket} (\lambda c \in \llbracket C \rrbracket . \llbracket \Gamma, y : C \vdash [e/x]e' : C \rrbracket (d^*, c)\]
+\[\Fix_{\llbracket C \rrbracket} (\lambda c \in \llbracket C \rrbracket . \llbracket \Gamma, y : C \vdash [e/x]e' : C \rrbracket (d^*, c)\]
 
  We can use induction on $\llbracket \Gamma, y : C \vdash [e/x]e' : C \rrbracket$ to rewrite the denotation as the following:
 
-\[fix_{\llbracket C \rrbracket} (\lambda c \in \llbracket C \rrbracket . \llbracket \Gamma, y : C, x : A \vdash e' : C \rrbracket (d^*, c, \llbracket \Gamma \vdash e : A \rrbracket d^*)\] 
+\[\Fix_{\llbracket C \rrbracket} (\lambda c \in \llbracket C \rrbracket . \llbracket \Gamma, y : C, x : A \vdash e' : C \rrbracket (d^*, c, \llbracket \Gamma \vdash e : A \rrbracket d^*)\] 
 
-This is also the definition of $\llbracket \Gamma, x : A \vdash (fix \ y : C . e' : C) \rrbracket (d^*, \llbracket \Gamma \vdash e : C \rrbracket d^*)$.
+This is also the definition of $\llbracket \Gamma, x : A \vdash (\fix \ y : C . e' : C) \rrbracket (d^*, \llbracket \Gamma \vdash e : C \rrbracket d^*)$.
 
 \vspace{0.25cm}
 
-Therefore $\llbracket \Gamma \vdash [e/x](\fix \ y : C . \ e' : C) \rrbracket d^* = \llbracket \Gamma, x : A \vdash (fix \ y : C . e' : C) \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^* / x)$.
+Therefore $\llbracket \Gamma \vdash [e/x](\fix \ y : C . \ e' : C) \rrbracket d^* = \llbracket \Gamma, x : A \vdash (\fix \ y : C . e' : C) \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^* / x)$.
 
 \vspace{0.25cm}
 
@@ -340,13 +340,13 @@ By the substitution lemma, this is the same as $\llbracket \Gamma \vdash [e'/x]e
 
 \paragraph{$\lambda$-Abstraction}  is a value, so has no evaluation rules. Therefore there are no cases.
 
-\paragraph{Fixpoint} As $\llbracket \Gamma \vdash \fix \ x:A .e : A \rrbracket d^*$ is a fixpoint operator, we know that $f(fix(f)) = fix(f)$, so we can rewrite it as:
+\paragraph{Fixpoint} As $\llbracket \Gamma \vdash \fix \ x:A .e : A \rrbracket d^*$ is a fixpoint operator and we know that $f(\Fix(f)) = \Fix(f)$, we can rewrite it as:
 
-\[(\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a))[fix_{\llbracket A \rrbracket} (\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a))]\]
+\[(\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a))[\Fix_{\llbracket A \rrbracket} (\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a))]\]
 
 which is equal to:
 
-\[\llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, fix_{\llbracket A \rrbracket} (\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a)))
+\[\llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, \Fix_{\llbracket A \rrbracket} (\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a)))
 \]
 
 which is equal to:
@@ -356,13 +356,13 @@ which is equal to:
 
 Using the substitution lemma, this is the same as
 
-\[\llbracket \Gamma \vdash [fix \ x:A.e/x] e : A \rrbracket d^* \]
+\[\llbracket \Gamma \vdash [\fix \ x:A.e/x] e : A \rrbracket d^* \]
  
  
 The evaluation rule is 
 $$
 \inferrule{ \ }
-{fix \ x:A. e \mapsto [fix \ x:A. e/x]e}
+{\fix \ x:A. e \mapsto [\fix \ x:A. e/x]e}
 $$
 so this is the denotation we need.
 \end{proof}

@@ -11,7 +11,7 @@
 \BOOKMARK [1][-]{section.3.1}{Definition of PCF}{chapter.3}% 11
 \BOOKMARK [1][-]{section.3.2}{Type System for PCF}{chapter.3}% 12
 \BOOKMARK [0][-]{chapter.4}{Operational Semantics of PCF}{}% 13
-\BOOKMARK [1][-]{section.4.1}{Example programs in PCF}{chapter.4}% 14
+\BOOKMARK [1][-]{section.4.1}{Example of a program in PCF}{chapter.4}% 14
 \BOOKMARK [0][-]{chapter.5}{Type Safety}{}% 15
 \BOOKMARK [1][-]{section.5.1}{Lemmas for Type Safety}{chapter.5}% 16
 \BOOKMARK [1][-]{section.5.2}{Type Safety}{chapter.5}% 17
@@ -23,19 +23,15 @@
 \BOOKMARK [1][-]{section.7.1}{Logical Relation}{chapter.7}% 23
 \BOOKMARK [1][-]{section.7.2}{Lemmas for Main Lemma}{chapter.7}% 24
 \BOOKMARK [1][-]{section.7.3}{Main Lemma}{chapter.7}% 25
-\BOOKMARK [0][-]{chapter.8}{Other Proofs of Adequacy}{}% 26
-\BOOKMARK [1][-]{section.8.1}{Proof using "Computable Terms"}{chapter.8}% 27
-\BOOKMARK [1][-]{section.8.2}{PCF with fixpoint constant}{chapter.8}% 28
-\BOOKMARK [1][-]{section.8.3}{Proof using Binary Logical Relation}{chapter.8}% 29
-\BOOKMARK [0][-]{chapter.9}{Non-Definability of Parallel-Or}{}% 30
-\BOOKMARK [1][-]{section.9.1}{The Domain Model for PCF is not fully abstract}{chapter.9}% 31
-\BOOKMARK [1][-]{section.9.2}{R-invariant}{chapter.9}% 32
-\BOOKMARK [1][-]{section.9.3}{Admissible Logical Relations}{chapter.9}% 33
-\BOOKMARK [1][-]{section.9.4}{Logical Relation Examples}{chapter.9}% 34
-\BOOKMARK [0][-]{chapter.10}{Evaluation}{}% 35
-\BOOKMARK [1][-]{section.10.1}{What did I learn/achieve?}{chapter.10}% 36
-\BOOKMARK [1][-]{section.10.2}{Evaluation of the Product}{chapter.10}% 37
-\BOOKMARK [1][-]{section.10.3}{Evaluation of the Process}{chapter.10}% 38
-\BOOKMARK [1][-]{section.10.4}{Review of Project Plan}{chapter.10}% 39
-\BOOKMARK [1][-]{section.10.5}{Limitations and ideas for future work}{chapter.10}% 40
-\BOOKMARK [0][-]{chapter.11}{Conclusion}{}% 41
+\BOOKMARK [1][-]{section.7.4}{Other Proofs of Adequacy}{chapter.7}% 26
+\BOOKMARK [0][-]{chapter.8}{Non-Definability of Parallel-Or}{}% 27
+\BOOKMARK [1][-]{section.8.1}{R-invariant}{chapter.8}% 28
+\BOOKMARK [1][-]{section.8.2}{Admissible Logical Relations}{chapter.8}% 29
+\BOOKMARK [1][-]{section.8.3}{Admissible Logical Relations for Non-Definability of por}{chapter.8}% 30
+\BOOKMARK [0][-]{chapter.9}{Evaluation}{}% 31
+\BOOKMARK [1][-]{section.9.1}{What did I learn/achieve?}{chapter.9}% 32
+\BOOKMARK [1][-]{section.9.2}{Evaluation of the Product and Presentation}{chapter.9}% 33
+\BOOKMARK [1][-]{section.9.3}{Evaluation of the Process}{chapter.9}% 34
+\BOOKMARK [1][-]{section.9.4}{Review of Project Plan}{chapter.9}% 35
+\BOOKMARK [1][-]{section.9.5}{Limitations and ideas for future work}{chapter.9}% 36
+\BOOKMARK [0][-]{chapter.10}{Conclusion}{}% 37

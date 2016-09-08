@@ -1,4 +1,4 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{23}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -83,6 +83,11 @@ Robin Milner.
 Robin Milner and Richard Weyhrauch.
 \newblock Proving compiler correctness in a mechanized logic.
 \newblock \emph{Machine Intelligence}, 7:\penalty0 51--70, 1972.
+
+\bibitem[Murawski(2012)]{Murawski12}
+A.~Murawski.
+\newblock {Logical Relations}.
+\newblock {Course Notes from Midlands Graduate School, Birmingham}, 2012.
 
 \bibitem[Nipkow et~al.(2002)Nipkow, Paulson, and Wenzel]{Nipkow02}
 Tobias Nipkow, Lawrence~C Paulson, and Markus Wenzel.

@@ -1,0 +1,173 @@
+\subsection{Logical Relation Definition}
+We specify a logical relation on denotations of program terms in PCF  by defining relations on each type individually. We use Streicher's definition, as given in \citep{Streicher06}: 
+
+\vspace{0.5cm}
+
+\begin{defn}
+Let $W$ be an arbitrary set.  A $W$-ary logical relation on the model of PCF is a family of relations
+
+\[R = (R_A \in \mathcal{P}(\llbracket A \rrbracket^W) \ | \ A \in Type)\]
+
+such that
+
+\[f \in R_{A \to B} = \forall d \in R_A. \ \lambda i \in W. \ f(i)d(i) \in R_B\]
+\end{defn}
+
+where $Type$ is the set of all possible types our programs can have, defined by induction.
+
+Logical relations for different properties are constructed by defining the relation differently on the base type for each property. For example, if the types are defined by the base type being $\nat$ and other types $A \to B$ (formed any other types $A$ and $B$), then the relation is defined by the definition of $R_{\nat}$.
+
+Therefore we say that a logical relation $R$ of arity $W$ is uniquely determined by $R_{\nat}$, so for all subsets of ${\llbracket \nat \rrbracket}^W$ there is a unique $R$ equal to the set. 
+
+\vspace{0.5cm}
+
+\paragraph{Logical Relations at Function Types}
+
+For a function $f = (f_1, \dots f_n)$ to be in the relation, if we apply it to \textbf{any} value that is in the relation of the type of its domain, for example, for arity $3$:
+
+\[ (x,y,z) \in R_A \]
+
+Then $f$ applied to everything in these elements will be in the relation of the codomain, so we must have:
+
+\[ (f_1(x),f_2(y),f_3(z)) \in R_B \]
+
+Then $f \in R_{A \to B}$.
+
+%Define a set of types, $Type$, which is formed by:
+%
+%\[ \theta ::= o \ | \ \theta \to \theta \]
+%
+%such that $\llbracket o \rrbracket = X$ and  $\llbracket \theta_1 \to \theta_2 \rrbracket = \llbracket \theta_1 \rrbracket \to \llbracket \theta_2 \rrbracket$
+%
+%\begin{defn}
+%An $n$-ary \textbf{logical relation} is a family $\mathcal{R} = \{R_\theta\}_{\theta \in Type}$ of $n$-ary relations such that $R_\theta \subseteq \llbracket \theta \rrbracket \times \dots \llbracket \theta \rrbracket$ (i.e.\ an $n$-tuple) for any $\theta$ and
+%
+%\[ R_{\theta_1 \to \theta_2}(f_1, \dots f_n) \Leftrightarrow\]
+%
+%
+%for all $(d_1, \dots d_n) \in \llbracket \theta_1 \rrbracket^n$, if $R_{\theta_1}(d_1, \dots d_n)$ then $R_{\theta_2}(f_1(d_1), \dots f_n(d_n))$ 
+%\end{defn}
+
+\subsection{Examples and Counter-Examples}
+
+The examples in this section are our answers to  exercises from Lecture 1 of \citep{Murawski12}:
+
+Applying certain restrictions on $R_{\nat}$ restricts the relations we can define on function types, for example:
+
+\begin{itemize}
+\item{If $R_{\nat} = \llbracket \nat \rrbracket^n$, relations on function types can only have $n$ arguments, if $n$ is specified, otherwise 
+there is no difference to the definition.}
+\item{If $R_{\nat} = \emptyset$, then all relations in $R$ are the empty relation.}
+\end{itemize}
+
+\paragraph{Union of two logical relations}
+Given two logical relations $R$ and $S$ of the same arity, we could try to form a logical relation $R \cup S$. This is \textbf{not} a logical relation. For example, if we have $(f_1, \dots , f_n) \in R_{A \to B}$ (and not in $S_{A \to B}$) and $(d_1, \dots , d_n) \in S_A$, (and not in $R_{A \to B}$)  then $(f_1(d_n), \dots , f_n(d_n))$ cannot be in either $R$ or $S$.
+
+\paragraph{Intersection of two logical relations}
+Therefore if we restrict the logical relation to only contain tuples that are in both $R$ and $S$ then we do not have this problem, so this is a logical relation.
+
+If the relations did not have the same arity, there will be no tuples that are in both relations that satisfy the definition, as if we have $R$ of arity 3 and $S$ of arity 5, then have, for example, $(f,g,h) \in R_{A \to B}$ and $(f,g,h,i,j) \in S_{A \to B}$, then we cannot say that $(f,g,h)$ is in both, as this would not be in $S$ anymore. Therefore, this would not be a logical relation.
+
+\paragraph{Composition of two binary logical relations}
+We define $R;S$ in the following way:
+
+\[ (R;S)(x,y) \Leftrightarrow \exists z. \ (R(x,z) \ \wedge \ S(z,y))\]
+
+So for base type we have:
+
+\[ (R_{\nat};S_{\nat})(x,z) \Leftrightarrow \exists y. \ (R_{\nat}(x,y) \ \wedge \ S_{\nat}(y,z))\]
+
+and for functions we have
+
+\[ (R_{A \to B};S_{A \to B})(f,h) \Leftrightarrow \exists g. \ (R_{A \to B}(f,g) \ \wedge \ S_{A \to B}(g,h))\] 
+
+where for any $(x,z) \in (R_A;S_A)$ we have
+
+\[ (R_B(f(x),g(y)) \ \wedge \ S_B(g(y),h(z)))\] 
+
+So as functions in $R$ are only applied to inputs that are in $R$ and the same for $S$, and functions in both are only applied to inputs that are in both, then \textbf{this is a logical relation.}
+
+ 
+
+\subsection{Main Lemma}
+When using logical relations, we usually prove a general theorem about the relation, which we then give specific inputs to, to get the proof of our original property. This is called the Main Lemma (or sometimes the Fundamental Property/Theorem/Lemma). %(Note that this definition uses the denotational semantics of PCF, so reading Chapter \ref{ch6} first will make this definition much easier to understand): 
+
+\vspace{0.5cm}
+
+For any denotation of a PCF term, we want to show that it is in a given logical relation at its type, so we want to show that $\llbracket \Gamma \vdash e : A \rrbracket \in R_{\Gamma \to A}$. An element of $\llbracket \Gamma \rrbracket$ is any tuple of substitutions $d^* = (d_1, \dots d_n)$ for $x_1 : A_1, \dots x_n :A_n = \Gamma$. So $R_\Gamma \in \mathcal{P}(\llbracket A_1 \rrbracket \times \dots \times \llbracket A_n \rrbracket$).
+
+We want all substitutions in a set $W$ of size $n$  to be in the relation, so by using the definition of $\llbracket \Gamma \vdash e : A \rrbracket \in R_{\Gamma \to A}$, we want to show that 
+
+\[ \forall (d^*(1), \dots d^*(W)) \in R_\Gamma. \ \lambda i \in W. \llbracket \Gamma \vdash e : A \rrbracket d^*(i)\]
+
+This says that for any position in the $W$-tuple, we have the denotation of $e$ using the substitution $d^*(i)$ (the substitution from the $i$th position in the tuple $(d^*(1), \dots, d^*(W)) \in R_\Gamma$).
+
+For $W$ different substitutions we want to have
+
+\[(\llbracket \Gamma \vdash e : A \rrbracket d^*(1) , \dots, \llbracket \Gamma \vdash e : A \rrbracket d^*(W)) \in R_B \]
+
+Therefore for program terms, we define the Main Lemma in the following way, as in \citep{Streicher06}, where we only need to define the lemma on $\lambda$ terms. This is because any closed PCF term can be written as a $\lambda$-term in the following way:
+
+\begin{itemize}
+\item{$z$}
+\item{$\lambda x: \nat. s(x)$}
+\item{$\lambda x: \nat, e_0 : A, e_S: A. \case(e,z \to e_0,s(x) \to e_S)$}
+\item{$\lambda e: A . \ \fix x:A \ e $}
+\end{itemize}
+
+The statement of the main lemma is the following:
+
+\vspace{0.5cm}
+
+\begin{lem}\label{main2}
+Let $R$ be a logical relation of arity $W$ on the Scott Model of PCF. Then for $\lambda$ terms $\Gamma \vdash e : A$ and $d_j \in R_{A_j}$ for $j = 1, \dots, n$
+
+\[ \lambda i \in W. \llbracket \Gamma \vdash e : A \rrbracket d^*(i) \in R_A\]
+
+where $d^*(i) = (d_1(i) \dots d_n(i))$ and $\Gamma = x_1 : A_1 , \dots x_n : A_n$
+\end{lem}
+
+We include the proof given by \citep{Streicher06}, additionally explaining how the case for variables is proved:
+
+\begin{proof}
+By induction on $\lambda$ terms:
+
+\paragraph{Variables} Assume $x_1 : A_1, \dots x_n : A_n \vdash x_j : A_j$ and $d_j \in R_{A_j}$ for every $j$. We need to show that $\lambda i \in W. \ \llbracket x_1 : A_1, \dots x_n : A_n \vdash x_j : A_j \rrbracket(d^*(i)) \in R_{A_j} $. $d^*(i)$ includes $d_j(i)$, so by the denotational semantics for variables, we want to show that $\lambda i \ \in W. d_j(i) \in R_{A_J}$. As we have assumed that $d_j \in R_{A_j}$, then at each $i$th position, we already have $d_j(i) \in R_{A_j}$ as an assumption, so we have  $\lambda i \ \in W. d_j(i) \in R_{A_J}$.
+ 
+\paragraph{$\lambda$ -Abstraction} Assume that $\Gamma \vdash \lambda x : A. \ e : A $ and $\forall j \leq n. \ d_j \in R_{A_j}$. We need to show that $\lambda i \in W. \  \llbracket \Gamma \vdash \lambda x : A. \ e : B \rrbracket (d^*(i)) \in R_{A \to B}$. As this is a function type, we expand the definition of the logical relation to get:
+
+\[ \forall d \in R_A. \ \lambda i \in W. \ \llbracket \Gamma \vdash \lambda x:A. e : B \rrbracket (d^*(i))(d(i)) \in R_B\]
+
+Let $d$ be a substitution in $R_A$. We use the induction hypothesis with $\Gamma, x : A \vdash e : B$ (obtained by using the typing rule of $\lambda$-abstraction) and $d_j \in R_{A_j}$  and $d \in R_A$ to get:
+
+\[\lambda i \in W. \ \llbracket \Gamma ,x:A \vdash e : B \rrbracket (d^*(i),d(i))\in R_B \]
+
+By the definition of the denotational semantics for $\lambda$-abstraction, this is the same as:
+
+\[\lambda i \in W. \ \llbracket \Gamma \vdash \lambda x:A. e : B \rrbracket (d^*(i))(d(i)) \in R_B\]
+
+Therefore, $\forall d \in R_A. \ \lambda i \in W. \ \llbracket \Gamma \vdash \lambda x:A. e : B \rrbracket (d^*(i))(d(i)) \in R_B$, so we have 
+
+\[\lambda i \in W. \  \llbracket \Gamma \vdash \lambda x : A. \ e : B \rrbracket (d^*(i)) \in R_{A \to B}\]
+
+which is what we wanted to prove.
+
+\paragraph{Application} Assume that $\Gamma \vdash e \ e' :  B$ and $\forall j \leq n. \ d_j \in R_{A_j}$. We need to show that $\lambda i \in W. \  \llbracket \Gamma \vdash  e \ e' : B \rrbracket (d^*(i)) \in R_B$.
+
+By using the induction hypothesis on $\Gamma \vdash e : A \to B$ and $\Gamma \vdash e' : A$ (which we obtain by using the typing rule of function application), we get 
+$\lambda i \in W. \  \llbracket \Gamma \vdash e : A \to B \rrbracket(d^*(i)) \in R_{A \to B}$. and $\lambda i \in W. \ \llbracket \Gamma \vdash e' : A \rrbracket(d^*(i)) \in R_{A}$.
+
+Expanding the definition of the first result gives us:
+
+\[ \forall d \in R_A. \  \lambda i \in W. \  \llbracket \Gamma \vdash e : A \to B \rrbracket(d^*(i))(d(i)) \in R_B \]
+
+Let $d = \lambda i \in W. \llbracket \Gamma \vdash e' : A  \rrbracket(d^*(i)) \in R_A$. Then we have:
+
+\[  \lambda i \in W. \  \llbracket \Gamma \vdash e : A \to B \rrbracket(d^*(i))( \llbracket \Gamma \vdash e' : A \rrbracket(d^*(i)) \in R_B \]
+ 
+Using the definition of the denotational semantics for function application, we have:
+
+\[\lambda i \in W. \  \llbracket \Gamma \vdash  e \ e' : B \rrbracket (d^*(i)) \in R_B\]
+
+which is what we wanted to prove.
+\end{proof}

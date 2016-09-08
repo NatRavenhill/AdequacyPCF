@@ -125,7 +125,7 @@ For $x_1 : A_1, \dots, x_n : A_n \vdash \fix x:A. \ e : A$, assume for any $i = 
 
 \[ \llbracket \Gamma \vdash \fix x:A. \ e : A \rrbracket (d_1, \dots, d_n) \ R_A \ [e_1/x_1, \dots, e_n/x_n] (\fix x:A. \ e : A) \]
 
-The denotation of the left hand side is $fix( \lambda a \in \llbracket A \rrbracket. \  \llbracket \Gamma, x :A \vdash e : A \rrbracket(d_1, \dots, d_n, a))$.
+The denotation of the left hand side is $\Fix( \lambda a \in \llbracket A \rrbracket. \  \llbracket \Gamma, x :A \vdash e : A \rrbracket(d_1, \dots, d_n, a))$.
 
 By the fixpoint theorem, we know this is the same as 
 \[\bigsqcup_n (\lambda a \in \llbracket A \rrbracket. \  \llbracket \Gamma, x :A \vdash e : A \rrbracket(d_1, \dots, d_n, a))^n(\bot)\]
@@ -167,7 +167,7 @@ because
 \[ = [e_1/x_1, \dots e_n/x_n, [e_1/x_1, \dots e_n/x_n] \fix x:A. e/x] e : A \]
 
 We can use Lemma \ref{exp}, to get 
-\[(\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash e : A \rrbracket(d_1 \dots d_n,a))^{n+1}(\bot) \ R_A \ [e_1/x_1, \dots e_n/x_n]\fix x : A. \ e : A\].
+\[(\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash e : A \rrbracket(d_1 \dots d_n,a))^{n+1}(\bot) \ R_A \ [e_1/x_1, \dots e_n/x_n]\fix x : A. \ e : A\]
 
 
 

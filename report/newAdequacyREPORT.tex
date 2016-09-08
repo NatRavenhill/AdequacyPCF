@@ -44,18 +44,31 @@ Therefore $\forall n \in \mathbb{N}. \llbracket \underline{n} \rrbracket  = n$, 
 
 \end{proof}
 
-To prove the forwards direction, we could naively try to prove it by induction on the denotations of each expression. However,  although we only consider closed expressions of base type, if it has sub-expressions then they may not be closed or of type $\nat$, so we have no inductive hypothesis to provide in these cases.
+To prove the forwards direction, we could naively try to prove it by induction on each expression. However,  although we only consider closed expressions of base type, if it has sub-expressions then they may not be closed or of type $\nat$, so we have no inductive hypothesis to provide in these cases.
 
 Therefore, instead we use the Logical Relations approach that we described in Section \ref{log}.
 
 %Binary Logical Relation definition
-\section{Logical Relation}
-The logical relation we define is a binary logical relation between denotations of PCF expressions and closed expressions of PCF. It is defined as the following:
+\section{Logical Relation}\label{const}
+The logical relation we define is a binary logical relation between denotations of PCF expressions and closed expressions of PCF. It is based on a binary logical relation defined in \citep{Streicher06}. 
+
+There are some differences between our logical relation and the one defined in \citep{Streicher06}. In our proof of the fixpoint case of the main lemma, we do not use the observational preorder that they use. Instead we use an Expansion Lemma (see Lemma \ref{exp} below). We also work with chains instead of directed sets.
+
+Also, Streicher's logical relation is defined on a version of PCF in which  constants to replace certain constructors in the language.
+
+For example, in our definition of PCF, we have terms $s(e)$, for some expression $e$. Here $s$ is a constructor, so $s$ itself is not a term, but once we attach an expression to it, it is a term, $s(e)$.
+
+This is the same for zero, $\case$ and $\fix$.
+
+Alternatively, we could have defined these operations as constants, for example, $\succc : \nat \to \nat$ is a function in the language that has a pre defined definition that never changes. We then also define zero $: \nat$, $\case : \nat \to \nat \to \nat$ (just on Natural numbers) and $\fix : (A \to A) \to A$. This is how PCF is defined in \citep{Streicher06}.
+ 
+\subsection{Defintition of the logical relation}
+The definition of the logical relation is the following:
 
 \vspace{0.5cm}
 
 \begin{defn}
-We define a family of binary  relations $R_A \subseteq \llbracket A \rrbracket \times \{e \ | \ \vdash e : A \}$, defined by induction on types for each type as follows:
+We create a family of binary  relations $R_A \subseteq \llbracket A \rrbracket \times \{e \ | \ \vdash e : A \}$, by defining relations by induction on types for each type as follows:
 
 \[ d  R_{\nat}  e \Leftrightarrow \forall n \in \mathbbm{N}. \ d = n \Rightarrow e \mapsto^* n\]
 
@@ -161,6 +174,8 @@ By the inductive hypothesis we know that for any $e \mapsto e'$ for expressions 
 \end{proof}
 
 \subsection{Chains Lemma}
+
+This lemma was adapted from a similar lemma on directed sets from \citep{Streicher06}.
 
 \vspace{0.25cm}
 

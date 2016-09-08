@@ -1,15 +1,10 @@
-In semantics, there is a theorem called Full Abstraction, in which if two expressions are operationally equal, then they are denotationally equal too.
+The following chapter is based on contents from the chapters "The Full Abstraction Problem" and "Logical Relations" from the book \citep{Streicher06}.
 
-\section{The Domain Model for PCF is not fully abstract}
-This theorem does not hold in PCF. We can show this by giving an example of a function that we can define in the denotational model, but cannot define in PCF.
-
-The example we use is the function  Parallel Or:
-
-\subsection{Parallel Or}
+In Chapter \ref{ch6}, we described how our denotational model can represent any PCF expression. We can show that this model also contains extra functions that do not correspond to any expression. One such example is the function parallel or, written as $\por$.
 
 Parallel or (por) is the function defined in the following way (where $0 = true$):
 
-\[ por \ x \ y =
+\[ \por \ x \ y =
 \left\{
 	\begin{array}{ll}
 		0  & \mbox{if } x = 0  \vee y = 0 \\
@@ -31,28 +26,40 @@ which gives us the following truth table:
 
 \vspace{0.5cm}
 
-%prove it is undefinable in PCF
-As we are using call by name evaluation, (see Chapter \ref{ch4}) $por$ evaluates $x$ and $y$ while it is evaluating the $por$  function, and not before. However, as the function depends on $x$ and $y$, it must evaluate them before $por$ is fully evaluated. If the first argument we evaluate diverges, then the second may be true, but we will never know.
+By observation, parallel or is not definable as we would have to evaluate its arguments in parallel and PCF is a sequential language.
 
-We can formally prove that $por$ is non-definable by using logical relations, but first we need another definition on logical relations:
+We can formally prove that $\por$ is non-definable by using logical relations.
+
+\input{logical2REPORT.tex}
+
+To use our relation to prove $\por$ is not definable in PCF, we must first define a property that a logical relation may or may not satisfy:
 
 \section{R-invariant}
 
-When an expression $e$ of type $A$ is \textbf{$R$-invariant}, there is an element in $R_A$ of the form $(\llbracket \Gamma \vdash e \rrbracket d^*, \dots , \llbracket \Gamma \vdash e \rrbracket d^*) \in R_A$
+When the denotation of an expression $e$ of type $A$ is \textbf{$R$-invariant}, there is an element in $R_A$ of the form $(\llbracket \Gamma \vdash e : A \rrbracket d^*, \dots , \llbracket \Gamma \vdash e : A \rrbracket d^*) \in R_A$
 
 We can define this in general for an denotation $d \in \llbracket A \rrbracket$:
 
 \vspace{0.5cm}
 
-\begin{defn}
-Let $R$ be a logical relation of arity $W$. Then an denotation $d \in \llbracket A \rrbracket$ is called $R$-invariant if 
+\begin{defn}{\citep{Streicher06}}Let $R$ be a logical relation of arity $W$. Then $d \in \llbracket A \rrbracket$ is called $R$-invariant if 
 
 \[\delta_W(d) = \lambda i \in W. \ d \in R_A \]
 \end{defn}
 
-Therefore we can also say that if $R$ is a logical relation of arity $W$ and $e$ is a closed term of type $A$ then the denotation of $e$ is $R$-invariant.
+%Therefore we can also say that if $R$ is a logical relation of arity $W$ and $e$ is a closed term of type $A$ then the denotation of $e$ is $R$-invariant.
 
-For non-closed expressions, we can prove that as long as the denotations of all the expressions in the substitution are $R$-invariant, then the denotation of the entire non closed expression is also $R$-invariant, as a corollary of the main lemma (see Lemma \ref{main2}):
+To understand how this works for $\lambda$ terms, we can prove the following as a corollary of the main lemma:
+
+\vspace{0.5cm}
+
+\begin{cor}{\citep{Streicher06}}
+If $R$ is a logical relation of arity $W$ and $e$ is a $\lambda$ term of type $A$, then $\lambda i \in W. \ \llbracket e \rrbracket \in R_A$
+\end{cor}
+
+Therefore any element of the denotational model that is the denotation of a closed $\lambda$ term is $R$-invariant.
+
+By proving another corollary of the main lemma, it can be proved that any $\lambda$ expression is $R$-invariant (which is done in \citep{Streicher06}). For non-closed expressions, we can prove that as long as the denotations of all the expressions in the substitution are $R$-invariant, then the denotation of the entire non closed expression is also $R$-invariant, as a corollary of the main lemma (see Lemma \ref{main2}):
 
 \vspace{0.5cm}
 
@@ -60,17 +67,9 @@ For non-closed expressions, we can prove that as long as the denotations of all 
 Let $R$ be a logical relation on the Scott Model of arity $W$ and $\Gamma \vdash e : B$ be a $\lambda$ term. Then $\llbracket \Gamma \vdash e : B \rrbracket(d^*(i))$ is $R$-invariant whenever all $d \in d^*$ are.
 \end{cor}
 
-%\begin{proof}
-%Assume all terms $d$ in $d^*$ are $R$ invariant. Then $\forall j \leq n. \ \delta(d_j) \in R_{A_j}$. Therefore we can use this as an assumption in the main lemma \ref{main}, which gives us:
+Now we know that all the denotations of $\lambda$ terms are $R$-invariant, so any \textbf{closed} PCF term that can be written as a $\lambda$ term will have  an $R$-invariant denotation. 
 
-%\[ \lambda i \in W. \ \llbracket \Gamma \vdash e \rrbracket (\delta(d_1(i)), \dots \delta(d_n)(i))  = \lambda i \in W. \ \llbracket \Gamma \vdash e \rrbracket (d^*(i)) \in R_B\]
-%\end{proof}
-
-Therefore an \textbf{element of the denotational model} is $R$-invariant as long as it is the denotation of a $\lambda$ term that is $R$-invariant.
-
-As we know that all the denotations of closed $\lambda$ terms are $R$-invariant, any \textbf{closed} PCF term that can be written as a $\lambda$ term will have  an $R$-invariant denotation. If we can show that the syntax of PCF can be written as $\lambda$ terms, then these $\lambda$ terms can be composed to create $\lambda$ terms for any closed PCF term, so any closed PCF term will be $R$-invariant.
-
-Therefore, we want to ensure that the following expressions are $R$-invariant:
+The syntax of PCF can be written as $\lambda$ terms in the following way, as previously described:
 
 \begin{itemize}
 \item{$z$}
@@ -79,7 +78,10 @@ Therefore, we want to ensure that the following expressions are $R$-invariant:
 \item{$\lambda e: A . \ \fix x:A \ e $}
 \end{itemize} 
 
-The most difficult expression to check is $R$-invariant is $\lambda e: A . \ \fix x:A \ e $, so we require another property on logical relations:
+
+so these $\lambda$ terms can be composed to create $\lambda$ terms for any closed PCF term, so any closed PCF term will be $R$-invariant.
+
+Therefore, we want to ensure that all of the $\lambda$ terms describing PCF expressions are $R$-invariant. The most difficult expression to check is $R$-invariant is $\lambda e: A . \ \fix x:A \ e $, so we require another property on logical relations:
 
 \section{Admissible Logical Relations}
 
@@ -87,22 +89,24 @@ An admissible logical relation is the following:
 
 \vspace{0.5cm}
 
-\begin{defn}
+\begin{defn}{\citep{Streicher06}}
 A logical relation $R$ of arity $W$ is called \textbf{admissible} if $\delta_W(\bot) \in R_{Nat}$ and for all chains $d_1 \sqsubseteq d_2 \sqsubseteq \dots$, if  $d_i \in R_{\nat}$, then $\bigsqcup d_n \in R_{\nat}$.
 \end{defn}
 
-In \citep{Streicher06}, the above definition is defined for directed sets. If $R_{\nat}$ is closed under directed suprema, this is the same as saying that if we form chains $d_0 \sqsubseteq d_1 \sqsubseteq \dots$ of $W$-tuples of elements in $\mathbb{N}_\bot$'s underlying set, if $d_i \in R_{\nat}$, then $\bigsqcup d_n \in R_{\nat}$. This is how obtained our definition of admissible.
+In \citep{Streicher06}, the above definition is defined for directed sets. If $R_{\nat}$ is closed under directed suprema, this is the same as saying that if we form chains $d_0 \sqsubseteq d_1 \sqsubseteq \dots$ of $W$-tuples of elements in $\mathbb{N}_\bot$'s underlying set, if $d_i \in R_{\nat}$, then $\bigsqcup d_n \in R_{\nat}$. This is how we obtained our definition of admissible.
 
-We can prove the following theorem:
+It is also stated in \citep{Streicher06} that for finite $W$, there are no non trivial chains of $\llbracket \nat \rrbracket^W$, so in these cases, we can just say the logical relation is admissible if $d_0 \sqsubseteq d_1 \sqsubseteq \dots$.  
+
+To show that $\lambda x : A. \lambda e : A. \fix x : A. \ e : A$ is $R$-invariant, we can prove the following theorem, from $\citep{Streicher06}$, which is modified for our definition of fixpoint and the definition of domains and admissible logical relations using chains:
 
 \vspace{0.5cm}
 
-\begin{thm}
+\begin{thm}{\citep{Streicher06}}\label{adm}
 Let $R$ be an admissible logical relation of arity $W$. Then for all types $A$ we have:
 
 \begin{enumerate}
 \item{$\delta_W(\bot) \in R_A$ and $R_A$ for all chains $d_1 \sqsubseteq d_2 \sqsubseteq \dots$, if  $d_i \in R_A$, then $\bigsqcup d_n \in R_A$}
-\item{The interpretation of $\lambda x : A. \lambda e : A. \fix x : A. \ e : A$ is $R$-invariant}
+\item{The denotation of $\lambda x : A. \lambda e : A. \fix x : A. \ e : A$ is $R$-invariant}
 \end{enumerate}
 \end{thm}
 
@@ -130,9 +134,8 @@ Therefore $\forall d \in R_A. \ \lambda i \in W. \ \bigsqcup f_n(i)d(i) \in R_B$
 \vspace{0.5cm}
 
 %%% NOW THE FIX CASE %%%%
-\textcolor{red}{Fix case as in written notes}
-
-We prove \emph{2} by 
+\input{fixcase.tex}
+ 
 \end{proof}
 
 %\textcolor{red}{I need to prove something like this for case too? (as it's not a natural number anymore...)}
@@ -142,7 +145,7 @@ Now we have proved this, we can prove the following:
 \vspace{0.5cm}
 
 \begin{thm}{\citep{Streicher06}}
-Let $R$ be an admissible logical relation such that the interpretations of the terms:
+Let $R$ be an admissible logical relation such that the denotations of the terms:
 
 \begin{itemize}
 \item{$z$}
@@ -150,11 +153,18 @@ Let $R$ be an admissible logical relation such that the interpretations of the t
 \item{$\lambda x: \nat, e_0 : A, e_S: A. \case(e,z \to e_0,s(x) \to e_S)$}
 \end{itemize}
 
-are all $R$-invariant. Then all interpretaions of closed PCF terms are $R$-invariant.
+are all $R$-invariant. Then all denotations of closed PCF terms are $R$-invariant.
 \end{thm}
 
-\section{Logical Relation Examples}
-Given the following two logical relations, defined at base types:
+\begin{proof}
+Assume we have an admissible logical relation $R$ and the given $\lambda$ terms have $R$-invariant denotations. Then we just need to show the denotations of $x : A. \lambda e : A. \fix x : A. \ e : A$, which we get by Theorem \ref{adm}. Therefore all denotations of closed PCF terms are $R$-invariant.
+\end{proof}
+
+\section{Admissible Logical Relations for Non-Definability of por}\label{exercise}
+
+Now we have defined admissible logical relations and proved that closed PCF terms are $R$-invariant for any such logical relation, we define two logical relations, defined in \citep{Streicher06} which we will use in the proof that $\por$ is non-definable in PCF.
+
+The following two logical relations, are specified by defining them at base types:
 
 \[ (x,y,z) \in {R_{Nat}}^1 = x \uparrow y \ \wedge \ z = x \sqcap y\]
 
@@ -162,25 +172,27 @@ Given the following two logical relations, defined at base types:
 
 \emph{(where $x \sqcap y$ is the greatest lower bound of $x$ and $y$ and $x \uparrow y = \exists z. \ x \sqsubseteq z \ \wedge \ y \sqsubseteq z$)}
 
-we want to show that they are both admissible, so all the interpretations of all closed PCF terms are invariant in them. 
-
 At function type, the definition will be as for a general logical relation:
 
 \[ f \in R_{A \to B}^1 = \forall d \in R_A^1. \ \lambda i \in W. f(i)(d(i)) \in R_B^1 \]
 
 \[ f \in R_{A \to B}^2 = \forall d \in R_A^2. \ \lambda i \in W. f(i)(d(i)) \in R_B^2 \]
 
+We want to show that the denotations of all closed PCF terms are invariant in them. We use Theorem \ref{adm}, so we must prove two things. First we prove that both logical relations are admissible. As $W = 3$, from the remark before, we just prove that $(\bot, \bot, \bot)$ is in each logical relation:
+
+
 \paragraph{$R_1$ is admissible} For $R_1$, $z = \bot$, so $x \uparrow y$ and $\bot \sqcap \bot = z$, so $\delta_W(\bot)$ is in $R^1$.
 
-Given a chain of numbers/$\bot$s, in $R_1$, their limits must also be in $R_1$. \textcolor{red}{(trivial?)}
+%Given a chain of numbers/$\bot$s, in $R_1$, their limits must also be in $R_1$. \textcolor{red}{(trivial?)}
 
 \paragraph{$R_2$ is admissible}
 
 $\delta_W(\bot)$ is in $R^2$, as everything is equal to $\bot$.
 
-\textcolor{red}{Have written on paper all possible elements of each, should I put it here too?}
+%\textcolor{red}{Have written on paper all possible elements of each, should I put it here too?}
 
-Now we must show that the interpretations of all the $\lambda$ definitions of the constructors are in each relation:
+Secondly, we must show that the denotations of all the $\lambda$ definitions of the constructors (except $\fix$) are $R$-invariant for each relation. (This is left as exercise in \citep{Streicher06}, we prove it fully here):
+
 
 \subsection{Constructors are in $R_1$}
 
@@ -307,7 +319,7 @@ Now we know that all PCF constructor $\lambda$ terms are all $R^1$ invariant, so
 
 \subsection{Stable PCF functions}
 
-Now we can go prove a lemma which says that all first order PCF terms are \emph{stable}. Stable means that binary infima of consistent pairs are preserved (i.e.\ given $x$ and $y$ such that $x \uparrow y$, then if $z = x \sqcap y$, then $f(z) = f(x) \sqcap f(y)$):
+Now we can go prove a lemma which says that all first order PCF terms are \emph{stable}, from which the non definability of $\por$ is a corollary. Stable means that binary infima of consistent pairs are preserved (i.e.\ given $x$ and $y$ such that $x \uparrow y$, then if $z = x \sqcap y$, then $f(z) = f(x) \sqcap f(y)$):
 
 \vspace{0.5cm}
 
@@ -318,6 +330,8 @@ For every expression $e$ of first order type, (i.e.\ of type $\nat \to \nat \to 
 
 for all $x^*$ and $y^* \in \llbracket \nat \times \dots \times \nat \rrbracket$, with $x^i \uparrow y^i$ for all $i = 1, \dots , k$ 
 \end{lem}
+
+We give the proof as in \citep{Streicher06}, explaining it in more detail:
 
 \begin{proof}
 As we know that all the  $\lambda$ terms of the constructors are $R^1$ invariant and $R^1$ is admissible, then the denotation of any closed PCF term is $R^1$ invariant. This means for any function $\llbracket e \rrbracket$ that describes the denotation of a closed PCF term, and any $(x,y,z) \in R_{\nat}^1$, that
@@ -332,7 +346,7 @@ Applying the definition of $(\llbracket e \rrbracket , \llbracket e \rrbracket, 
 
 Therefore we have $(\llbracket e \rrbracket(x_1, \dots x_n), \llbracket e \rrbracket(y_1, \dots y_n),\llbracket e \rrbracket(x_1 \sqcap y_1), \dots (x_n \sqcap y_n)) \in R_{\nat}^1$.
 
-\textcolor{red}{Assuming $x^* \sqcap y^* = (x_1 \sqcap y_1), \dots (x_n \sqcap y_n)$}
+%\textcolor{red}{Assuming $x^* \sqcap y^* = (x_1 \sqcap y_1), \dots (x_n \sqcap y_n)$}
 
 By the second part of $R_{\nat}^1$'s definition, we have:
 
@@ -343,30 +357,39 @@ Now we can use this to show the non definability of parallel or:
 
 \vspace{0.5cm}
 
-\begin{cor}
+\begin{cor}{\citep{Streicher06}}
 There are no PCF definable functions $f$ of type $\llbracket \nat \to \nat \to \nat$ where:
 
 \begin{itemize}
-\item{$f 0 \bot = 0$}
-\item{$f \bot 0 = 0$}
-\item{$f 1 1 = 1$}
+\item{$f \ 0 \ \bot = 0$}
+\item{$f \ \bot \ 0 = 0$}
+\item{$f \ 1 \ 1 = 1$}
 \end{itemize}
 \end{cor}
 
-\begin{proof}
-By contradiction. Assume there is a function $f$ that satisfies the above conditions and it is definable in PCF. Then $f 0 \bot = 0 = f \bot 0$, so using Lemma \ref{stable} we have
+\begin{proof}{\citep{Streicher06}}
+By contradiction. Assume there is a function $f$ that satisfies the above conditions and it is definable in PCF. Then $f \ 0 \ \bot = 0 = f \ \bot \ 0$, so using Lemma \ref{stable} we have
 
-\[ f \bot \bot = f(0 \sqcap \bot)(\bot \sqcap 0) = f 0 \bot \sqcap f \bot 0 = 0 \sqcap 0 = 0 \]
+\[ f \ \bot \ \bot = f \ (0 \sqcap \bot) \ (\bot \sqcap 0) = f \ 0 \ \bot \sqcap f \ \bot \ 0 = 0 \sqcap 0 = 0 \]
 
-However we also have $f 1 1 = 1$ and by monotonicty of $f$ we should have $f \bot \bot \sqsubseteq f 1 1$ which is $0 \sqsubseteq 1$ which is not in the relation for $\mathbb{N}_\bot$. Therefore we have a contradiction and there is no PCF definable $f$ satisfying the constraints.
+However we also have $f \ 1 \ 1 = 1$ and by monotonicity of $f$ we should have $f \ \bot \ \bot \sqsubseteq f \ 1 \ 1$ which is $0 \sqsubseteq 1$ which is not in the relation for $\mathbb{N}_\bot$. Therefore we have a contradiction and there is no PCF definable $f$ satisfying the constraints.
 \end{proof}
 
 The constraints in the above corollary characterize parallel or, so we cannot define parallel or in our PCF.
 
-\subsection{Showing por cannot be defined with $R^2$}
+We have not used $R^2$ yet. $R^2$ is another relation with which we can show that $\por$ is non-definable in 
+PCF, as a corollary of Lemma 
+ \ref{stable}.
+\vspace{0.5cm}
 
-As all the $\lambda$-terms for PCF constructors are in $R^2$ and it is admissible, it is also the case that the denotation of any closed PCF term of type $\nat \to \nat \to \nat$ is $R^2$ invariant.  If this term is $f$, then we cannot satisfy all the por conditions.
+\begin{cor}
+Parallel Or is not definable in PCF 
+\end{cor}
 
-$(\bot, 0, 1)$ and $(0, \bot, 1)$ are in $R_{\nat}^2$, as both tuples contain $\bot$, so we should have $f ((\bot, 0, 1)(0, \bot, 1) \in R_{\nat}^2$ . 
+\begin{proof}{\citep{Streicher06}}
+As all the $\lambda$-terms for PCF constructors are in $R^2$ and it is admissible, it is also the case that the denotation of any closed PCF term of type $\nat \to \nat \to \nat$ is $R^2$ invariant.  If this term is $f$, then we cannot satisfy all the por conditions (from the other corollary).
 
-However, $(f \bot 0, f 0 \bot, f 1 1) = (0,0,1)$, so it is not in $R_{\nat}^2$.
+This is because $(\bot, 0, 1)$ and $(0, \bot, 1)$ are in $R_{\nat}^2$ and as both tuples contain $\bot$, we should have $f ((\bot, 0, 1)(0, \bot, 1) \in R_{\nat}^2$ . 
+
+However, $(f \ \bot \ 0, f \ 0 \ \bot, f \ 1 \ 1) = (0,0,1)$, so it is not in $R_{\nat}^2$. Therefore we cannot define an $f$ that satisfies the constraints, so parallel or is not definable.
+\end{proof}

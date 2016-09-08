@@ -26,7 +26,7 @@ This is because the ordering on the lifted set is only defined between numbers a
 \vspace{0.5cm}
  
 \begin{defn}
-A \textbf{directed set} $X$, is a set where
+A \textbf{directed set} $X$, is a non-empty set where
 
 \[ \forall x,y \in X. \ \exists z \in X. \ x \sqsubseteq z \ \wedge y \ \sqsubseteq z \]
 \end{defn}
@@ -56,41 +56,35 @@ The limit of a chain is usually written as $\bigsqcup x_n$, where $x_n$ is a cha
 
 \section{Examples of Domains}\label{ex}
 \subsection{Single Element Domain}\label{single}
-In a single element domain the underlying set is $\{x\}$, so he only element $\bot$ can be is $x$ and $\sqsubseteq$ just contains the pair $(x,x)$
+In a single element domain the underlying set is $\{x\}$, so the only element $\bot$ can be is $x$ and $\sqsubseteq$ just contains the pair $(x,x)$
 
-Now we must prove the three conditions in the domain definition to show that $(\{x\},x,\sqsubseteq)$ is a domain):
+\vspace{0.5cm}
 
-\begin{enumerate}
-\item{$\forall x \in \{x\}. \ x \sqsubseteq x$\\
-There is only one element, $x$, and $x \sqsubseteq x$ is in the ordering.}
-\item{$\sqsubseteq$ \textbf{is a partial order}
-\begin{itemize}
-\item{Reflexivity\\
-The only element is $x$ and $x \sqsubseteq x$ is in the ordering}
-\item{Antisymmetry\\
-Any $x$ and $y$ must both be the element $x$, as it is the only possible element, so $x = x$.}
-\item{Transitivity\\
-Any $x,y$ and $z$ must all be $x$ and $x \sqsubseteq x$ is in the ordering.}
-\end{itemize}}
-\item{\textbf{All chains must have a least upper bound}\\
-As $x$ is the only possible element, all chains will be of the form 
+\begin{lem}
+$(\{x\},x,\sqsubseteq)$ is a domain.
+\end{lem}
+
+\begin{proof}
+We prove the three conditions in the domain definition to show that $(\{x\},x,\sqsubseteq)$ is a domain).
+
+There is only one element, $x$, and $x \sqsubseteq x$ is in the ordering, so $\forall x \in \{x\}. \ x \sqsubseteq x$.
+
+Next, we prove $\sqsubseteq$ is a partial order. As the only element in the underlying set is $x$ and $x \sqsubseteq x$ is in the ordering, then it must be  reflexive. We can only have $x \sqsubseteq x$ in the ordering and $x = x$, so it is antisymmetric.
+Any $x,y$ and $z$ must all be $x$ and $x \sqsubseteq x$ is in the ordering, so $\sqsubseteq$ is transitive. Therefore $\sqsubseteq$ is a partial order.
+
+
+Finally, we prove that all chains must have a least upper bound. As $x$ is the only possible element, all chains will be of the form 
 
 \[ x \sqsubseteq x  \sqsubseteq x  \sqsubseteq \dots \]
 
-Let $\bigsqcup x_n = x$. Then we need an element $z$ such that the following two statements are true, so let $z = \sqcup x_n = x$. Then:
+Let $z = \bigsqcup x_n = x$. Then the only possible $x_i$ is $x$, so we must have $x \sqsubseteq x$. This is in the ordering. Therefore $\forall i. x_i \sqsubseteq x$.
 
-\begin{itemize}
-\item{$\forall i. x_i \sqsubseteq x$ \\
-The only possible $x_i$ is $x$, so we must have $x \sqsubseteq x$. This is in the ordering.}
-\item{$\forall y. (\forall i . x_i \sqsubseteq y) \Rightarrow x \sqsubseteq y$\\
-The only possible value of $y$ is $x$. Therefore we must have $x \sqsubseteq x$, which is in the ordering.}
-\end{itemize}}
-\end{enumerate}
+Then we prove $\forall y. (\forall i . x_i \sqsubseteq y) \Rightarrow x \sqsubseteq y$. The only possible value of $y$ is $x$. Therefore we must have $x \sqsubseteq x$, which is in the ordering.
 
 \vspace{0.25cm}
 
 Now we have proved all the conditions, so the single element domain is a domain.
-
+\end{proof}
 
 \subsection{Flat Natural Numbers}\label{flat} A domain is a \textbf{flat} domain if  the only ordering is between $\bot$ and the elements of the underlying set. In this example the underlying set is  $\mathbbm{N}$, the set of natural numbers, so the only orderings we have are $\bot \sqsubseteq 0$, $\bot \sqsubseteq 1$, $\bot \sqsubseteq 2$, etc... 
 
@@ -118,101 +112,79 @@ which gives us the following picture:
 
 \vspace{0.5cm}
 
-Now we must prove three conditions to show $(\mathbbm{N}, \bot, \sqsubseteq)$ is a domain: 
+Now we must prove that this is a domain:
 
-\begin{enumerate}
-\item{$\forall x \in \natb. \ \bot \sqsubseteq x$ }\\
-In the definition of our relation we have $\{ (\bot , n) \ | \ n \in \mathbb{N} \}$ and $(\bot , \bot)$. so $\{(\bot , x) \ | \ x \in \natb\}$ is a subset of $\sqsubseteq$.
-\item{\textbf{Prove $\sqsubseteq$ is a partial order}\\
-For $\sqsubseteq$ to be a partial order, it must be reflexive, antisymmetric and transitive.
-\begin{itemize}
-\item{Reflexivity\\
-We know this from the  definition of $\sqsubseteq$, as $\{(x,x) \ | \ x \in \natb \}$ is a subset of $\sqsubseteq$.}
-\item{Antisymmetry\\
-When $x = \bot$, the only possible $y$ we can have such that $y \sqsubseteq x$, is $y = \bot$, as  $n \sqsubseteq \bot$ is not defined in the relation for any $n$. Therefore $x = y = \bot$.
+\vspace{0.5cm}
 
-When $x = n$, the only possible value of $y$ is $n$, so $x = y = n$.}
-\item{Transitivity \\
-If $x = \bot$ and $y =n$, then we must have $z = n$ for $(y,z)$ to be in $\sqsubseteq$. Then we need $\bot \sqsubseteq n$ , which we have, as we have $(\bot, n)$, for any $n \in \mathbb{N}$, defined in the relation. 
+\begin{lem}
+$(\mathbbm{N}, \bot, \sqsubseteq)$ is a domain.
+\end{lem} 
 
-If $x = \bot = y$, then we have two options for $z$. When $z = n$, we should have $\bot \sqsubseteq n$, which we have, as we have $(\bot, n)$ for any $n \in \mathbb{N}$ defined in the relation. When $z = \bot$, we just want $ \bot \sqsubseteq \bot$, which is also in the definition of $\sqsubseteq$.
+\begin{proof}
+We prove the three conditions in the domain definition:
 
-If $x = n$, then both $y$ and $z$ must also be equal to $n$ for $x \sqsubseteq y$ and $y \sqsubseteq z$ to be defined. Therefore we should  have $n \sqsubseteq n$. This is in the definition of $\sqsubseteq$.}
-\end{itemize}}
+In the definition of our relation we have $\{ (\bot , n) \ | \ n \in \mathbb{N} \}$ and $(\bot , \bot)$. so $\{(\bot , x) \ | \ x \in \natb\}$ is a subset of $\sqsubseteq$. Therefore $\forall x \in \natb. \ \bot \sqsubseteq x$.
 
-\item{\textbf{All chains must have a least upper bound}\\
-For any chain of elements of $\mathbb{N}_\bot$, we must prove there is some $z \in \natb$ satisfying the two statements. We prove this by case analysis on the different chains:
+Next, we prove $\sqsubseteq$ is a partial order. From the  definition of $\sqsubseteq$, as $\{(x,x) \ | \ x \in \natb \}$ is a subset of $\sqsubseteq$, so $\sqsubseteq$ must be reflexive.
 
-\begin{enumerate}
-\item{$\bot \sqsubseteq \dots \sqsubseteq \bot$\\ 
-For these chains, let $z = \bot$. The last element in the chain will always be $\bot$, so for every $i$ we have $\bot \sqsubseteq \bot$. Therefore $\forall i . x_i \sqsubseteq \bot$.
-For the second statement, as every element is $\bot$, $x_i = \bot$ and $y = \bot$, we have $\bot \sqsubseteq \bot$ for $z \sqsubseteq y$. Therefore $\forall y. (\forall i . x_i \sqsubseteq y) \Rightarrow \bot \sqsubseteq y$ holds.}
-\item{$n \sqsubseteq \dots \sqsubseteq n$ \\
- For these chains, let $z = n$. The last element in the chain will always be $n$, so for every $n$ we have $n \sqsubseteq n$. Therefore $\forall i . x_i \sqsubseteq n$.
+We prove antisymmetry by case analysis. When $x = \bot$, the only possible $y$ we can have such that $y \sqsubseteq x$ is $y = \bot$, as  $n \sqsubseteq \bot$ is not defined in the relation for any $n$. Therefore $x = y = \bot$. When $x = n$, the only possible value of $y$ is $n$, so $x = y = n$. Therefore every element of the underlying set satisfies antisymmetry.
 
-For the second part, every element is $n$, so $x_i = n$ and $y = n$. Then we have $n \sqsubseteq n$ for $z \sqsubseteq y$. Therefore $\forall y. (\forall i . x_i \sqsubseteq y) \Rightarrow n \sqsubseteq y$ holds.}
-\item{$\bot \sqsubseteq \dots \sqsubseteq \bot \sqsubseteq n \sqsubseteq \dots \sqsubseteq n$\\
-For these chains, let $z = n$.  The last element will be $n$. We have both $\bot \sqsubseteq n$ and $n \sqsubseteq n$ in the relation, so for any $x$, we have $x \sqsubseteq n$. Therefore $\forall i . x_i \sqsubseteq n$.
+We also prove transitivity by case analysis. If $x = \bot$ and $y =n$, then we must have $z = n$ for $(y,z)$ to be in $\sqsubseteq$. Then we need $\bot \sqsubseteq n$ , which we have, as we have $(\bot, n)$, for any $n \in \mathbb{N}$, defined in the relation. If $x = \bot = y$, then we have two options for $z$. When $z = n$, we should have $\bot \sqsubseteq n$, which we have, as we have $(\bot, n)$ for any $n \in \mathbb{N}$ defined in the relation. When $z = \bot$, we just want $ \bot \sqsubseteq \bot$, which is also in the definition of $\sqsubseteq$. If $x = n$, then both $y$ and $z$ must also be equal to $n$ for $x \sqsubseteq y$ and $y \sqsubseteq z$ to be defined. Therefore we should  have $n \sqsubseteq n$. This is in the definition of $\sqsubseteq$.
 
-For the second part, $(\forall i . x_i \sqsubseteq y)$ is only true when $y = n$, so we only have to consider this case. Then we have $n \sqsubseteq n$ for $z \sqsubseteq y$. Therefore $\forall y. (\forall i . x_i \sqsubseteq y) \Rightarrow n \sqsubseteq y$ holds.}
-\end{enumerate}}
-\end{enumerate}
+Finally we prove that all chains must have a least upper bound. We prove this by case analysis on the different chains. For  chains of the form $\bot \sqsubseteq \dots \sqsubseteq \bot$, let $z = \bot$. The last element in the chain will always be $\bot$, so for every $i$ we have $\bot \sqsubseteq \bot$. Therefore $\forall i . x_i \sqsubseteq \bot$.
+For the second statement, as every element is $\bot$, $x_i = \bot$ and $y = \bot$, we have $\bot \sqsubseteq \bot$ for $z \sqsubseteq y$. Therefore $\forall y. (\forall i . x_i \sqsubseteq y) \Rightarrow \bot \sqsubseteq y$ holds.
+
+For chains of the form $n \sqsubseteq \dots \sqsubseteq n$, let $z = n$. The last element in the chain will always be $n$, so for every $n$ we have $n \sqsubseteq n$. Therefore $\forall i . x_i \sqsubseteq n$. For the second part, every element is $n$, so $x_i = n$ and $y = n$. Then we have $n \sqsubseteq n$ for $z \sqsubseteq y$. Therefore $\forall y. (\forall i . x_i \sqsubseteq y) \Rightarrow n \sqsubseteq y$ holds.
+
+For chains of the form $\bot \sqsubseteq \dots \sqsubseteq \bot \sqsubseteq n \sqsubseteq \dots \sqsubseteq n$, let $z = n$.  The last element will be $n$. We have both $\bot \sqsubseteq n$ and $n \sqsubseteq n$ in the relation, so for any $x$, we have $x \sqsubseteq n$. Therefore $\forall i . x_i \sqsubseteq n$. For the second part, $(\forall i . x_i \sqsubseteq y)$ is only true when $y = n$, so we only have to consider this case. Then we have $n \sqsubseteq n$ for $z \sqsubseteq y$. Therefore $\forall y. (\forall i . x_i \sqsubseteq y) \Rightarrow n \sqsubseteq y$ holds.
+\end{proof}
 
 \subsection{Product of domains}\label{prod}
 Given two domains $\mathbb{X} = (X, \bot_X, \sqsubseteq_X)$ and $\mathbb{Y} = (Y, \bot_Y, \leq_Y)$, we have a new domain,  where $X \times Y$ is the underlying set, the bottom element is $(\bot_X, \bot_Y)$ and $(x,y) \sqsubseteq (x',y')$ is defined when $x \sqsubseteq_X x'$ and $y \leq_Y y'$ are defined.
 
 \vspace{0.25cm}
 
-Now we must prove three conditions to show that $\mathbbm{X \times Y}$ is a domain:
+Now we must prove that this is a domain.
 
-\begin{enumerate}
-\item{$\forall (x,y) \in X \times Y. \ \bot  \sqsubseteq (x,y)$\\
-Because $\mathbbm{X}$ is a domain, we know $\forall x \in X. \ \bot_X \sqsubseteq_X x$ and because $\mathbb{Y}$ is a domain, we know $\forall y \in Y. \ \bot_Y \leq_Y y$.
+\vspace{0.5cm}
 
-Therefore we have $\forall x,y . \ \bot_X \sqsubseteq_X x \wedge \bot_Y \leq_Y y$. This is the same as $\forall (x,y) \in X \times Y. (\bot_X,\bot_Y) \sqsubseteq (x,y)$}
-\item{$\sqsubseteq $ \textbf{is a partial order}\\
-\begin{itemize}
-\item{Reflexivity\\
-For an element $(x,y) \in X \times Y$, we have $x \sqsubseteq_X x$ and $y \leq_Y y$ because $\mathbb{X}$ and $\mathbb{Y}$ are domains, so their orderings are reflexive. This means we have $(x,y) \sqsubseteq (x,y)$.}
-\item{Antisymmetry\\
-For elements $(x,y)$ and $(x',y')$ we can assume $(x,y) \sqsubseteq (x',y')$ and $(x',y') \sqsubseteq (x,y)$. Expanding these definitions we have $x \sqsubseteq_X x' \wedge y \leq_Y y' \wedge x' \sqsubseteq_X x \wedge y' \leq_Y y$. If we reorder this we have:
+\begin{lem}
+$(X \times Y, (\bot_X, \bot_Y), \sqsubseteq)$ is a domain
+\end{lem}
+
+\begin{proof}
+We prove the three conditions in the domain definition:
+
+As $\mathbbm{X}$ is a domain, we know $\forall x \in X. \ \bot_X \sqsubseteq_X x$ and because $\mathbb{Y}$ is a domain, we know $\forall y \in Y. \ \bot_Y \leq_Y y$. Therefore we have $\forall x,y . \ \bot_X \sqsubseteq_X x \wedge \bot_Y \leq_Y y$. This is the same as $\forall (x,y) \in X \times Y. (\bot_X,\bot_Y) \sqsubseteq (x,y)$.
+
+Next, we prove $\sqsubseteq $ is a partial order. For an element $(x,y) \in X \times Y$, we have $x \sqsubseteq_X x$ and $y \leq_Y y$ because $\mathbb{X}$ and $\mathbb{Y}$ are domains, so their orderings are reflexive. This means we have $(x,y) \sqsubseteq (x,y)$, so $\sqsubseteq$ is also reflexive. For elements $(x,y)$ and $(x',y')$ we can assume $(x,y) \sqsubseteq (x',y')$ and $(x',y') \sqsubseteq (x,y)$. Expanding these definitions we have $x \sqsubseteq_X x' \wedge y \leq_Y y' \wedge x' \sqsubseteq_X x \wedge y' \leq_Y y$. If we reorder this we have:
 
 \[x \sqsubseteq_X x' \wedge x' \sqsubseteq_X x \wedge y \leq_Y y' \wedge y' \leq_Y y \]
 
-As the orderings on $\mathbb{X}$ and $\mathbb{Y}$ are antisymmetric, we can rewrite this as $x = x'$ and $y = y'$. Therefore we have $(x,y) = (x',y')$.}
-\item{Transitivity\\
- For elements $(x,y), (x',y')$ and $(x'',y'')$ we can assume $(x,y) \sqsubseteq (x',y')$ and $(x',y') \sqsubseteq (x'',y'')$. Expanding these definitions gives us $x \sqsubseteq_X x' \ \wedge \ y \leq_Y y' \wedge \ x' \sqsubseteq_X x'' \wedge y' \leq_Y y''$. If we reorder this we have:
+As the orderings on $\mathbb{X}$ and $\mathbb{Y}$ are antisymmetric, we can rewrite this as $x = x'$ and $y = y'$. Therefore we have $(x,y) = (x',y')$, so $\sqsubseteq$ is antisymmetric. For elements $(x,y), (x',y')$ and $(x'',y'')$ we can assume $(x,y) \sqsubseteq (x',y')$ and $(x',y') \sqsubseteq (x'',y'')$. Expanding these definitions gives us $x \sqsubseteq_X x' \ \wedge \ y \leq_Y y' \wedge \ x' \sqsubseteq_X x'' \wedge y' \leq_Y y''$. If we reorder this we have:
 
 
 \[x \sqsubseteq_X x' \wedge x' \sqsubseteq_X x'' \wedge y \leq_Y y' \wedge y' \leq_Y y'' \]
 
-As the orderings on $\mathbb{X}$ and $\mathbb{Y}$ are transitive, we can rewrite this as $x \sqsubseteq_X x''$ and $y \leq_Y y''$. Therefore we can now define $(x,y) \sqsubseteq (x'',y'')$.}
-\end{itemize}}
-\item{\textbf{All chains have a least upper bound}\\
-Chains of $\mathbbm{X \times Y}$ will be of the form:
+As the orderings on $\mathbb{X}$ and $\mathbb{Y}$ are transitive, we can rewrite this as $x \sqsubseteq_X x''$ and $y \leq_Y y''$. Therefore we can now define $(x,y) \sqsubseteq (x'',y'')$, so $\sqsubseteq$ is transitive.
+
+Finally we prove that all chains have a least upper bound. Chains of $\mathbbm{X \times Y}$ will be of the form:
 
 \[(x,y) \sqsubseteq (x', y') \sqsubseteq (x'', y'') \sqsubseteq \dots \]
 
 where $x \sqsubseteq_X x' \sqsubseteq_X x'' \dots$ and $y \leq_Y y' \leq_Y y'' \dots $.
 
-So we need an element $z$ that makes the following two statements true. Let $z = \bigsqcup (x, y)_n = (\bigsqcup x_n, \bigsqcup y_n)$. Then:
+Let $z = \bigsqcup (x, y)_n = (\bigsqcup x_n, \bigsqcup y_n)$. Then as $\mathbb{X}$ and $\mathbb{Y}$ are domains, we have $\forall i. \ x_i \sqsubseteq_X \bigsqcup x_n$ and  $\forall i. \  y_i \leq_Y \bigsqcup y_n$. Therefore, for any $(x,y)$ we have $\forall i. (x_i ,y_i) \sqsubseteq (\bigsqcup x_n , \bigsqcup y_n)$.
 
-\begin{itemize}
-\item{$\forall i. (x_i, y_i) \sqsubseteq z$ \\
-As $\mathbb{X}$ and $\mathbb{Y}$ are domains, we have $\forall i. \ x_i \sqsubseteq_X \bigsqcup x_n$ and  $\forall i. \  y_i \leq_Y \bigsqcup y_n$. Therefore, for any $(x,y)$ we have $\forall i. (x_i ,y_i) \sqsubseteq (\bigsqcup x_n , \bigsqcup y_n)$.}
-\item{$\forall (x',y'). \ (\forall i . (x_i,y_i) \sqsubseteq (x',y')) \Rightarrow z \sqsubseteq (x',y')$\\
+%\item{$\forall (x',y'). \ (\forall i . (x_i,y_i) \sqsubseteq (x',y')) \Rightarrow z \sqsubseteq (x',y')$\\
 As $\mathbb{X}$ and $\mathbb{Y}$ are domains, we have $\forall x'. \  (\forall i.\  x_i \sqsubseteq_X x') \Rightarrow \bigsqcup x_n \sqsubseteq_X x'$ and $\forall y'. \ (\forall i. \ y_i \leq_Y y') \Rightarrow \bigsqcup y_n \leq_Y y'$.
 
  Therefore if we assume $\forall (x',y'). (\forall i . (x_i,y_i) \sqsubseteq (x',y'))$, then we know $\bigsqcup x_n \sqsubseteq_X x'$ and $\bigsqcup y_n \leq_Y y'$. This is the definition of $(\bigsqcup x_n , \bigsqcup y_n) \sqsubseteq (x',y')$.
-}
-\end{itemize}
-
-}
-\end{enumerate}
 
 \vspace{0.25cm}
 
 Now we have proved all the conditions, so the product of two domains is also a domain.
+\end{proof}
 
 \section{Monotone and Continuous Functions}
 There are two different types of functions that we will use when modelling PCF functions:
@@ -220,7 +192,9 @@ There are two different types of functions that we will use when modelling PCF f
 \vspace{0.25cm}
 
 \begin{defn}
-A \textbf{monotone} function, $f$, is a function that preserves the order of a partially ordered set.
+A \textbf{monotone} function, $f$, is a function that preserves the order of a partially ordered set, $X$,  so:
+
+\[ \forall x, y \in X. \ x \sqsubseteq y  \Rightarrow f(x) \sqsubseteq f(y) \]
 \end{defn}
 
 Given a chain $x_0 \sqsubseteq x_1 \sqsubseteq \dots$, we can form the chain $f(x_0) \sqsubseteq f(x_1) \sqsubseteq \dots$ using a monotone function.
@@ -237,12 +211,20 @@ Therefore continuous functions must also be monotone:
 
 \vspace{0.25cm}
 
-\begin{thm}
+\begin{thm}\label{mono}
 Comtinuous functions are monotone
 \end{thm}
 
 \begin{proof}
-Given a chain $x_1 \sqsubseteq  \dots \sqsubseteq x_n$, its limit will be $x_n$. Then $f(x_n) = f(\bigsqcup (x_n)) =  \bigsqcup(f x_n)$. Therefore every other element in $f(x_n)$'s chain must be related to it. If we remove $x_n$, we have the chain ending in $x_{n - 1}$. The least upper bound of this chain is $x_{n - 1}$, so we have  $f(x_{n-1}) =  f(\bigsqcup (x_{n-1})) = \bigsqcup(f x_{i-1})$.  Everything below this element must be related to it. We repeat this for every lower element until we have $f(x_1)$ alone, which is related to itself. Therefore we get a chain $f(x_1)  \sqsubseteq  \dots \sqsubseteq f(x_n)$, so $f$ must be monotonic. 
+Given a continuous function $f$, on a partially ordered set $X$, we need to show that $\forall x,y \in X. \ x \sqsubseteq y \Rightarrow f(x) \sqsubseteq f(y)$.
+Assume we have a chain $x_n$, where $x_0 = x$ and $x_{n + 1} = y$ for all $n$:
+
+\[x \sqsubseteq y \sqsubseteq y \dots \] .
+
+The limit of this chain will be $y$, so $f(\bigsqcup x_n) = f(y) = \bigsqcup (f (x_n))$.
+
+We also know that because there are only two different elements in the chain, $\bigsqcup (f (x_n)) = f(x) \sqcup f(y) = f(y)$, so therefore $f(x) \sqsubseteq f(y)$.
+
 \end{proof}
 
 \subsection{Domain of Continuous Functions}\label{cont}
@@ -253,7 +235,7 @@ Given two domains, $\mathbb{X} = (X, \bot_X, \sqsubseteq_X)$ and $\mathbb{Y} = (
 
 \begin{itemize}
 \item{$\forall x, x' \in X. \ x \sqsubseteq_X x' \Rightarrow f(x) \leq_Y f(x')$ \hspace{1cm} $f$ preserves the ordering of chains in $\mathbbm{X}$}
-\item{$x_n \in \chain(X) \Rightarrow f(\sqcup x_n) = \sqcup f(x_n)$ \hspace{2cm} $f$ is continuous}
+\item{$x_n \in \chain(X) \Rightarrow f(\bigsqcup x_n) = \bigsqcup f(x_n)$ \hspace{2cm} $f$ is continuous}
 \end{itemize} 
 
 where $\chain(X)$ is the set of all possible chains we can form from  $\mathbbm{X}$.
@@ -264,41 +246,30 @@ The relation $\rel$ is defined as
 
 \[ \rel  \ = \{ (f , g) \ | \ f,g \in \cont(X,Y) \ \wedge \ \forall x \in X. \ f(x) \leq_Y g(x)\} \]
 
-Therefore our domain will be $(\cont(X,Y), \bot_{X \to Y}, \sqsubseteq_C)$. Now we must prove the three conditions:
+Therefore our domain will be $(\cont(X,Y), \bot_{X \to Y}, \sqsubseteq_C)$. Now we must prove that this is a domain.
 
-\vspace{0.25cm}
+\vspace{0.5cm}
 
-\begin{enumerate}
-\item{$\forall f \in \cont(X,Y). \ \bot_{X \to Y} \rel f$ \\
-For all $x \in X$ we have $\bot \leq_Y f(x)$. As $\mathbb{Y}$ is a domain we know this holds for every element of $Y$ and as the codomain of $f$ is $Y$, every $f(x)$ is in $Y$. Therefore $\bot_{X \to Y} \rel f$.}
-\item{\textbf{Prove $\rel$ is a partial order}\\
-As $\mathbb{Y}$ is a domain, we know that $\leq_Y$ is a partial order.
-\begin{itemize}
-\item{Reflexivity\\
-We need to prove that $\forall f \in \cont(X,Y). \ f \rel f$. We can rewrite this using the definition of $\rel$ to get 
+\begin{lem}
+$(\cont(X,Y), \bot_{X \to Y}, \sqsubseteq_C)$ is a domain.
+\end{lem}
+
+\begin{proof}
+We must prove the three conditions in the domain definition:
+
+For all $x \in X$ we have $\bot \leq_Y f(x)$. As $\mathbb{Y}$ is a domain we know this holds for every element of $Y$ and as the codomain of $f$ is $Y$, every $f(x)$ is in $Y$. Therefore $f\forall f \in \cont(X,Y). \ \bot_{X \to Y} \rel f$.
+
+Next we prove $\rel$ is a partial order. As $\mathbb{Y}$ is a domain, we know that $\leq_Y$ is a partial order. For reflexivity, we need to prove that $\forall f \in \cont(X,Y). \ f \rel f$. We can rewrite this using the definition of $\rel$ to get 
 \[\forall f \in \cont(X,Y). \ (\forall x \in X. \ f(x) \leq_Y f(x))\]
- Functions are single valued, so we know $\forall f. \ \forall x. \ f(x) = f(x)$ and as $\leq_Y$ is reflexive we know $\forall f. \forall x \in X. \ f(x) \leq_Y f(x)$. Therefore we have $f \rel f$, for any $f \in \cont(X,Y)$. }
-\item{Antisymmetry\\
-We need to prove that $\forall f,g \in \cont(X,Y). \ ((f \rel g) \ \wedge \ (g \rel f)) \Rightarrow f = g$. Rewriting this using the definition of $\rel$ gives us
+ Functions are single valued, so we know $\forall f. \ \forall x. \ f(x) = f(x)$ and as $\leq_Y$ is reflexive we know $\forall f. \forall x \in X. \ f(x) \leq_Y f(x)$. Therefore we have $f \rel f$, for any $f \in \cont(X,Y)$. For antisymmetry, we need to prove that $\forall f,g \in \cont(X,Y). \ ((f \rel g) \ \wedge \ (g \rel f)) \Rightarrow f = g$. Rewriting this using the definition of $\rel$ gives us
  \[\forall f,g \in \cont(X,Y). \ (\forall x \in X. \ ((f(x) \leq_Y g(x)) \ \wedge \ (g(x) \leq_Y f(x))) \Rightarrow f(x) = g(x))\] 
- $\leq_Y$ is antisymmetric, so we have $\forall x \in X. \ f(x) = g(x)$, for any values of $f$ and $g$. Therefore $\rel$ is also antisymmetric. }
-\item{Transitivity\\
-We need to prove that $\forall f,g,h \in \cont(X,Y). \ ((f \rel g) \  \wedge \ (g \rel h)) \Rightarrow f \rel h$. Rewriting this using the definition of $\rel$ gives us 
+ $\leq_Y$ is antisymmetric, so we have $\forall x \in X. \ f(x) = g(x)$, for any values of $f$ and $g$. Therefore $\rel$ is also antisymmetric. For transitivity, we need to prove that $\forall f,g,h \in \cont(X,Y). \ ((f \rel g) \  \wedge \ (g \rel h)) \Rightarrow f \rel h$. Rewriting this using the definition of $\rel$ gives us 
 
 \[\forall f,g,h \in \cont(X,Y). \ (\forall x \in X. \ ((f(x) \leq_Y g(x)) \ \wedge \ (g(x) \leq_Y h(x))) \Rightarrow f(x) \rel h(x)) \]
  
-As $\leq_Y$ is transitive, we have $\forall x \in X.f(x) \leq_Y h(x)$, for all $f, g$ and $h$. Therefore $\rel$ is also transitive. }
-\end{itemize}}
-\item{\textbf{All chains have a least upper bound (limit)}\\
+As $\leq_Y$ is transitive, we have $\forall x \in X.f(x) \leq_Y h(x)$, for all $f, g$ and $h$. Therefore $\rel$ is also transitive. 
 
-For any chain $f_n$, we must have some $ z  \in \cont(X,Y)$ such that:
-
-\begin{itemize}
-\item{$\forall i . f_i \rel z$}
-\item{$\forall g. (\forall i . f_i \rel g) \Rightarrow z \rel g$}
-\end{itemize}
-
-Let $z = \lambda x. \bigsqcup^Y f_n (x)$, where $\sqcup^Y f_n (x)$ is the limit of the chain (in $\mathbbm{Y}$) obtained by applying the functions in some chain of elements of $\cont(X,Y)$ to a certain element $x \in X$.
+Finally we prove that all chains have a least upper bound. Let $z = \lambda x. \bigsqcup^Y f_n (x)$, where $\sqcup^Y f_n (x)$ is the limit of the chain (in $\mathbbm{Y}$) obtained by applying the functions in some chain of elements of $\cont(X,Y)$ to a certain element $x \in X$.
 
 An example of a chain of such functions is:
 
@@ -315,10 +286,8 @@ For the second part of the proof, we can rewrite it using the definition of $\re
 \[ \forall x \in X. \ (\forall g. (\forall i . f_i(x) \leq_Y g(x)) \Rightarrow z(x) \leq_Y g(x)) \]
 
 
-As $\mathbb{Y}$ is  a domain, $(\forall i . f_i(x) \leq_Y g(x)) \Rightarrow z(x) \leq_Y g(x))$ holds for each of our individual chains for each $x \in X$. Therefore we have $ \forall g. (\forall i . f_i \rel g) \Rightarrow z \rel g$}
-\end{enumerate}
-
-\vspace{0.75cm}
+As $\mathbbm{Y}$ is  a domain, $(\forall i . f_i(x) \leq_Y g(x)) \Rightarrow z(x) \leq_Y g(x))$ holds for each of our individual chains for each $x \in X$. Therefore we have $ \forall g. (\forall i . f_i \rel g) \Rightarrow z \rel g$
+\end{proof}
 
 
 \section{Fixpoint Theorem}\label{fixpoint}
@@ -329,4 +298,4 @@ Now we have a domain of continuous functions, we can use it to state and prove t
 
 \input{fixpointREPORT.tex}
 
-Now that we have proved the above theorem, we know enough Domain Theory to model recursive PCF programs between any types.
+Now that we have proved the above theorem, we know enough Domain Theory to model recursive PCF programs of any type.

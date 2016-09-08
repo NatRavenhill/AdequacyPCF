@@ -34,10 +34,13 @@
 \newcommand{\chain}{\operatorname{Chain}}
 \newcommand{\cont}{\operatorname{Cont}}
 \newcommand{\nat}{\operatorname{Nat}}
+\newcommand{\succc}{\operatorname{succ}}
+\newcommand{\por}{\operatorname{por}}
 \newcommand{\fix}{\operatorname{fix}}
 \newcommand{\add}{\operatorname{add}}
 \newcommand{\adeq}{\operatorname{Adeq}}
 \newcommand{\case}{\operatorname{case}}
+\newcommand{\Fix}{\operatorname{\mathsf{fix}}}
 \degree{MSc Advanced Computer Science}
 
 
@@ -104,13 +107,13 @@ Therefore, we need a structure which includes an underlying set, an partial orde
 \input{newAdequacyREPORT.tex}
 %\input{logrelREPORT.tex}
 
-\chapter{Other Proofs of Adequacy}\label{ch8}
+%\chapter{Other Proofs of Adequacy}\label{ch8}
 
 \input{adeqREPORT.tex}
 
 
 
-\chapter{Non-Definability of Parallel-Or}
+\chapter{Non-Definability of Parallel-Or}\label{por}
 \input{por.tex}
 
 %\chapter{FPC}
@@ -121,9 +124,9 @@ Therefore, we need a structure which includes an underlying set, an partial orde
 
 \chapter{Conclusion}\label{ch10}
 In the report we defined the syntax of PCF and gave the typing rules, which all syntactically correct PCF programs must satsify. We specified the operational semantics of PCF and we proved Type Safety, which states that all correctly typed PCF programs must have a valid evaluation in the operational semantics if they are expected to.
-We defined our denotational semantics of PCF and proved that the operational semantics are sound with respect to this. We proved the Adequacy theorem on our semantics and we discussed other approaches to the proof of Adequacy.
+We defined our denotational semantics of PCF and proved that the operational semantics are sound with respect to this. We proved the Adequacy theorem on our semantics and we discussed other approaches to the proof of Adequacy. We also discussed how there are functions in the denotational model that cannot be defined in PCF.
 
-Therefore we have fully solved the problem stated in the introduction (in Chapter \ref{ch1}).
+%Therefore we have fully solved the problem stated in the introduction (in Chapter \ref{ch1}).
 
 \bibliographystyle{plainnat}
 \bibliography{report}
