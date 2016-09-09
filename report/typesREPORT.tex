@@ -105,7 +105,7 @@ $$
  {(\lambda x: A .\ e) \ e' \mapsto [e'/x]e}
 $$
 
-The above rule states that given a function application, where the function is defined by a $\lambda$-abstracttion, we substitute $e'$ for $x$ in the expression $e$. This means that we replace every occurrence of $x$ in $e$ with the expression $e'$.
+The above rule states that given a function application, where the function is defined by a $\lambda$-abstraction, we substitute $e'$ for $x$ in the expression $e$. This means that we replace every occurrence of $x$ in $e$ with the expression $e'$.
 
 $$
 \inferrule{ \ }
@@ -354,7 +354,7 @@ Now we have all the rules, we can prove Substitution, which is the following the
 \begin{thm}If $\Gamma \vdash e:A$ and $\Gamma, x:A \vdash e' : C$ then $\Gamma \vdash [e/x] e' : C$ \end{thm}
 
 \begin{proof}
-We can slso prove this by induction on derivation trees. %We can rewrite the theorem as "If $D :: \Gamma \vdash e:A$ and $E :: \Gamma, x:A \vdash e' : C$ then $F ::\Gamma \vdash [e/x] e' : C$, where $D$, $E$ and $F$ are derivation trees for each of the well typed terms. We use induction on the tree $E$, as we are interested in the possible expressions $e'$ could be. We can use the inductive hypothesis:
+We can also prove this by induction on derivation trees. %We can rewrite the theorem as "If $D :: \Gamma \vdash e:A$ and $E :: \Gamma, x:A \vdash e' : C$ then $F ::\Gamma \vdash [e/x] e' : C$, where $D$, $E$ and $F$ are derivation trees for each of the well typed terms. We use induction on the tree $E$, as we are interested in the possible expressions $e'$ could be. We can use the inductive hypothesis:
 
 %\[(\Gamma \vdash e:A \ \wedge \Gamma, x:A \vdash e' : C) \Rightarrow \ \Gamma \vdash [e/x] e' : C\]
 
@@ -388,7 +388,7 @@ which is a derivation tree for $\Gamma \vdash [e/x]s(e') : \nat$. Therefore subs
 
 \paragraph{Case} We rename $x$ to $y$ using alpha equivalence, then assume derivation trees exist for $\Gamma \vdash e : A$ and $\Gamma, x: A \vdash \case \ (e', z \mapsto e_0 , s(y) \mapsto e_S) \  : C$. The second derivation tree gives us the subtrees $\Gamma, x:A \vdash e' : \nat$, $\Gamma, x : A \vdash e_0 : C$ and $\Gamma, y:Nat, x : A \vdash e_S : C$. Using the induction hypothesis and the tree for $\Gamma \vdash e : A$, we get  $\Gamma \vdash [e/x]e' : \nat$ and $\Gamma \vdash [e/x]e_0 : C$.
 
-For $\Gamma, y:\nat, x : A \vdash e_S : C$, we need  to change the context of $e$ before we can apply the inductive hypothesis. We do this using our  Weakening Lemmma we just proved (in Section \ref{weak}), which gives us $\Gamma, y:\nat \vdash e : A$. Now we apply the inductive hypothesis with this to get $\Gamma, y:\nat \vdash [e/x]e_S : C$.
+For $\Gamma, y:\nat, x : A \vdash e_S : C$, we need  to change the context of $e$ before we can apply the inductive hypothesis. We do this using our  Weakening Lemma we just proved (in Section \ref{weak}), which gives us $\Gamma, y:\nat \vdash e : A$. Now we apply the inductive hypothesis with this to get $\Gamma, y:\nat \vdash [e/x]e_S : C$.
  
  
 Now we can apply the typing rule to these trees to get the following derivation tree:

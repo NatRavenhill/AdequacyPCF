@@ -6,7 +6,7 @@ In this report, we are interested in the first two approaches. Operational seman
 In general, denotational semantics is considered to be more abstract, enabling us to remove detail that is unnecessary for analysing behaviour and just makes proofs less readable,  whereas operational semantics can be more easily linked to an implementation of a language. Also, the operational semantics of a language are usually proved to be sound with relation to the Denotational Semantics, in a theorem called Correctness/Soundness (see Section \ref{sound}). In the other direction the theorem is usually referred to as Completeness. We will see that a result this strong cannot be proved for all languages and instead we relate the denotational model of PCF to its operational semantics using a theorem called Adequacy (see Chapter \ref{Adequacy}). Therefore having both of these approaches to semantics is beneficial to analyse a the language in different ways. For example, later in the report we prove a property called Type Safety (see Chapter \ref{safe}), for which we use just the operational semantics of the language, but to prove the operational semantics is sound we require both approaches.
 
 \section{History}
-Early examples of creating a mathematical model for a programming language include Landin's model for Algol 60 using the $\lambda$ calculus \citep{Landin64,Landin65}.
+Early examples of creating a mathematical model for a programming language include Landin's model for ALGOL 60 using the $\lambda$ calculus \citep{Landin64,Landin65}.
 and Gordon's denotational model for LISP \citep{Gordon73}.
 
 
@@ -31,7 +31,7 @@ Therefore although PCF is a research language, it has many applications, so stud
 \section{Structure}
 In Chapter \ref{ch2}, we explain \emph{Domain Theory}, a area of mathematics studying the structures that we use to specify our denotational semantics and \emph{Logical Relations}, a proof technique required for proving Adequacy
 
-In chapter \ref{ch3}, we define the syntax of PCF and give the typing rules, which all syntactically correct PCF programs must satsify. In Chapter \ref{ch4}, we specify the operational semantics of PCF and in Chapter \ref{safe}, we prove Type Safety, which states that all correctly typed PCF programs must have a valid evaluation in the operational semantics if they are expected to.
+In chapter \ref{ch3}, we define the syntax of PCF and give the typing rules, which all syntactically correct PCF programs must satisfy. In Chapter \ref{ch4}, we specify the operational semantics of PCF and in Chapter \ref{safe}, we prove Type Safety, which states that all correctly typed PCF programs must have a valid evaluation in the operational semantics if they are expected to.
 
 In Chapter \ref{ch6}, we define our denotational semantics of PCF and prove that the operational semantics are sound with respect to this. In Chapter \ref{Adequacy}, we prove the Adequacy theorem and in Chapter \ref{ch8} we discuss other approaches to the proof of Adequacy. In Chapter \ref{por}, we discuss how there are functions in the denotational model that cannot be defined in PCF.
 

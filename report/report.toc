@@ -94,7 +94,7 @@
 \contentsline {paragraph}{Fixpoint}{50}{section*.61}
 \contentsline {chapter}{\numberline {7}Adequacy}{51}{chapter.7}
 \contentsline {section}{\numberline {7.1}Logical Relation}{52}{section.7.1}
-\contentsline {subsection}{\numberline {7.1.1}Defintition of the logical relation}{52}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.1}Definition of the logical relation}{52}{subsection.7.1.1}
 \contentsline {subsection}{\numberline {7.1.2}Substitution Function}{53}{subsection.7.1.2}
 \contentsline {section}{\numberline {7.2}Lemmas for Main Lemma}{54}{section.7.2}
 \contentsline {subsection}{\numberline {7.2.1}Bottom Element Lemma}{54}{subsection.7.2.1}
@@ -133,7 +133,7 @@
 \contentsline {chapter}{\numberline {9}Evaluation}{79}{chapter.9}
 \contentsline {section}{\numberline {9.1}What did I learn/achieve?}{79}{section.9.1}
 \contentsline {section}{\numberline {9.2}Evaluation of the Product and Presentation}{80}{section.9.2}
-\contentsline {section}{\numberline {9.3}Evaluation of the Process}{81}{section.9.3}
+\contentsline {section}{\numberline {9.3}Evaluation of the Process}{82}{section.9.3}
 \contentsline {section}{\numberline {9.4}Review of Project Plan}{82}{section.9.4}
 \contentsline {section}{\numberline {9.5}Limitations and ideas for future work}{82}{section.9.5}
-\contentsline {chapter}{\numberline {10}Conclusion}{83}{chapter.10}
+\contentsline {chapter}{\numberline {10}Conclusion}{84}{chapter.10}

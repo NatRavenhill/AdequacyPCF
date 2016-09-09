@@ -53,9 +53,9 @@ What I had done was take the definition of the term, but I had not actually prov
 
 As we got completely stuck with the syntactic predicate and we had proved the fixpoint theorem (Lemma \ref{fixpoint}), it made much more sense to consider using a binary logical relation, so we could actually use this theorem in our proof. Such a logical relation is defined in \citep{Streicher06} , albeit for a different version of PCF with constants, as explained in Section \ref{const}. 
 
-We adjusted this definition to work for our defintion of PCF with constructors and used it in our proof. This gave proofs for the simpler terms that were not too different from our  original proofs, and we could still use an Expansion Lemma like the one we proved for our original logical predicate. Being able to use the fixpoint theorem gave a much simpler proof than the one that uses the 'computable' terms, described in Section \ref{ch8}. 
+We adjusted this definition to work for our definition of PCF with constructors and used it in our proof. This gave proofs for the simpler terms that were not too different from our  original proofs, and we could still use an Expansion Lemma like the one we proved for our original logical predicate. Being able to use the fixpoint theorem gave a much simpler proof than the one that uses the 'computable' terms, described in Section \ref{ch8}. 
 
-After proving Adequacy, we studied how the function $\por$ can be defined in the denotational model of PCF but not as a PCF term. This involved knowing more about logical relations and another property of domains, which was completely new to me, so we just reviewed the content of two chapters of \citep{Streicher06} and expanded on a trivial exercise given in the book, which was proving the PCF constructors were $R$-invariant in Section \ref{exercise}. We also had to rephrase these chapters for our definition of PCF and to do this, we reproved Lemma \ref{adm} to fit our PCF definition and to use the definition of domains with chains (as opposed to directed sets).
+After proving Adequacy, we studied how the function $\por$ can be defined in the denotational model of PCF but not as a PCF term. This involved knowing more about logical relations and another property of domains, which was completely new to me, so we just reviewed the content of two chapters of \citep{Streicher06}. There were a few things we added to this review. The Main Lemma for the logical relation (see Lemma \ref{main2}) did not include the variables case, so we explained this case too. We expanded on a trivial exercise given in the book, which was proving the PCF constructors were $R$-invariant in Section \ref{exercise}. We also had to rephrase these chapters for our definition of PCF and to do this, we reproved Lemma \ref{adm} to fit our PCF definition (particularly in the fixpoint case) and to use the definition of domains with chains (as opposed to directed sets). Finally, we explained the lemma on stable functions and its corollary that gives the non-definability of $\por$ in more detail than in the book (see Lemma \ref{stable}).
 
 \section{Evaluation of the Process} 
 My problem statement was to prove Adequacy for PCF. I completed this by defining the operational and denotational semantics for PCF, then proving both directions of the theorem. Therefore I believe I have fully solved the problem stated in the introduction. 
@@ -72,11 +72,7 @@ As we had some time left at the end, we were able to discuss other approaches to
 \section{Limitations and ideas for future work}
 There is no original work in my project, but I have proved theorems in domain theory from the basic definitions, selected a version of PCF for which I have developed operational and denotational semantics for, with the help of my first supervisor, and related these by proving a theorem I had not encountered before, with the help of my second supervisor. Almost all of the mathematical theory in this report was entirely new to me and not taught in any undergraduate or postgraduate Computer Science module. Therefore I believe my report represents a substantial amount of work for a Computer Science student of my level.   
 
-Having now proved Adequacy for PCF in the Domain Theoretic model, I could apply my knowledge to other models and/or other languages.
-
-%other models?
-
-For example FPC is a language similar to PCF in which we have recursive types, so I could try to prove the same theorem with this addition to the possible types we can form.
+Having now proved Adequacy for PCF in the Domain Theoretic model, I could consider other models of PCF and/or other languages. For example FPC, described in \citep{Harper16}, is a language similar to PCF in which we have recursive types, so I could try to prove the same theorem with this addition to the possible types we can form.
 
 I could also try different ways of constructing the logical relation to describe Adequacy.
 

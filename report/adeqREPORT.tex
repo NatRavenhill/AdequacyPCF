@@ -14,7 +14,7 @@ The following definition of a computable term in PCF is given by \citep{Gunter92
 \end{enumerate}
 \end{defn}  
 
-As described by \citep{Gunter92}, by combining the second two parts of the definition of computable terms, we know that an expression $e$ is computable iff there is some substitution $\sigma$ of closed computable expressions for all the free variables of $e$ (ie.\ part 3 of the definition) and there are closed computable terms $e_1, \dots e_n$ that make $(\sigma e)e_1, \dots e_n$ a closed term of ground type, then  $(\sigma e)e_1, \dots e_n$ is computable (using part 2 of the definition).  
+As described by \citep{Gunter92}, by combining the second two parts of the definition of computable terms, we know that an expression $e$ is computable iff there is some substitution $\sigma$ of closed computable expressions for all the free variables of $e$ (i.e..\ part 3 of the definition) and there are closed computable terms $e_1, \dots e_n$ that make $(\sigma e)e_1, \dots e_n$ a closed term of ground type, then  $(\sigma e)e_1, \dots e_n$ is computable (using part 2 of the definition).  
 
 %get that $e : A \to B$ is computable only if  $\sigma e(e'_1, \dots e'_n)$ is (where $\forall i. \ e'_i :  A_i$ is closed computable and $\sigma $ is a substitution formed of closed computable terms). This is because starting from the open term $e$, using part 3 of the definition we know that everything in $\sigma$ is closed computable, so if $\sigma e$ is closed computable, then so is $e$. Then we use part 2 to prove $\sigma e$ is closed computable. We get $\sigma e (e'_1)$ is closed computable, then $(\sigma e (e'_1))(e'_2)$ is closed computable and so on until we have applied every argument and the whole result is closed computable, so $\sigma e$ is too.
 
@@ -74,7 +74,7 @@ Now we know $\sigma M^k$ is computable, we must show $\sigma M^k (e_1, \dots, e_
 \subsection{Differences from our Logical Relation}
 The definition of computable could also be considered as a unary logical relation (or logical predicate), where PCF expressions satisfying the definition of computable are in the relation.
 
-This predicate would only be defined on the syntax of PCF and not on the semantics, which makes it much more difficult to prove the fixpoint case, as we have to use the Lemmma \ref{fix} which is quite complicated to prove. \citep{Gunter92} uses another version of PCF with bounded recursion and an Unwinding Theorem (of which Lemma \ref{fix} is a corollary) to translate it back to our PCF, which adds complexity to their proof.  
+This predicate would only be defined on the syntax of PCF and not on the semantics, which makes it much more difficult to prove the fixpoint case, as we have to use the Lemma \ref{fix} which is quite complicated to prove. \citep{Gunter92} uses another version of PCF with bounded recursion and an Unwinding Theorem (of which Lemma \ref{fix} is a corollary) to translate it back to our PCF, which adds complexity to their proof.  
 %\section{PCF with fixpoint constant}
 %
 %We could have also defined PCF in a different way, by using constants to replace certain constructors in the language.

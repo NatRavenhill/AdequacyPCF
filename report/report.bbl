@@ -1,4 +1,4 @@
-\begin{thebibliography}{23}
+\begin{thebibliography}{24}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -6,53 +6,77 @@
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
 \bibitem[Gordon(1973)]{Gordon73}
-Michael~JC Gordon.
-\newblock Evaluation and denotation of pure lisp programs: a worked example in
-  semantics.
-\newblock 1973.
+M.~Gordon.
+\newblock \emph{Evaluation and denotation of pure {LISP} programs: a worked
+  example in semantics}.
+\newblock PhD thesis, The University of Edinburgh, 1973.
 
 \bibitem[Gordon(2000)]{Gordon00}
-Mike Gordon.
-\newblock Proof, language, and interaction.
-\newblock chapter From LCF to HOL: A Short History, pages 169--185. MIT Press,
-  Cambridge, MA, USA, 2000.
-\newblock ISBN 0-262-16188-5.
-\newblock URL \url{http://dl.acm.org/citation.cfm?id=345868.345890}.
+M.~Gordon.
+\newblock From lcf to hol: A short history.
+\newblock In G.~Plotkin, C.~Stirling, and M.~Tofte, editors, \emph{Proof,
+  Language, and Interaction}, pages 169--185. MIT Press, Cambridge, MA, USA,
+  2000.
 
 \bibitem[Gunter(1992)]{Gunter92}
-Carl~A Gunter.
-\newblock \emph{{Semantics of programming languages: Structures and
+C.~A. Gunter.
+\newblock \emph{{Semantics of Programming Languages: Structures and
   Techniques}}.
-\newblock MIT press, 1992.
+\newblock {MIT Press}, 1992.
+
+\bibitem[Harper(2016)]{Harper16}
+R.~Harper.
+\newblock \emph{Practical Foundations for Programming Languages}.
+\newblock Cambridge University Press, 2016.
+\newblock 2nd. Edition.
 
 \bibitem[Hoare(1969)]{Hoare69}
-Charles Antony~Richard Hoare.
-\newblock An axiomatic basis for computer programming.
+C.~A.~R. Hoare.
+\newblock {An Axiomatic Basis for Computer Programming}.
 \newblock \emph{Communications of the ACM}, 12\penalty0 (10):\penalty0
   576--580, 1969.
 
 \bibitem[Hutton(2014)]{Hutton14}
 G.~Hutton.
-\newblock {Introduction to Domain Theory (Course Notes)}.
-\newblock 2014.
+\newblock {Introduction to Domain Theory}.
+\newblock Course Notes, 2014.
+
+\bibitem[Landin(1964)]{Landin64}
+P.~J Landin.
+\newblock {The Mechanical Evaluation of Expressions}.
+\newblock \emph{The Computer Journal}, 6\penalty0 (4):\penalty0 308--320, 1964.
 
 \bibitem[Landin(1965)]{Landin65}
 P.~J. Landin.
 \newblock Correspondence between algol 60 and church's lambda-notation: Part i.
-\newblock \emph{Commun. ACM}, 8\penalty0 (2):\penalty0 89--101, February 1965.
-\newblock ISSN 0001-0782.
-\newblock \doi{10.1145/363744.363749}.
-\newblock URL \url{http://doi.acm.org/10.1145/363744.363749}.
-
-\bibitem[Landin(1964)]{Landin64}
-Peter~J Landin.
-\newblock The mechanical evaluation of expressions.
-\newblock \emph{The Computer Journal}, 6\penalty0 (4):\penalty0 308--320, 1964.
+\newblock \emph{Commununications of the ACM}, 8\penalty0 (2):\penalty0 89--101,
+  February 1965.
 
 \bibitem[Marlow et~al.(2010)]{Marlow10}
-Simon Marlow et~al.
+S.~Marlow et~al.
 \newblock Haskell 2010 language report.
-\newblock 2010.
+\newblock Accessed online at
+  http://https://www.haskell.org/definition/haskell2010.pdf, 9th September
+  2016, 2010.
+
+\bibitem[Milner(1972{\natexlab{a}})]{Milner72a}
+R.~Milner.
+\newblock {Logic for Computable Functions: Description of a Machine
+  Implementation}.
+\newblock Technical report, Stanford University, Stanford, CA, USA,
+  1972{\natexlab{a}}.
+
+\bibitem[Milner(1972{\natexlab{b}})]{Milner72b}
+R.~Milner.
+\newblock {Implementation and Applications of Scott's Logic for Computable
+  Functions}.
+\newblock In \emph{Proceedings of ACM Conference on Proving Assertions About
+  Programs}, pages 1--6, New York, NY, USA, 1972{\natexlab{b}}. ACM.
+
+\bibitem[Milner(1973)]{Milner73}
+R.~Milner.
+\newblock {Models of LCF}.
+\newblock Technical report, Stanford University, Stanford, CA, USA, 1973.
 
 \bibitem[Milner(1997)]{Milner97}
 R.~Milner.
@@ -60,28 +84,9 @@ R.~Milner.
 \newblock MIT Press, 1997.
 \newblock ISBN 9780262631815.
 
-\bibitem[Milner(1972{\natexlab{a}})]{Milner72a}
-Robin Milner.
-\newblock {Logic for Computable Functions: Description of a Machine
-  Implementation}.
-\newblock Technical report, Stanford, CA, USA, 1972{\natexlab{a}}.
-
-\bibitem[Milner(1972{\natexlab{b}})]{Milner72b}
-Robin Milner.
-\newblock {Implementation and Applications of Scott's Logic for Computable
-  Functions}.
-\newblock \emph{SIGACT News}, \penalty0 (14):\penalty0 1--6, January
-  1972{\natexlab{b}}.
-\newblock ISSN 0163-5700.
-
-\bibitem[Milner(1973)]{Milner73}
-Robin Milner.
-\newblock {Models of LCF}.
-\newblock Technical report, Stanford, CA, USA, 1973.
-
 \bibitem[Milner and Weyhrauch(1972)]{Milner72c}
-Robin Milner and Richard Weyhrauch.
-\newblock Proving compiler correctness in a mechanized logic.
+R.~Milner and R.~Weyhrauch.
+\newblock {Proving Compiler Correctness in a Mechanized Logic}.
 \newblock \emph{Machine Intelligence}, 7:\penalty0 51--70, 1972.
 
 \bibitem[Murawski(2012)]{Murawski12}
@@ -90,35 +95,32 @@ A.~Murawski.
 \newblock {Course Notes from Midlands Graduate School, Birmingham}, 2012.
 
 \bibitem[Nipkow et~al.(2002)Nipkow, Paulson, and Wenzel]{Nipkow02}
-Tobias Nipkow, Lawrence~C Paulson, and Markus Wenzel.
+T.~Nipkow, L.~C. Paulson, and M.~Wenzel.
 \newblock \emph{Isabelle/HOL: a proof assistant for higher-order logic}, volume
   2283.
 \newblock Springer Science \& Business Media, 2002.
 
 \bibitem[Plotkin(1973)]{Plotkin73}
-Gordon~D. Plotkin.
+G.~D. Plotkin.
 \newblock Lambda-definability and logical relations.
 \newblock Memorandum SAI--RM--4, University of Edinburgh, Edinburgh, Scotland,
   October 1973.
 
 \bibitem[Plotkin(1977)]{Plotkin77}
-Gordon~D. Plotkin.
+G.~D. Plotkin.
 \newblock {LCF considered as a programming language}.
-\newblock \emph{Theoretical computer science}, 5\penalty0 (3):\penalty0
+\newblock \emph{{Theoretical Computer Science}}, 5\penalty0 (3):\penalty0
   223--255, 1977.
 
 \bibitem[Plotkin(1981)]{Plotkin81}
-Gordon~D Plotkin.
-\newblock A structural approach to operational semantics, 1981.
+G.~D. Plotkin.
+\newblock {A Structural Approach to Operational Semantics}, 1981.
 
 \bibitem[Scott(1993)]{Scott93}
-Dana~S. Scott.
+D.~S. Scott.
 \newblock {A Type-theoretical Alternative to ISWIM, CUCH, OWHY}.
-\newblock \emph{Theor. Comput. Sci.}, 121\penalty0 (1-2):\penalty0 411--440,
-  December 1993.
-\newblock ISSN 0304-3975.
-\newblock \doi{10.1016/0304-3975(93)90095-B}.
-\newblock URL \url{http://dx.doi.org/10.1016/0304-3975(93)90095-B}.
+\newblock \emph{{Theoretical Computer Science}}, 121\penalty0 (1-2):\penalty0
+  411--440, December 1993.
 
 \bibitem[Statman(1985)]{Statman85}
 R.~Statman.
