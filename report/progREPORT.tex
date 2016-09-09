@@ -7,11 +7,11 @@ In functional languages, we usually define mathematical operators on numbers as 
 
 We can write this as a $\lambda$ abstraction:
 
-\[ \add = \lambda x,y : \nat. \ case(x, z \mapsto y, s(v) \mapsto s(\add \ v \ y))\]
+\[ \add = \lambda x,y : \nat. \ \case \ (x, z \mapsto y, s(v) \mapsto s(\add \ v \ y))\]
 
 This is a recursive function, so to define it in PCF, it must be the fixpoint of some other function $A$:
 
-\[ A = \lambda f: Nat \to Nat \to Nat. \ \lambda x,y : \nat. \ case(x, z \mapsto y, s(v) \mapsto s(f \ v \ y))\]
+\[ A = \lambda f: Nat \to Nat \to Nat. \ \lambda x,y : \nat. \ \case \ (x, z \mapsto y, s(v) \mapsto s(f \ v \ y))\]
 
 Therefore we can define this in PCF as:
 
@@ -21,7 +21,7 @@ When we try to evaluate this term, we get the following, by the evaluation rule 
 
 $\fix f : \nat \to \nat \to \nat . \ A : \nat \to \nat \to \nat = [\fix f : \nat \to \nat \to \nat . \ A : \nat \to \nat \to \nat/f]A$. This expands to:
 
-\[ \lambda x,y : \nat. \ case(x, z \mapsto y, s(v) \mapsto \]
+\[ \lambda x,y : \nat. \ \case \ (x, z \mapsto y, s(v) \mapsto \]
 \[s((\fix f: \nat \to \nat \to \nat . \ A : \nat \to \nat \to \nat) \ v \ y)) \]
 
 Therefore expanding this infinitely gives all possible executions of the addition function.

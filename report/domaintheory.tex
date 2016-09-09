@@ -1,5 +1,5 @@
 \section{Domain Theory}\label{dom}
-There is an entire area of mathematics devoted to exploring these structures called \emph{Domain Theory}, as described in \citep{Gunter92} and  \citep{Hutton14}.
+There is an entire area of mathematics devoted to exploring these structures called Domain Theory, as described in \citep{Gunter92} and  \citep{Hutton14}.
 
 Generally domains can be defined in two different ways, either by using chains or by using directed sets.
 
@@ -17,11 +17,11 @@ As an example, given the lifted set  $\natb$ (a set with $\bot$ added) then a ch
 
 \begin{itemize}
 \item{$\bot \sqsubseteq \dots \sqsubseteq \bot$, for any number of $\bot$s}
-\item{$n \sqsubseteq \dots \sqsubseteq n$, for any number of $n$ , where $n$ is the same number each time}
+\item{$n \sqsubseteq \dots \sqsubseteq n$, for any number of $n$s, where $n$ is the same number each time}
 \item{$\bot \sqsubseteq \dots \sqsubseteq \bot \sqsubseteq n \sqsubseteq \dots \sqsubseteq n$, for any number of $\bot$s followed by any number of identical $n$s}
 \end{itemize}
 
-This is because the ordering on the lifted set is only defined between numbers and themselves, $\bot \sqsubseteq \bot$ and $\bot \sqsubseteq n$ for some $n \in \mathbbm{N}$.
+This is because the ordering on the lifted set is only defined between numbers and themselves, so it only contains $\bot \sqsubseteq \bot$ and $\bot \sqsubseteq n$ for some $n \in \mathbbm{N}$.
 
 \vspace{0.5cm}
  
@@ -123,13 +123,13 @@ $(\mathbbm{N}, \bot, \sqsubseteq)$ is a domain.
 \begin{proof}
 We prove the three conditions in the domain definition:
 
-In the definition of our relation we have $\{ (\bot , n) \ | \ n \in \mathbb{N} \}$ and $(\bot , \bot)$. so $\{(\bot , x) \ | \ x \in \natb\}$ is a subset of $\sqsubseteq$. Therefore $\forall x \in \natb. \ \bot \sqsubseteq x$.
+In the definition of our relation we have $\{ (\bot , n) \ | \ n \in \mathbb{N} \}$, so $\forall x \in \mathbb{N}. \ \bot \sqsubseteq x$.
 
-Next, we prove $\sqsubseteq$ is a partial order. From the  definition of $\sqsubseteq$, as $\{(x,x) \ | \ x \in \natb \}$ is a subset of $\sqsubseteq$, so $\sqsubseteq$ must be reflexive.
+Next, we prove $\sqsubseteq$ is a partial order. From the  definition of $\sqsubseteq$, we have $\{(x,x) \ | \ x \in \natb \}$, which is a subset of $\sqsubseteq$, so $\sqsubseteq$ must be reflexive.
 
 We prove antisymmetry by case analysis. When $x = \bot$, the only possible $y$ we can have such that $y \sqsubseteq x$ is $y = \bot$, as  $n \sqsubseteq \bot$ is not defined in the relation for any $n$. Therefore $x = y = \bot$. When $x = n$, the only possible value of $y$ is $n$, so $x = y = n$. Therefore every element of the underlying set satisfies antisymmetry.
 
-We also prove transitivity by case analysis. If $x = \bot$ and $y =n$, then we must have $z = n$ for $(y,z)$ to be in $\sqsubseteq$. Then we need $\bot \sqsubseteq n$ , which we have, as we have $(\bot, n)$, for any $n \in \mathbb{N}$, defined in the relation. If $x = \bot = y$, then we have two options for $z$. When $z = n$, we should have $\bot \sqsubseteq n$, which we have, as we have $(\bot, n)$ for any $n \in \mathbb{N}$ defined in the relation. When $z = \bot$, we just want $ \bot \sqsubseteq \bot$, which is also in the definition of $\sqsubseteq$. If $x = n$, then both $y$ and $z$ must also be equal to $n$ for $x \sqsubseteq y$ and $y \sqsubseteq z$ to be defined. Therefore we should  have $n \sqsubseteq n$. This is in the definition of $\sqsubseteq$.
+We also prove transitivity by case analysis. If $x = \bot$ and $y =n$, then we must have $z = n$ for $(y,z)$ to be in $\sqsubseteq$. Then we need $\bot \sqsubseteq n$ , which we have, as $(\bot, n)$, for any $n \in \mathbb{N}$ is defined in the relation. If $x = \bot = y$, then we have two options for $z$. When $z = n$, we should have $\bot \sqsubseteq n$, which we have, as $(\bot, n)$ for any $n \in \mathbb{N}$ is defined in the relation. When $z = \bot$, we want $ \bot \sqsubseteq \bot$, which is also in the definition of $\sqsubseteq$. If $x = n$, then both $y$ and $z$ must also be equal to $n$ for $x \sqsubseteq y$ and $y \sqsubseteq z$ to be defined. Therefore we should  have $n \sqsubseteq n$. This is in the definition of $\sqsubseteq$.
 
 Finally we prove that all chains must have a least upper bound. We prove this by case analysis on the different chains. For  chains of the form $\bot \sqsubseteq \dots \sqsubseteq \bot$, let $z = \bot$. The last element in the chain will always be $\bot$, so for every $i$ we have $\bot \sqsubseteq \bot$. Therefore $\forall i . x_i \sqsubseteq \bot$.
 For the second statement, as every element is $\bot$, $x_i = \bot$ and $y = \bot$, we have $\bot \sqsubseteq \bot$ for $z \sqsubseteq y$. Therefore $\forall y. (\forall i . x_i \sqsubseteq y) \Rightarrow \bot \sqsubseteq y$ holds.
@@ -231,7 +231,7 @@ We also know that because there are only two different elements in the chain, $\
 
 We can form a domain of continuous functions between two other domains:
 
-Given two domains, $\mathbb{X} = (X, \bot_X, \sqsubseteq_X)$ and $\mathbb{Y} = (Y, \bot_Y, \leq_y)$, we can form the set $\cont(X,Y) =\{ f : X \to Y\}$, of continuous functions between the underlying sets, where:
+Given two domains $\mathbb{X} = (X, \bot_X, \sqsubseteq_X)$ and $\mathbb{Y} = (Y, \bot_Y, \leq_y)$, we can form the set $\cont(X,Y) =\{ f : X \to Y\}$, of continuous functions between the underlying sets, where:
 
 \begin{itemize}
 \item{$\forall x, x' \in X. \ x \sqsubseteq_X x' \Rightarrow f(x) \leq_Y f(x')$ \hspace{1cm} $f$ preserves the ordering of chains in $\mathbbm{X}$}
@@ -257,7 +257,7 @@ $(\cont(X,Y), \bot_{X \to Y}, \sqsubseteq_C)$ is a domain.
 \begin{proof}
 We must prove the three conditions in the domain definition:
 
-For all $x \in X$ we have $\bot \leq_Y f(x)$. As $\mathbb{Y}$ is a domain we know this holds for every element of $Y$ and as the codomain of $f$ is $Y$, every $f(x)$ is in $Y$. Therefore $f\forall f \in \cont(X,Y). \ \bot_{X \to Y} \rel f$.
+For all $x \in X$ we have $\bot \leq_Y f(x)$. As $\mathbb{Y}$ is a domain we know this holds for every element of $Y$ and as the codomain of $f$ is $Y$, every $f(x)$ is in $Y$. Therefore $\forall f \in \cont(X,Y). \ \bot_{X \to Y} \rel f$.
 
 Next we prove $\rel$ is a partial order. As $\mathbb{Y}$ is a domain, we know that $\leq_Y$ is a partial order. For reflexivity, we need to prove that $\forall f \in \cont(X,Y). \ f \rel f$. We can rewrite this using the definition of $\rel$ to get 
 \[\forall f \in \cont(X,Y). \ (\forall x \in X. \ f(x) \leq_Y f(x))\]
@@ -269,7 +269,7 @@ Next we prove $\rel$ is a partial order. As $\mathbb{Y}$ is a domain, we know th
  
 As $\leq_Y$ is transitive, we have $\forall x \in X.f(x) \leq_Y h(x)$, for all $f, g$ and $h$. Therefore $\rel$ is also transitive. 
 
-Finally we prove that all chains have a least upper bound. Let $z = \lambda x. \bigsqcup^Y f_n (x)$, where $\sqcup^Y f_n (x)$ is the limit of the chain (in $\mathbbm{Y}$) obtained by applying the functions in some chain of elements of $\cont(X,Y)$ to a certain element $x \in X$.
+Finally we prove that all chains have a least upper bound. Let $z = \lambda x. \bigsqcup^Y f_n (x)$, where $\bigsqcup^Y f_n (x)$ is the limit of the chain (in $\mathbbm{Y}$) obtained by applying the functions in some chain of elements of $\cont(X,Y)$ to a certain element $x \in X$.
 
 An example of a chain of such functions is:
 
@@ -279,7 +279,7 @@ If we expand this using the definition of $\rel$ we have
 
 \[ \forall x \in X. \ (f_1(x) \leq_y f_2(x) \leq_Y \dots \leq_Y \bigsqcup f_n (x)) \]
 
-This is a set of chains in $\chain(\mathbb{Y})$ where every chain contains the result of each function on a certain $x \in \mathbbm{X}$. As $\mathbb{Y}$ is a domain, the least upper bound is defined for any chain using the elements of $Y$. Therefore we know that the least upper bound $\bigsqcup f_n (x)$ is defined. Now we can see that this is the same as our definition of $z$, which was $\lambda x. \bigsqcup^Y f_i (x)$.
+This is a set of chains in $\chain(Y)$ where every chain contains the result of each function on a certain $x \in X_\bot$. As $\mathbb{Y}$ is a domain, the least upper bound is defined for any chain using the elements of $Y_\bot$. Therefore we know that the least upper bound $\bigsqcup f_n (x)$ is defined. Now we can see that this is the same as our definition of $z$, which was $\lambda x. \bigsqcup^Y f_n (x)$.
 
 For the second part of the proof, we can rewrite it using the definition of $\rel$ as
 
@@ -292,7 +292,7 @@ As $\mathbbm{Y}$ is  a domain, $(\forall i . f_i(x) \leq_Y g(x)) \Rightarrow z(x
 
 \section{Fixpoint Theorem}\label{fixpoint}
 
-Now we have a domain of continuous functions, we can use it to state and prove the fixpoint theorem. The following theorem is an important result in recursion theory, that we will use to model recursion in PCF. The chain given in the theorem is the chain obtained by repeatedly iterating a recursive function on its previous result. If an input of the function is computed using $f^n(\bot)$ and it needs more than $n$ iterations then it will not terminate. As the chain can be infinitely long, it can model infinite (general) recursion.
+Now we have a domain of continuous functions, we can use it to state and prove the fixpoint theorem. The following theorem is an important result in recursion theory, that we will use to model recursion in PCF. The chain given in the theorem is the chain obtained by repeatedly iterating a recursive function on its previous result, starting with $\bot$. If an input of the function is computed using $f^n(\bot)$ and it needs more than $n$ iterations then it will not terminate. As the chain can be infinitely long, it can model infinite (general) recursion.
 
 \vspace{0.5cm}
 

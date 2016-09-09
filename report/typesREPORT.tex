@@ -3,15 +3,15 @@ Programming Computable Functions (PCF) is a programming language that is based o
 \section{Definition of PCF}
 
 \subsection{Types}
-There are some versions of PCF in different papers and books (such as \citep{Plotkin77}, \citep{Gunter92}) where some use Booleans and Natural Numbers for the base types. Here we just use Natural numbers, where $0$ represents false and any non zero number represents true. We define our types using the following grammar:\\
+There are different versions of PCF in certain papers and books (such as \citep{Plotkin77}, \citep{Gunter92}) where some use Booleans and Natural Numbers for the base types. Here we just use Natural numbers, where $0$ represents False and any non zero number represents True. We define our types using the following grammar:\\
 
-\[A ::= \nat \ | A \to B\] 
+\[A ::= \nat \ | \  A \to B\] 
 
 \subsection{Expressions}
 
-The allowable expressions include variables (represented by $x$), a constant $z$ representing the number $0$, and a successor function $s(e)$, which takes any expression as input and returns its successor. 
+The allowable expressions include variables (represented by $x$), a constant $z$ representing the number $0$, and a successor function $s(e)$, which takes any natural number expression as input and returns its successor. 
 
-$\case$ takes an expression $e$, which we assume is a numerical value. If $e$ is zero, we return an expression $e_0$, otherwise we have the successor of some value $x$ and we return the expression $e_S$.
+$\case$ takes an expression $e$, which we assume is a numerical value, as input. If $e$ is zero, we return an expression $e_0$, otherwise we have the successor of some value $x$ and we return the expression $e_S$.
 
 Then we have function application, in which a function $e$ is applied to an expression $e'$, and $\lambda$-abstraction, which denotes a function $e$ that takes an input $x$ of type $A$.
 
@@ -19,7 +19,7 @@ Our last expression is the fixpoint expression, which takes a value $x$ as input
 
 The grammar for expressions is:
 
-\[e ::=  \ x \ | \ z \ | \ s(e) \  |  \ \case \ (e, z \mapsto e_0 , s(x) \mapsto e_S) \ |\ e \ e' \  | \lambda x:A.e \ | \ \fix \ x:A . \ e\]
+\[e ::=  \ x \ | \ z \ | \ s(e) \  |  \ \case \ (e, z \mapsto e_0 , s(x) \mapsto e_S) \ |\ e \ e' \  | \ \lambda x:A.e \ | \ \fix \ x:A . \ e\]
 
 \section{Type System for PCF}
 $\Gamma$ is an example of a typing context, which is a function that maps variables to their types. For example, if we have an expression $x : A$ in the context, then $\Gamma(x) = A$. We write $\Gamma \vdash e : A$ for the context associated with an expression $e$ of type $A$.
@@ -37,11 +37,11 @@ $$
  {\Gamma \vdash s(e) : \nat}
 $$
 
-For \emph{variables}, if $x$ is in the domain of $\Gamma$, then we can conclude that we have a variable of that type.
+For variables, if $x$ is in the domain of $\Gamma$, then we can conclude that we have a variable of that type.
 
-$z$ is a constant, so it needs no assumptions.
+For zero, $z$ is a constant, so it needs no assumptions.
 
-For \emph{successor}, we must have an expression $e$ of type $\nat$ that we can apply the successor function to. We then know we have $s(e)$ of type $\nat$.
+For successor, we must have an expression $e$ of type $\nat$ that we can apply the successor function to. We then know we have $s(e)$ of type $\nat$.
 
 $$
 \inferrule [case]{\Gamma \vdash e : \nat \\  \Gamma \vdash e_0 : A \\  \Gamma , x:\nat\vdash e_S : A}
@@ -58,16 +58,16 @@ $$
   {\Gamma \vdash \lambda x : A. e : A \to B}  
 $$
 
-For application, $e$ must have a function type and $e'$ must have the same type as the domain of $e$. Then we can apply $e$ to $e'$ to get the expression $e \ e'$ of the type of the codomain of $e$.
+For function application, $e$ must have a function type and $e'$ must have the same type as the domain of $e$. Then we can apply $e$ to $e'$ to get the expression $e \ e'$ of the type of the codomain of $e$.
 
-For $\lambda$ abstraction, we need an expression $e$ of some type $B$ and we must know that the parameter $x$ is in the context of this expression, to be able to use it in the $\lambda$ abstraction. Then in the conclusion, as $x$ is now bound to the expression, we remove it from the context of $B$.
+For $\lambda$-abstraction, we need an expression $e$ of some type $B$ and we must know that the parameter $x$ is in the context of this expression, to be able to use it in the $\lambda$ abstraction. Then in the conclusion, as $x$ is now bound to the expression, we remove it from the context of $B$.
 
 $$
 \inferrule [fix]{\Gamma, x : A \vdash e : A }
   {\Gamma \vdash \  \fix \ x:A . \ e : A}
 $$
 
-The fixpoint case is exactly the same as $\lambda$ abstraction, where the $x$ is bound to the fixpoint expression.
+The fixpoint case is the same as $\lambda$ abstraction, except that the $x$ is bound to the fixpoint expression and is of the same type as the entire expression.
 
 \vspace{0.5cm}
 
@@ -76,9 +76,9 @@ For any well typed PCF expression, we can obtain a derivation tree, where the ro
 We also note that given a typing context $\Gamma$, an expression $e$ and a type $A$ such that we have the typing judgement $\Gamma \vdash e : A$, there is only one possible derivation of this judgement.
 
 \chapter{Operational Semantics of PCF}\label{ch4}
-Now we have defined the syntax and typing rules of PCF, we can use this to define its operational semantics.
+Now we have defined the syntax and typing rules of PCF, we can use this to define its Operational Semantics.
 
-We use the \textbf{Call By Name} evaluation strategy, which means that function arguments are placed into the body of the function and evaluated within the entire function's evaluation, instead of before.
+We use the \textbf{call by name} evaluation strategy, which means that function arguments are placed into the body of the function and evaluated within the entire function's evaluation, instead of before.
 
 The semantics we define are \textbf{small step} semantics, which means that in $e \mapsto e'$, the transition relation $\mapsto$ must take an expression $e$ to another expression $e'$ in only one step.
 
@@ -91,7 +91,7 @@ $$
 $$
 
 $$
-\inferrule { e \mapsto e'} {\case \ (e, z \to e_0 , s(x) \to e_S) \mapsto \case \ (e', z \to e_0 , s(x) \to e_S)}
+\inferrule { e \mapsto e'} {\case \ (e, z \mapsto e_0 , s(x) \mapsto e_S) \mapsto \case \ (e', z \mapsto e_0 , s(x) \mapsto e_S)}
 $$
 
 (Note that we could have given the typing contexts before each expression in the evaluation rules, but as they do not change, we can omit them. The same is also true for the rest of the rules we define below.) 
@@ -109,14 +109,14 @@ The above rule states that given a function application, where the function is d
 
 $$
 \inferrule{ \ }
-{\case \ (z, z \to e_0 , s(x) \to e_S) \mapsto e_0}
+{\case \ (z, z \mapsto e_0 , s(x) \mapsto e_S) \mapsto e_0}
 $$
 $$
 \inferrule{ \ }
-{\case \ (s(v), z \to e_0 , s(x) \to e_S) \mapsto [v/x]e_S}
+{\case \ (s(v), z \mapsto e_0 , s(x) \mapsto e_S) \mapsto [v/x]e_S}
 $$
 
-The above rules give the evaluation of case, when we have a value as the condition expression. The first rule states that if $e = z$, then our result will be $e_0$. If $e = s(v)$, our result is $e_S$ , but we must also substitute $v$ for $x$ in $e_S$ (as $e_S$ is defined for a bound variable $x$, which we now know is equal to $v$).
+The above rules give the evaluation of case, when we have a value as the condition expression. The first rule states that if $e = z$, then our result will be $e_0$. If $e = s(v)$, our result is $e_S$, but we must also substitute $v$ for $x$ in $e_S$ (as $e_S$ is defined for a bound variable $x$, which we now know is equal to $v$).
 
 $$
 \inferrule{ \ }
@@ -137,7 +137,7 @@ We give an example of a function that uses the fixpoint operator in the followin
 \input{progREPORT.tex}
 
 \chapter{Type Safety}\label{safe}
-Type Safety is an important property of a programming language, as it proves that well typed programs do not go wrong. It is usually expressed as a property of the operational semantics, which we have defined in the previous chapter (see Chapter \ref{ch4}), and follows from the conclusion of two other lemmas we will prove; Type Preservation (\ref{pres}) and Type Progress (\ref{prog})
+Type Safety is an important property of a programming language, as it proves that well typed programs do not go wrong. It is usually expressed as a property of the Operational Semantics, which we have defined in the previous chapter (see Chapter \ref{ch4}), and follows from the conclusion of two other lemmas we will prove; Type Preservation (\ref{pres}) and Type Progress (\ref{prog})
 
 \section{Lemmas for Type Safety}
 There are two simple lemmas we must prove which will aid us in proving the lemmas of Type Safety:
@@ -154,7 +154,7 @@ If $\Gamma \vdash e:A$ then  $\Gamma,x:C \vdash e:A$
 \end{thm}
  
 \begin{proof}
-We prove this theorem by induction on derivation trees, so if we have a derivation tree for our assumption then there exists a derivation tree for the conclusion.% We can use the inductive hypothesis
+We prove this theorem by induction on derivation trees, so if we have a derivation tree for our assumption, then there is a derivation tree for the conclusion.% We can use the inductive hypothesis
 
 %\[ \Gamma \vdash e : A \Rightarrow \Gamma , x : C \vdash e : A \]
 
@@ -167,7 +167,7 @@ $$
 \inferrule{\Gamma(y) = A}{\Gamma \vdash y : A}
 $$ 
 
-of which $\Gamma(y) = A$ is a subtree. $\Gamma$ is a function, so can also be represented by a set of (variable, type) pairs. Therefore $\Gamma, x: C$ is the set $\Gamma \ \cup \{(x,C)\}$. Therefore we define the function $(\Gamma,x:C)$, where $(\Gamma,x:C)(y) = A$ and for any other variable $z$, $(\Gamma, x:C)(z) = \Gamma(z)$. Then we just use the typing rule for variables to get the following derivation tree:
+of which $\Gamma(y) = A$ is a subtree. $\Gamma$ is a function, so can also be represented by a set of (variable, type) pairs. Therefore $\Gamma, x: C$ is the set $\Gamma \ \cup \{(x,C)\}$, so we define the function $(\Gamma,x:C)$, where $(\Gamma,x:C)(y) = A$ and for any other variable $z$, $(\Gamma, x:C)(z) = \Gamma(z)$. Then we just use the typing rule for variables to get the following derivation tree:
 
 $$
 \inferrule{(\Gamma, x : C) (y) = A}{\Gamma, x : C \vdash y : A}
@@ -197,12 +197,12 @@ $$
 \inferrule{\Gamma, x : C \vdash e : \nat}{\Gamma, x : C \vdash s(e) : \nat}
 $$.
 
-Now we have the required , so weakening holds for the successor function.
+Now we have the required derivation tree, so weakening holds for the successor function.
 
 \paragraph{Case} We assume $\Gamma \vdash \ \case \ (e, z \mapsto e_0 , s(y) \mapsto e_S) : A$, (renaming $x$ to $y$ using alpha equivalence) giving us the following derivation tree from the typing rule:
 
 $$
-\inferrule{\Gamma \vdash e : Nat \\  \Gamma \vdash e_0 : A \\  \Gamma , y:\nat \vdash e_S : A}
+\inferrule{\Gamma \vdash e :  \nat \\  \Gamma \vdash e_0 : A \\  \Gamma , y:\nat \vdash e_S : A}
   {\Gamma \vdash \ \case \ (e, z \mapsto e_0 , s(y) \mapsto e_S) \  : A}  
 $$
 
@@ -278,7 +278,7 @@ if we naively substitute $s(x)$ for $y$ in $\lambda x. x + y$, we get $\lambda x
 
 \paragraph {Variables} There are two cases for substitution in variables. The first is for when $e'$ is the same as the variable being replaced:
 \[[e/x]x = e\]
-The second one is when $e$ is a completely different variable, for which nothing happens:
+The second one is when $e'$ is a completely different variable, for which nothing happens:
 \[ [e/x]y = y\]
 
 \paragraph{Zero} For zero, any substitution will have no effect, as zero is a constant:
@@ -289,15 +289,15 @@ The second one is when $e$ is a completely different variable, for which nothing
  
 \paragraph{Case} As we cannot change the case statement, we could substitute $e$ in the expressions given as arguments to the case statement, in the following way: 
 
-\[ [e/x] \ (\case \ (e', z \mapsto e_0, s(x) \mapsto e_S)) = \case \ ([e/x]e', z \to [e/x]e_0, s(x)  \to [e/x]e_S)\]
+\[ [e/x] \ (\case \ (e', z \mapsto e_0, s(x) \mapsto e_S)) = \case \ ([e/x]e', z \mapsto [e/x]e_0, s(x)  \mapsto [e/x]e_S)\]
 
-But we must be careful with variable capture, as the derivation of $e_S$ is $\Gamma, x:Nat \vdash e_S$. If we have $[s(x)/y] e_S$ and $e_S = x + y$, then we have $x + s(x)$ and the value of $s(x)$ is bound by $\Gamma, x : Nat$. Therefore we should rename $s(x)$ in the case statement to something that is not free in $e_S$.
+But we must be careful with variable capture, as the derivation of $e_S$ is $\Gamma, x: \nat \vdash e_S$. If we have $[s(x)/y] e_S$ and $e_S = x + y$, then we have $x + s(x)$ and the value of $s(x)$ is bound by $\Gamma, x : \nat$. Therefore we should rename $s(x)$ in the case statement to something that is not free in $e_S$.
 
 Therefore our rule for case will be:
 
 \begin{minipage}{4in}
 \begin{align*}
-\intertext{$(\case \ (e', z \to e_0, s(x) \to e_S))=$}
+\intertext{$(\case \ (e', z \mapsto e_0, s(x) \mapsto e_S))=$}
   \begin{cases}
             (\case \ ([e/x]e', z \mapsto [e/x]e_0, s(x) \mapsto [e/x]e_S)) & \text{if } x \notin FV(e')  \\
             (\case \ ([e/x]e', z \mapsto [e/x]e_0, s(y) \mapsto [e/x]e_S)) & \text{if } x \in FV(e')
@@ -386,7 +386,7 @@ Using the substitution rule for successor, we know the bottom half is equal to $
  
 which is a derivation tree for $\Gamma \vdash [e/x]s(e') : \nat$. Therefore substitution holds for successor function.
 
-\paragraph{Case} We rename $x$ to $y$ using alpha equivalence, then assume derivation trees exist for $\Gamma \vdash e : A$ and $\Gamma, x: A \vdash \case \ (e', z \mapsto e_0 , s(y) \mapsto e_S) \  : C$. The second derivation tree gives us the subtrees $\Gamma, x:A \vdash e' : \nat$, $\Gamma, x : A \vdash e_0 : C$ and $\Gamma, y:Nat, x : A \vdash e_S : C$. Using the induction hypothesis and the tree for $\Gamma \vdash e : A$, we get  $\Gamma \vdash [e/x]e' : \nat$ and $\Gamma \vdash [e/x]e_0 : C$.
+\paragraph{Case} We rename $x$ to $y$ using alpha equivalence, then assume derivation trees exist for $\Gamma \vdash e : A$ and $\Gamma, x: A \vdash \case \ (e', z \mapsto e_0 , s(y) \mapsto e_S) \  : C$. The second derivation tree gives us the subtrees $\Gamma, x:A \vdash e' : \nat$, $\Gamma, x : A \vdash e_0 : C$ and $\Gamma, y: \nat, x : A \vdash e_S : C$. Using the induction hypothesis and the tree for $\Gamma \vdash e : A$, we get  $\Gamma \vdash [e/x]e' : \nat$ and $\Gamma \vdash [e/x]e_0 : C$.
 
 For $\Gamma, y:\nat, x : A \vdash e_S : C$, we need  to change the context of $e$ before we can apply the inductive hypothesis. We do this using our  Weakening Lemma we just proved (in Section \ref{weak}), which gives us $\Gamma, y:\nat \vdash e : A$. Now we apply the inductive hypothesis with this to get $\Gamma, y:\nat \vdash [e/x]e_S : C$.
  

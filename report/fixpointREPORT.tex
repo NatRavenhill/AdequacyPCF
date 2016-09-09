@@ -4,16 +4,16 @@ For every domain $X$, every continuous function $f : X \to X$ has a least fixpoi
 \end{thm}
 
 \begin{proof}
-Assume we have a domain $X$ and a continuous function $f: X \to X$. First we must show that we can define the chain in the theorem using $f$. To do this we must show that $f^n(\bot) \sqsubseteq f^{n+1}(\bot)$, for any $n$. We prove this by induction on $n$. $f^0(\bot) = \bot$ and $\bot \sqsubseteq f(\bot)$, as $\bot$ is the least element. For the inductive case, we know that $f^{n} \sqsubseteq f^{n+1}$, and that continuous functions are monotone (see Lemma \ref{mono}), so we have $f(f^{n}(\bot)) \sqsubseteq f(f^{n+1}(\bot))$ = $f^{n+1}(\bot) \sqsubseteq f^{n+2}(\bot)$. Therefore we have proved it for all cases, so we know we can form the chain.
+Assume we have a domain $X$ and a continuous function $f: X \to X$. First we must show that we can define the chain in the theorem using $f$. To do this we must show that $f^n(\bot) \sqsubseteq f^{n+1}(\bot)$, for any $n$. We prove this by induction on $n$. $f^0(\bot) = \bot$ and $\bot \sqsubseteq f(\bot)$, as $\bot$ is the least element. For the inductive case, we know that $f^{n} \sqsubseteq f^{n+1}$, and that continuous functions are monotone (see Lemma \ref{mono}), so we have $f(f^{n}(\bot)) \sqsubseteq f(f^{n+1}(\bot))$ = $f^{n+1}(\bot) \sqsubseteq f^{n+2}(\bot)$. Therefore we have proved the above statement for all cases, so we know we can form the chain.
 
-Define the fixpoint function $\Fix(f) \equiv \bigsqcup f^n (\bot)$. This is the limit of the chain in the theorem. We know this limit exists because $X$ is a domain, so all chains in $\mathbbm{X}$ have a limit. %$f$ is continuous, so $(X, \bot, \sqsubseteq)$ must form a domain (see Section \ref{cont}), and by the definition of domain, all chains of $\mathbbm{X}$ have a limit. 
+Define the fixpoint function $\Fix(f) \equiv \bigsqcup f^n (\bot)$. This is the limit of the chain in the theorem. We know this limit exists because $\mathbbm{X}$ is a domain, so all chains in $\mathbbm{X}$ have a limit. %$f$ is continuous, so $(X, \bot, \sqsubseteq)$ must form a domain (see Section \ref{cont}), and by the definition of domain, all chains of $\mathbbm{X}$ have a limit. 
 
 %First we must prove that this limit exists, so $\forall i \in \mathbb{N} . \ f^i(\bot) \sqsubseteq f^n(\bot)$. We prove this by induction. If $i = 0$, then the only element of the chain is $f^0(\bot) = \bot$. $\bot$ is the least element of the chain, so we have $\bot  \sqsubseteq f^n(\bot)$. 
 
 %The inductive hypothesis is $\sqcup f^i(\bot)$ exists. Applying $f$ to this gives us $f(\sqcup f^i(\bot))$. $f$ is continuous, so this is equal to $\sqcup f(f^i(\bot)) = \sqcup f^{i+1}(\bot) $
 
 \paragraph{$\bigsqcup f^n (\bot)$ is a fixpoint}
-For the limit to be a fixpoint we must have  $f( \bigsqcup f^n (\bot)) =  \bigsqcup f^n (\bot)$.  As $f$ is continuous, we have $f( \bigsqcup f^n (\bot)) = \bigsqcup f(f^n(\bot)) = \bigsqcup f^{n+1}(\bot)$. The chain formed by $f^{n+1}$ is $f(\bot)  \sqsubseteq f^2(\bot) \sqsubseteq \dots$. This is the same as our original chain, but without $\bot$ at the start. Because $\mathbbm{X}$ is a domain, we know that $\forall x \in X. \ \bot \sqsubseteq x$. Therefore $\bot$ has no effect on the limit because every element is higher than it, so removing $\bot$ will not change the limit. This means that $\bigsqcup f^{n+1} (\bot) = \bigsqcup f^n(\bot)$.
+For the limit to be a fixpoint we must have  $f( \bigsqcup f^n (\bot)) =  \bigsqcup f^n (\bot)$.  As $f$ is continuous, we have $f( \bigsqcup f^n (\bot)) = \bigsqcup f(f^n(\bot)) = \bigsqcup f^{n+1}(\bot)$. As we have applied $f$ to the whole chain to get the new limit, we now have a chain $f(\bot)  \sqsubseteq f^2(\bot) \sqsubseteq \dots$. This is the same as our original chain, but without $\bot$ at the start. Because $\mathbbm{X}$ is a domain, we know that $\forall x \in X. \ \bot \sqsubseteq x$. Therefore $\bot$ has no effect on the limit because every element is higher than it, so removing $\bot$ will not change the limit. This means that $\bigsqcup f^{n+1} (\bot) = \bigsqcup f^n(\bot)$.
 
 \paragraph{$\bigsqcup f^n (\bot)$ is the least fixpoint}
 Let $x$ be an element of our chain such that $f(x) = x$. Then for $\bigsqcup f^n (\bot)$ to be the least fixpoint, we must have $\bigsqcup f^n (\bot) \sqsubseteq x$ (i.e.\ so $x$ is an upper bound that is higher than $\bigsqcup f^n (\bot)$). First we prove $x$ is an upper bound, so  we must show $\forall n. \ f^n(\bot) \sqsubseteq x$. We prove by this by induction on $n$:
@@ -24,7 +24,5 @@ Our inductive hypothesis is $f^n(\bot) \sqsubseteq x$. As $f$ is continuous, $f$
 
 As $\bigsqcup f^n (\bot)$ is a least upper bound, we know that  $\forall x \in X. \  \forall n. \ (f^n(\bot) \sqsubseteq x) \Rightarrow \bigsqcup f^n (\bot) \sqsubseteq x$. We have just proved the left hand side of this, so we now have $\bigsqcup f^n (\bot) \sqsubseteq x$.
 
-\vspace{0.5cm}
-
-Now we have proved that $\bigsqcup f^n (\bot)$ is the least fixpoint of $f$.
+Therefore we have proved that $\bigsqcup f^n (\bot)$ is the least fixpoint of $f$.
 \end{proof}

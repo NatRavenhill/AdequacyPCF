@@ -48,18 +48,18 @@
 \maketitle
 \newcommand{\natb}{\mathbb{N}_{\bot}}
 \begin{abstract}
-We give a proof of Adequacy, a theorem relating the denotational semantics of PCF, a typed language with recursion,  to its operational semantics, using the logical relations technique. To do this, we first develop operational and denotational semantics of PCF, proving type safety and some necessary lemmas for this, and soundness of PCF. Finally we consider whether all possible elements in our denotational semantic model are denotations of syntactically correct PCF terms.
+We give a proof of Adequacy, a theorem relating the Denotational Semantics of PCF, a typed language with recursion,  to its Operational Semantics, using the Logical Relations technique. To do this, we first develop Operational and Denotational Semantics of PCF, proving Type Safety and some necessary lemmas for this, and Soundness of the semantics of PCF. Finally we consider whether all possible elements in our denotational model are denotations of syntactically correct PCF terms.
 \vspace{0.5cm}
 
 \textbf{Keywords:} \emph{Computational Adequacy, Denotational Semantics, Domain Theory,  Logical Relations, Operational Semantics, PCF}
 \end{abstract}
 
 \begin{acknowledgements}
-I would like to thank my first supervisor, Dr.\ Neelakantan Krishnaswami for   his guidance and encouragement, particularly in helping me to understand Domain Theory and Type Safety and for enabling me to make a lot of progress with my project before he left the university.
+I must thank my first supervisor, Dr.\ Neelakantan Krishnaswami for his guidance and encouragement, particularly in helping me to understand Domain Theory and Type Safety and for enabling me to make a lot of progress with my project before he left the university.
 
-I would also like to thank Dr.\ Mart\'{i}n Escard\'{o} for taking over the supervision of my project and helping me to finish my proof of Adequacy correctly. I would also like to thank him for enabling me to extend my project past my proposal and consider other aspects of PCF and for taking so much time to help me write my report!
+I would also like to thank Dr.\ Mart\'{i}n Escard\'{o} for taking over the supervision of my project, helping me to finish my proof of Adequacy correctly and for enabling me to extend my project past my proposal and consider other aspects of PCF. Also, for taking so much time to help me write my report!
 
-I would also like to thank Dr.\ Paul Levy for organising and enabling me to attend the Midlands Graduate School in the Foundations of Computer Science and Prof.\ Achim Jung for delivering the Denotational Semantics course there, which inspired this project as I enjoyed it so much and wanted to understand the content more. 
+In addition, I would like to thank Dr.\ Paul Levy for organising and enabling me to attend the Midlands Graduate School in the Foundations of Computer Science and Prof.\ Achim Jung for delivering the Denotational Semantics course there, which inspired this project as I enjoyed it so much and wanted to understand the content more. 
 
 Finally I would like to thank Dr.\ Paul Levy and Dr.\ Rowanne Fleck for attending my demonstration and offering helpful advice to complete my report.
 \end{acknowledgements}
@@ -84,8 +84,8 @@ A good ordering to use is a partial order, which is defined as follows:
 A partial order on a set $X$ is a binary relation $\sqsubseteq$  that it is reflexive, antisymmetric and transitive, which are the following properties:
 \begin{itemize}
       \item{$\forall x \in X, \ x \sqsubseteq x$ \hspace{4.5cm} Reflexivity}
-      \item{$\forall x, y \in X. \  x \sqsubseteq y \wedge y \sqsubseteq x \to x = y$ \hspace{1cm} Antisymmetry}
-      \item{$\forall x, y, z \in X. \ x \sqsubseteq y \wedge y \sqsubseteq z \to x \sqsubseteq z$ \hspace{1cm} Transitivity}
+      \item{$\forall x, y \in X. \  x \sqsubseteq y \wedge y \sqsubseteq x \Rightarrow x = y$ \hspace{1cm} Antisymmetry}
+      \item{$\forall x, y, z \in X. \ x \sqsubseteq y \wedge y \sqsubseteq z \Rightarrow x \sqsubseteq z$ \hspace{1cm} Transitivity}
 \end{itemize} 
 \end{defn}
 
@@ -130,8 +130,8 @@ Therefore, we need a structure which includes an underlying set, an partial orde
 \input{evaluationREPORT.tex}
 
 \chapter{Conclusion}\label{ch10}
-In the report we defined the syntax of PCF and gave the typing rules, which all syntactically correct PCF programs must satisfy. We specified the operational semantics of PCF and we proved Type Safety, which states that all correctly typed PCF programs must have a valid evaluation in the operational semantics if they are expected to.
-We defined our denotational semantics of PCF and proved that the operational semantics are sound with respect to this. We proved the Adequacy theorem on our semantics and we discussed other approaches to the proof of Adequacy. We also discussed how there are functions in the denotational model that cannot be defined in PCF.
+In the report we defined the syntax of PCF and gave the typing rules, which all syntactically correct PCF programs must satisfy. We specified the Operational Semantics of PCF and we proved Type Safety, which states that all correctly typed PCF programs must have a valid evaluation in the Operational Semantics if they are expected to.
+We defined our Denotational Semantics of PCF and proved that the Operational Semantics are sound with respect to this. We proved the Adequacy theorem on our semantics and we discussed other approaches to the proof of Adequacy. We also discussed how there are functions in the denotational model that cannot be defined in PCF.
 
 %Therefore we have fully solved the problem stated in the introduction (in Chapter \ref{ch1}).
 
