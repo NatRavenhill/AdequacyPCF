@@ -264,8 +264,7 @@ Next we prove $\rel$ is a partial order. As $\mathbb{Y}$ is a domain, we know th
  Functions are single valued, so we know $\forall f. \ \forall x. \ f(x) = f(x)$ and as $\leq_Y$ is reflexive we know $\forall f. \forall x \in X. \ f(x) \leq_Y f(x)$. Therefore we have $f \rel f$, for any $f \in \cont(X,Y)$. For antisymmetry, we need to prove that $\forall f,g \in \cont(X,Y). \ ((f \rel g) \ \wedge \ (g \rel f)) \Rightarrow f = g$. Rewriting this using the definition of $\rel$ gives us
  \[\forall f,g \in \cont(X,Y). \ (\forall x \in X. \ ((f(x) \leq_Y g(x)) \ \wedge \ (g(x) \leq_Y f(x))) \Rightarrow f(x) = g(x))\] 
  $\leq_Y$ is antisymmetric, so we have $\forall x \in X. \ f(x) = g(x)$, for any values of $f$ and $g$. Therefore $\rel$ is also antisymmetric. For transitivity, we need to prove that $\forall f,g,h \in \cont(X,Y). \ ((f \rel g) \  \wedge \ (g \rel h)) \Rightarrow f \rel h$. Rewriting this using the definition of $\rel$ gives us 
-
-\[\forall f,g,h \in \cont(X,Y). \ (\forall x \in X. \ ((f(x) \leq_Y g(x)) \ \wedge \ (g(x) \leq_Y h(x))) \Rightarrow f(x) \rel h(x)) \]
+ \[\forall f,g,h \in \cont(X,Y). \ (\forall x \in X. \ ((f(x) \leq_Y g(x)) \ \wedge \ (g(x) \leq_Y h(x))) \Rightarrow f(x) \rel h(x)) \]
  
 As $\leq_Y$ is transitive, we have $\forall x \in X.f(x) \leq_Y h(x)$, for all $f, g$ and $h$. Therefore $\rel$ is also transitive. 
 

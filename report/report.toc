@@ -10,7 +10,7 @@
 \contentsline {section}{\numberline {2.3}Monotone and Continuous Functions}{13}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Domain of Continuous Functions}{14}{subsection.2.3.1}
 \contentsline {section}{\numberline {2.4}Fixpoint Theorem}{16}{section.2.4}
-\contentsline {paragraph}{$\DOTSB \bigsqcup@ \slimits@ f^n (\bot )$ is a fixpoint}{17}{section*.4}
+\contentsline {paragraph}{$\DOTSB \bigsqcup@ \slimits@ f^n (\bot )$ is a fixpoint}{16}{section*.4}
 \contentsline {paragraph}{$\DOTSB \bigsqcup@ \slimits@ f^n (\bot )$ is the least fixpoint}{17}{section*.5}
 \contentsline {section}{\numberline {2.5}Logical Relations}{17}{section.2.5}
 \contentsline {chapter}{\numberline {3}Definition of PCF and Syntax}{18}{chapter.3}
@@ -29,7 +29,7 @@
 \contentsline {paragraph}{Successor}{25}{section*.8}
 \contentsline {paragraph}{Case}{26}{section*.9}
 \contentsline {paragraph}{Application}{26}{section*.10}
-\contentsline {paragraph}{Abstraction}{26}{section*.11}
+\contentsline {paragraph}{$\lambda $-Abstraction}{26}{section*.11}
 \contentsline {paragraph}{Fixpoint}{27}{section*.12}
 \contentsline {subsection}{\numberline {5.1.2}Substitution Rules}{27}{subsection.5.1.2}
 \contentsline {paragraph}{Variables}{28}{section*.13}
@@ -37,7 +37,7 @@
 \contentsline {paragraph}{Successor}{28}{section*.15}
 \contentsline {paragraph}{Case}{28}{section*.16}
 \contentsline {paragraph}{Application}{29}{section*.17}
-\contentsline {paragraph}{$\lambda $ Abstraction}{29}{section*.18}
+\contentsline {paragraph}{$\lambda $-Abstraction}{29}{section*.18}
 \contentsline {paragraph}{Fixpoint}{29}{section*.19}
 \contentsline {subsection}{\numberline {5.1.3}Substitution}{30}{subsection.5.1.3}
 \contentsline {paragraph}{Variables}{30}{section*.20}
@@ -45,7 +45,7 @@
 \contentsline {paragraph}{Successor}{31}{section*.22}
 \contentsline {paragraph}{Case}{31}{section*.23}
 \contentsline {paragraph}{Application}{32}{section*.24}
-\contentsline {paragraph}{Abstraction}{32}{section*.25}
+\contentsline {paragraph}{$\lambda $-Abstraction}{32}{section*.25}
 \contentsline {paragraph}{Fixpoint}{33}{section*.26}
 \contentsline {section}{\numberline {5.2}Type Safety}{33}{section.5.2}
 \contentsline {subsection}{\numberline {5.2.1}Type Preservation}{33}{subsection.5.2.1}
@@ -54,7 +54,7 @@
 \contentsline {paragraph}{Successor}{34}{section*.29}
 \contentsline {paragraph}{Case}{34}{section*.30}
 \contentsline {paragraph}{Application}{35}{section*.31}
-\contentsline {paragraph}{$\lambda $-abstraction}{36}{section*.32}
+\contentsline {paragraph}{$\lambda $-Abstraction}{36}{section*.32}
 \contentsline {paragraph}{Fixpoint}{36}{section*.33}
 \contentsline {subsection}{\numberline {5.2.2}Type Progress}{36}{subsection.5.2.2}
 \contentsline {paragraph}{Zero}{37}{section*.34}
@@ -62,7 +62,7 @@
 \contentsline {paragraph}{Successor}{37}{section*.36}
 \contentsline {paragraph}{Case}{37}{section*.37}
 \contentsline {paragraph}{Application}{38}{section*.38}
-\contentsline {paragraph}{$\lambda $-abstraction}{38}{section*.39}
+\contentsline {paragraph}{$\lambda $-Abstraction}{38}{section*.39}
 \contentsline {paragraph}{Fixpoint}{38}{section*.40}
 \contentsline {chapter}{\numberline {6}Denotational Semantics}{40}{chapter.6}
 \contentsline {section}{\numberline {6.1}Denotational Model of PCF}{40}{section.6.1}
@@ -74,7 +74,7 @@
 \contentsline {paragraph}{Successor}{42}{section*.43}
 \contentsline {paragraph}{Case}{42}{section*.44}
 \contentsline {paragraph}{Application}{43}{section*.45}
-\contentsline {paragraph}{$\lambda $ abstraction}{43}{section*.46}
+\contentsline {paragraph}{$\lambda $-Abstraction}{43}{section*.46}
 \contentsline {paragraph}{Fixpoint}{43}{section*.47}
 \contentsline {section}{\numberline {6.2}Substitution Theorem}{44}{section.6.2}
 \contentsline {paragraph}{Variables}{44}{section*.48}
@@ -94,7 +94,7 @@
 \contentsline {paragraph}{Fixpoint}{50}{section*.61}
 \contentsline {chapter}{\numberline {7}Adequacy}{51}{chapter.7}
 \contentsline {section}{\numberline {7.1}Logical Relation}{52}{section.7.1}
-\contentsline {subsection}{\numberline {7.1.1}Definition of the logical relation}{52}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.1}Definition of the Logical Relation}{52}{subsection.7.1.1}
 \contentsline {subsection}{\numberline {7.1.2}Substitution Function}{53}{subsection.7.1.2}
 \contentsline {section}{\numberline {7.2}Lemmas for Main Lemma}{54}{section.7.2}
 \contentsline {subsection}{\numberline {7.2.1}Bottom Element Lemma}{54}{subsection.7.2.1}
@@ -120,7 +120,7 @@
 \contentsline {paragraph}{Composition of two binary logical relations}{66}{section*.72}
 \contentsline {subsection}{\numberline {8.0.3}Main Lemma}{67}{subsection.8.0.3}
 \contentsline {paragraph}{Variables}{68}{section*.73}
-\contentsline {paragraph}{$\lambda $ -Abstraction}{68}{section*.74}
+\contentsline {paragraph}{$\lambda $-Abstraction}{68}{section*.74}
 \contentsline {paragraph}{Application}{69}{section*.75}
 \contentsline {section}{\numberline {8.1}R-invariant}{69}{section.8.1}
 \contentsline {section}{\numberline {8.2}Admissible Logical Relations}{70}{section.8.2}
@@ -136,4 +136,4 @@
 \contentsline {section}{\numberline {9.3}Evaluation of the Process}{82}{section.9.3}
 \contentsline {section}{\numberline {9.4}Review of Project Plan}{82}{section.9.4}
 \contentsline {section}{\numberline {9.5}Limitations and ideas for future work}{82}{section.9.5}
-\contentsline {chapter}{\numberline {10}Conclusion}{84}{chapter.10}
+\contentsline {chapter}{\numberline {10}Conclusion}{83}{chapter.10}

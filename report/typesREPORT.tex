@@ -230,7 +230,7 @@ $$
 Therefore weakening holds for function application.
 
 
-\paragraph{Abstraction} We rename $x$ to $y$ using $\alpha$ equivalence. We assume $\Gamma \vdash \lambda y : A. \ e : B$, giving us the following derivation tree:
+\paragraph{$\lambda$-Abstraction} We rename $x$ to $y$ using $\alpha$ equivalence. We assume $\Gamma \vdash \lambda y : A. \ e : B$, giving us the following derivation tree:
 
 $$
 \inferrule{\Gamma, y : A \vdash e : B}{\Gamma \vdash \lambda y : A. \ e : A \to B}
@@ -313,7 +313,7 @@ For some expression $e$, $FV(e)$ is the set of free variables it contains.
 
 \[ [e/x] (e_0 \ e_1) = [e/x]e_0 \ ([e/x]e_1) \]
 
-\paragraph{$\lambda$ Abstraction} There are two cases, the first when the bound variable is $x$. This does nothing, as we are just rewriting the function using alpha equivalence in this case:
+\paragraph{$\lambda$-Abstraction} There are two cases, the first when the bound variable is $x$. This does nothing, as we are just rewriting the function using alpha equivalence in this case:
 \[ [e/x](\lambda x:A. \ e') = \lambda x:A. \ e' \]
 The second case is when the bound variable is not equal to $x$, where we substitute $e$ in the expression. If $y$ is a free variable in $e'$ then we must rename the bound variable to something else:
 
@@ -408,7 +408,7 @@ which contains the subtrees $\Gamma, x:A \vdash e_0 : B \to C$ and $\Gamma, x:A 
 
 Therefore substitution holds for function application.
 
-\paragraph{Abstraction} We rename $x$ to $y$ using $\alpha$ equivalence. Then derivation trees exist for $\Gamma \vdash e : A$ and $\Gamma, x : A \vdash \lambda y : B. \ e' : B \to C$. For the second tree we have the following:
+\paragraph{$\lambda$-Abstraction} We rename $x$ to $y$ using $\alpha$ equivalence. Then derivation trees exist for $\Gamma \vdash e : A$ and $\Gamma, x : A \vdash \lambda y : B. \ e' : B \to C$. For the second tree we have the following:
 
 $$\inferrule{\Gamma, x : A, y : B \vdash e' : C}{\Gamma, x:A \vdash \lambda y:B. \ e' : B \to C}$$
 
@@ -454,7 +454,7 @@ Now we have proved substitution holds for derivation trees of any expression $e'
 Now we can prove the two lemmas that form the property of Type Safety.
 
 \subsection{Type Preservation} \label{pres}
-Type preservation says that if an expression $e$ of type $A$ is well typed in a context $\Gamma$, and it evaluates in one step to $e'$, then $e'$ will also have type $A$ in $\Gamma$ (i.e.\ we get the same type at the end of the evaluation as we had at the start):
+Type Preservation says that if an expression $e$ of type $A$ is well typed in a context $\Gamma$, and it evaluates in one step to $e'$, then $e'$ will also have type $A$ in $\Gamma$ (i.e.\ we get the same type at the end of the evaluation as we had at the start):
 \vspace{0.5cm}
 
 \begin{thm}
@@ -464,9 +464,9 @@ Type preservation says that if an expression $e$ of type $A$ is well typed in a 
 \begin{proof}
 We can prove this by induction on derivation trees.%, so we rewrite the theorem as "If $D :: \Gamma \vdash e:A$ and $E ::e \mapsto e'$ (in one step) then $\exists. F :: \Gamma \vdash e' : A$:
 
-There will be a derivation tree  for each rule in the operational semantics, so we can check this statement for every evaluation rule on every possible expression:
+There will be a derivation tree  for each rule in the Operational Semantics, so we can check this statement for every evaluation rule on every possible expression:
 
-\paragraph{Variables} There are no rules in the operational semantics for when $e$ is just a variable so we do nothing here.
+\paragraph{Variables} There are no rules in the Operational Semantics for when $e$ is just a variable so we do nothing here.
 
 \paragraph{Zero} Same as for variables.
 
@@ -505,7 +505,7 @@ $$
 
 Then we have subtrees for $\Gamma \vdash e : \nat$, $\Gamma \vdash e_0 : A$, $\Gamma , x : \nat \vdash e_S : A$ and $e \mapsto e'$.
 
-Using the inductive hypothesis of type preservation, with the trees for $\Gamma \vdash e : \nat$ and $e \mapsto e'$ we get a tree for $\Gamma \vdash e' : \nat$. Then we apply the typing rule for case with this, $\Gamma \vdash e_0 : A$ and $\Gamma , x : \nat \vdash e_S : A$ to get a tree for $\Gamma \vdash case \ (e', z \to e_0 , s(x) \to e_S):A$}
+Using the inductive hypothesis of type preservation, with the trees for $\Gamma \vdash e : \nat$ and $e \mapsto e'$ we get a tree for $\Gamma \vdash e' : \nat$. Then we apply the typing rule for case with this, $\Gamma \vdash e_0 : A$ and $\Gamma , x : \nat \vdash e_S : A$ to get a tree for $\Gamma \vdash \case \ (e', z \mapsto e_0 , s(x) \mapsto e_S):A$}
 \item{If $e = \case \ (z, z \mapsto e_0 , s(x) \mapsto e_S)$, then we get the following tree from the typing rule:
 
 $$
@@ -545,32 +545,32 @@ We use the induction hypothesis with the subtrees for $\Gamma \vdash e_0 : A \to
 \item{When $e = (\lambda x: A .\ e) \ e'$, we have the following tree from its typing rule:
 
 $$
-\inferrule{\inferrule{\Gamma, x : A \vdash e : B}{\Gamma \vdash (\lambda x :A).e : A \to B} \\  \Gamma \vdash e' : A}
-  {\Gamma \vdash (\lambda x :A).e \ e' : B}
+\inferrule{\inferrule{\Gamma, x : A \vdash e : B}{\Gamma \vdash (\lambda x :A. \ e) : A \to B} \\  \Gamma \vdash e' : A}
+  {\Gamma \vdash (\lambda x :A. \ e) \ e' : B}
 $$  
 
-And the tree for $(\lambda x :A).e \ e' \mapsto [e'/x]e$ from its evaluation rule. We have subtrees $\Gamma \ \vdash e' : A$ and $\Gamma, x : A \vdash e : B$, so we use these as parameters to the Substitution Lemma to get the tree for $\Gamma \vdash [e'/x]e : B$.}
+And the tree for $(\lambda x :A. \ e) \ e' \mapsto [e'/x]e$ from its evaluation rule. We have subtrees $\Gamma \ \vdash e' : A$ and $\Gamma, x : A \vdash e : B$, so we use these as parameters to the Substitution Lemma to get the tree for $\Gamma \vdash [e'/x]e : B$.}
 \end{enumerate}
 
-\paragraph{$\lambda$-abstraction} has no evaluation rules when taken as a single expression (because it is a value).
+\paragraph{$\lambda$-Abstraction} has no evaluation rules when taken as a single expression (because it is a value).
 
 \paragraph{Fixpoint}
-When $e = \fix \ x:A. e$, we have the following tree from its typing rule:
+When $e = \fix \ x:A. \ e$, we have the following tree from its typing rule:
 $$
 \inferrule{\Gamma, x : A \vdash e : A }
   {\Gamma \vdash \  \fix \ x:A . \ e : A}
 $$
 
-and the tree for $\fix \ x:A . \ e \mapsto [\fix \ x:A. e/x]e$ from its evaluation rule. We already have the tree for $\Gamma \vdash \  \fix \ x:A . \ e : A$ as an assumption and $ \Gamma, x : A \vdash e : A$ is a subtree of it, so we can use the substitution lemma with these parameters to get a tree for $\Gamma \vdash [\fix \ x:A . e/x]e :  A$
+and the tree for $\fix \ x:A . \ e \mapsto [\fix \ x:A.  \ e/x]e$ from its evaluation rule. We already have the tree for $\Gamma \vdash \  \fix \ x:A . \ e : A$ as an assumption and $ \Gamma, x : A \vdash e : A$ is a subtree of it, so we can use the substitution lemma with these parameters to get a tree for $\Gamma \vdash [\fix \ x:A . \ e/x]e :  A$
 
 \vspace{1cm}
 
-Now we have proved type preservation for all the rules in the operational semantics on all possible expressions.
+Now we have proved type preservation for all the rules in the Operational Semantics on all possible expressions.
 \end{proof}
 
 \subsection{Type Progress}\label{prog}
-Type progress says that if an expression $e$ of type $A$ is well typed in a context $\Gamma$, then it must evaluate to another expression $e'$ in one step, or be a value (so $e$ cannot be evaluated further), where possible values are 
-\[v :: z \ | \ s(v) \ | \ \lambda x : A. \ e\]
+Type Progress says that if an expression $e$ of type $A$ is well typed in a context $\Gamma$, then it must evaluate to another expression $e'$ in one step, or be a value (i.e.\ $e$ cannot be evaluated further), where possible values are 
+\[v ::= z \ | \ s(v) \ | \ \lambda x : A. \ e\]
 which are numbers or non-recursive functions (but note this is not saying the values terminate, or that they have normal form):
 
 \vspace{0.5cm}
@@ -580,7 +580,7 @@ If $\vdash e : A$ then $e \mapsto e'$ or $e$ is a value.
 \end{thm}
 
 \begin{proof}
-We can prove this by induction on derivation trees of $e$. When we have a derivation tree for a closed term $e$, we either get a derivation tree $E$, for evaluating it in one step to another expression, or $e$ is a value.  
+We can prove this by induction on derivation trees of $e$. When we have a derivation tree for a closed term $e$, we either get a derivation tree for evaluating it in one step to another expression, or $e$ is a value (so there is no new derivation tree).  
 
 \paragraph{Zero} $z$ is a value
 
@@ -640,7 +640,7 @@ so we have a subtree for $\vdash e_0 : A \to B$. We can use the inductive hypoth
 
 Therefore, for every possible value of $e_0 \ e_1$, we can evaluate it to another expression in one step, so $e_0 \ e_1 \mapsto e_0' \  e_1$ or $e_0 \ e_1$ is a value is true. 
 
-\paragraph{$\lambda$-abstraction} $\lambda x:A. \ e$ is always a value, for any $x:A$ and $e : A$.
+\paragraph{$\lambda$-Abstraction} $\lambda x:A. \ e$ is always a value, for any $x:A$ and $e : A$.
 
 \paragraph{Fixpoint} When we have an expression $\fix \ x:A. \ e$, we assume $\vdash \ \fix \ x:A. \ e : A$, giving us the following tree:
 
@@ -649,15 +649,15 @@ $$
   { \vdash \  \fix \ x:A . \ e : A}
 $$
 
-There are no assumptions in the evaluation rule for fixpoint, so we already have the tree that maps $\fix \ x:A. \ e$ to another expression, which is  $[\fix \ x:A. e/x]e$. Therefore we know that $\fix \ x:A. \ e$ always maps to another expression. % so $\fix \ x:A. \ e$ maps to another expression $e'$ in one step, or $\fix \ x:A. \ e$ is a value is true.
+There are no assumptions in the evaluation rule for fixpoint, so we already have the tree that maps $\fix \ x:A. \ e$ to another expression, which is  $[\fix \ x:A. \ e/x]e$. Therefore we know that $\fix \ x:A. \ e$ always maps to another expression. % so $\fix \ x:A. \ e$ maps to another expression $e'$ in one step, or $\fix \ x:A. \ e$ is a value is true.
 
-Now we have proved type progress for all possible expressions.
+Now we have proved Type Progress for all possible expressions.
 \end{proof}
 
-Now Type Safety can be  assumed from the the two lemmas we have just proved. This approach was first used in \citep{Wright94}. 
+Type Safety can be  assumed from the the two lemmas we have just proved. This approach was first used in \citep{Wright94}. 
 
 
-The theorem for type safety says that an closed term either evaluates to a value in a finite number of steps or loops forever:
+The theorem for Type Safety says that a closed term either evaluates to a value in a finite number of steps or loops forever:
 
 \vspace{0.5cm}
 

@@ -1,5 +1,5 @@
 %Link back
-Now that we have defined our operational semantics (in  Chapter \ref{ch4}) and our denotational semantics (in Chapter \ref{ch6}), we can relate them using the Adequacy Theorem: 
+Now that we have defined our Operational Semantics (in  Chapter \ref{ch4}) and our Denotational Semantics (in Chapter \ref{ch6}), we can relate them using the Adequacy Theorem: 
 
 \vspace{1cm}
 %Statement of thm
@@ -16,9 +16,9 @@ where $\llbracket e \rrbracket$ = $\llbracket \vdash e : \nat \rrbracket$ and $\
 %EXPLAIN WHY ONLY AT BASE TYPE.
 
 %Correctness as in before
-The theorem has two directions. We have mostly proved the backwards direction because of the Soundness proof we proved in the previous chapter (see Section \ref{sound}). Therefore we have proved half of Adequacy.
+The prove this theorem we must prove it in two directions. We have mostly proved the backwards direction because of the Soundness proof we proved in the previous chapter (see Section \ref{sound}). Therefore we have proved half of Adequacy.
 
-Therefore, the right to left direction of adequacy is a corollary of the soundness proof:
+Therefore, the right to left direction of Adequacy is a corollary of the Soundness proof:
 
 \vspace{0.5cm}
 
@@ -28,11 +28,11 @@ If $\vdash e : \nat$ and $\llbracket e \rrbracket = n$ then $e \mapsto^* \underl
 
 
 \begin{proof}
-We rewrite $e \mapsto^* \underline{n}$ as $e \mapsto e_0 \mapsto \dots \mapsto e_m \mapsto \underline{n}$ , for any $m \geq 0$. Applying soundness to these evaluations gives us $\llbracket e\rrbracket = \dots = \llbracket e_m \rrbracket = \llbracket \underline{n} \rrbracket$. Therefore we have $\llbracket  e \rrbracket = \llbracket \underline{n} \rrbracket$.
+We rewrite $e \mapsto^* \underline{n}$ as $e \mapsto e_0 \mapsto \dots \mapsto e_m \mapsto \underline{n}$ , for any $m \geq 0$. Applying Soundness to these evaluations gives us $\llbracket e\rrbracket = \dots = \llbracket e_m \rrbracket = \llbracket \underline{n} \rrbracket$. Therefore we have $\llbracket  e \rrbracket = \llbracket \underline{n} \rrbracket$.
 
 Now we need to prove $\forall n \in \mathbb{N}. \llbracket \underline{n} \rrbracket = n$, which we prove by induction on $n$:
 
-If $n = 0$, then $\llbracket \underline{0} \rrbracket = \llbracket z \rrbracket = 0$, by the definition of the denotational semantics for zero.
+If $n = 0$, then $\llbracket \underline{0} \rrbracket = \llbracket z \rrbracket = 0$, by the definition of the Denotational Semantics for zero.
 
 %If $\underline{n} = zero$, then by the denotational semantics for $ zero$ we have $\llbracket e_n \rrbracket =  0$.
 
@@ -44,7 +44,7 @@ Therefore $\forall n \in \mathbb{N}. \llbracket \underline{n} \rrbracket  = n$, 
 
 \end{proof}
 
-To prove the forwards direction, we could naively try to prove it by induction on each expression. However,  although we only consider closed expressions of base type, if it has sub-expressions then they may not be closed or of type $\nat$, so we have no inductive hypothesis to provide in these cases.
+To prove the forwards direction, we could naively try to prove it by induction on each expression. However,  although we only consider closed expressions of base type, these expressions may have sub-expressions that are not closed or of type $\nat$, so we have no inductive hypothesis to provide in these cases.
 
 Therefore, instead we use the Logical Relations approach that we described in Section \ref{log}.
 
@@ -52,17 +52,17 @@ Therefore, instead we use the Logical Relations approach that we described in Se
 \section{Logical Relation}\label{const}
 The logical relation we define is a binary logical relation between denotations of PCF expressions and closed expressions of PCF. It is based on a binary logical relation defined in \citep{Streicher06}. 
 
-There are some differences between our logical relation and the one defined in \citep{Streicher06}. In our proof of the fixpoint case of the main lemma, we do not use the observational preorder that they use. Instead we use an Expansion Lemma (see Lemma \ref{exp} below). We also work with chains instead of directed sets.
+There are some differences between our logical relation and the one defined in \citep{Streicher06}. In our proof of the fixpoint case of the Main Lemma, we do not use the observational preorder that they use. Instead we use an Expansion Lemma (see Lemma \ref{exp} below). We also work with chains instead of directed sets.
 
-Also, Streicher's logical relation is defined on a version of PCF in which  constants to replace certain constructors in the language.
+Also, Streicher's logical relation is defined on a version of PCF in which  constants replace certain constructors in the language.
 
 For example, in our definition of PCF, we have terms $s(e)$, for some expression $e$. Here $s$ is a constructor, so $s$ itself is not a term, but once we attach an expression to it, it is a term, $s(e)$.
 
 This is the same for zero, $\case$ and $\fix$.
 
-Alternatively, we could have defined these operations as constants, for example, $\succc : \nat \to \nat$ is a function in the language that has a pre defined definition that never changes. We then also define zero $: \nat$, $\case : \nat \to \nat \to \nat$ (just on Natural numbers) and $\fix : (A \to A) \to A$. This is how PCF is defined in \citep{Streicher06}.
+Alternatively, we could have defined these operations as constants. For example, $\succc : \nat \to \nat$ is a function in the language that has a pre defined definition that never changes. We then also define zero $: \nat$, $\case : \nat \to \nat \to \nat$ (just on natural numbers) and $\fix : (A \to A) \to A$. This is how PCF is defined in \citep{Streicher06}.
  
-\subsection{Definition of the logical relation}
+\subsection{Definition of the Logical Relation}
 The definition of the logical relation is the following:
 
 \vspace{0.5cm}
@@ -96,7 +96,7 @@ We will prove this by induction on each possible expression $e$.
 
 %substitution function
 \subsection{Substitution Function}
-In the Main Lemma, we make multiple substitutions in the expression $e$, but we only defined our substitution function (in Chapter \ref{safe}) on single substitutions $[e'/x]e$. Therefore we define substituting multiple variables in the following way, where $\gamma = [e_1/x_1, \dots e_n/x_n]$:
+In the Main Lemma, we make multiple substitutions in the expression $e$, but we only defined our substitution function (in Chapter \ref{safe}) on single substitutions $[e'/x]e$. Therefore we define substituting multiple variables in the following way, where $[\gamma] = [e_1/x_1, \dots e_n/x_n]$:
 
 \begin{adjustwidth}{2cm}{}
 $[\gamma](zero) = zero$
@@ -124,9 +124,9 @@ $[\gamma](\case (e, z \mapsto e_0, s(v) \mapsto e_S)) = \case ([\gamma](e), z \m
 
 $[\gamma](e \ e') = ([\gamma] e) ([\gamma] e')$
 
-$[\gamma] (\lambda x:A. e) = \lambda x:A. [\gamma] e$
+$[\gamma] (\lambda x:A. \ e) = \lambda x:A. [\gamma] e$
 
-$[\gamma] (\fix \ x:A. e) = \fix \ x:A. [\gamma] e$
+$[\gamma] (\fix \ x:A. \ e) = \fix \ x:A. [\gamma] e$
 \end{adjustwidth}
 
 \vspace{0.5cm}
@@ -154,7 +154,7 @@ For any type $A$ and $\Gamma \vdash e: A$, $\bot \ R_A \ e$
 \begin{proof}
 By induction on types. For $\nat$, we want to show $\forall n \in \mathbbm{N}. \ \bot  = n \Rightarrow e \mapsto^* n$. Because $\bot \notin \mathbbm{N}$, this statement is vacuously true.
 
-For $R_{A \to B}$, we have that $\bot$ is the function $\lambda x : A. \bot$, so we want to show $\forall  d \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ d R_A e' \Rightarrow (\lambda x : A. \bot)(d) R_B  e \ e'$. Assume $d$ is an element of the domain representing type $A$ and $e'$ is an expression of type $A$ such that $d \ R_A e'$. We want to show that $\bot \ R_B \ e \ e'$ and by the inductive hypothesis, we know for any $e : B$ that $\bot \ R_B \ e$, so we can just use this with $e \ e'$ to get our conclusion.
+For $R_{A \to B}$, we have that $\bot$ is the function $\bot = \lambda x : A. \bot(x)$, so we want to show $\forall  d \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ d R_A e' \Rightarrow (\lambda x : A. \bot(x))(d) R_B  e \ e'$. Assume $d$ is an element of the domain representing type $A$ and $e'$ is an expression of type $A$ such that $d \ R_A e'$. We want to show that $\bot \ R_B \ e \ e'$ and by the inductive hypothesis, we know for any $e : B$ that $\bot \ R_B \ e$, so we can just use this with $e \ e'$ to get our conclusion.
 \end{proof}
 
 \subsection{Expansion Lemma}\label{exp}
@@ -168,9 +168,9 @@ If $\Gamma \vdash e : A$ and $e \mapsto e'$ and $d R_A e'$ then $d R_A e$
 \begin{proof}
 By induction on types. For base case we assume $d R_{\nat} e'$, so we have $\forall n \in \mathbbm{N}. \ d = n \Rightarrow e' \mapsto^* n$. Let $n = d$. Then, as $e \mapsto e'$ and $e' \mapsto^* n$, we know that $e \mapsto^*n$. Therefore, $d R_{\nat} e$.
 
-For the inductive case, assume $e_0 \mapsto e'_0$ and $f \ R_{A \to B} \ e_0$, so we have $\forall a \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ a \ R_A \ e' \Rightarrow f(a) \ R_B \ e_0 \ e'$. Let $a$ be an element in the domain representing $A$ and $e_1$ be an expression of type $A$ such that $a R_A e_1$. Then $f(a) \ R_B \ e_0 \ e_1$.
+For the inductive case, assume $e_0 \mapsto e'_0$ and $f \ R_{A \to B} \ e_0$, so we have $\forall a \in \llbracket A \rrbracket. \ \forall e_1 \in \{ e \ | \ \vdash e : A\}. \ a \ R_A \ e_1 \Rightarrow f(a) \ R_B \ e_0 \ e_1$. Let $a$ be an element in the domain representing $A$ and $e_1$ be an expression of type $A$ such that $a R_A e_1$. Then $f(a) \ R_B \ e_0 \ e_1$.
 
-By the inductive hypothesis we know that for any $e \mapsto e'$ for expressions of type $B$, that they are both related to the same denotation. Therefore we have $f(a) \ R_B \ e'_0 \ e_1$, so we know $\forall a \in \llbracket A \rrbracket. \ \forall e' \in \{ e \ | \ \vdash e : A\}. \ a \ R_A \ e' \Rightarrow f(a) \ R_B \ e'_0 \ e'$, so $f \ R_{A \to B} \ e'_0$. 
+By the inductive hypothesis for expressions of type $B$  and by using the congruence rule with $e_0 \to e'_0$, we have $e_0 \ e_1 \mapsto e'_0 \ e_1$, so we know both of these expressions are related to the same denotation. Therefore we get $f(a) \ R_B \ e'_0 \ e_1$, so we know $\forall a \in \llbracket A \rrbracket. \ \forall e_1 \in \{ e \ | \ \vdash e : A\}. \ a \ R_A \ e_1 \Rightarrow f(a) \ R_B \ e'_0 \ e_1$, so $f \ R_{A \to B} \ e'_0$. 
 \end{proof}
 
 \subsection{Chains Lemma}
@@ -180,14 +180,14 @@ This lemma was adapted from a similar lemma on directed sets from \citep{Streich
 \vspace{0.25cm}
 
 \begin{lem}\label{chain}
-For an expression $e : A$ and a  chain $x_0 \sqsubseteq x_1 \sqsubseteq \dots$, if $x_n R_A e$, then $\bigsqcup x_n \ R_A \ e$
+For an expression $e : A$ and a  chain $x_0 \sqsubseteq x_1 \sqsubseteq \dots$, if $x_i R_A e$, then $\bigsqcup x_n \ R_A \ e$
 \end{lem}
 
 \begin{proof}
-By induction on types. For base type, $\nat$, we assume we have a chain of elements in $\mathbbm{N}_\bot$ such that $x_n \ R_{\nat} e$. Therefore for any element in the chain we know $\forall n \in \mathbbm{N} . \ x_n = n \Rightarrow e \mapsto^* n$. We have two cases depending on the values of $\bigsqcup x_n$:
+By induction on types. For base type, $\nat$, we assume we have a chain of elements in $\mathbbm{N}_\bot$ such that $x_i \ R_{\nat} e$. Therefore for any element in the chain we know $\forall n \in \mathbbm{N} . \ x_i = n \Rightarrow e \mapsto^* n$. We have two cases depending on the values of $\bigsqcup x_n$:
 
 \begin{enumerate}
-\item{$\bigsqcup x_n = n$. Then we know that $e \mapsto^* \sqcup x_n$, as any $x_n R_{\nat} e$}
+\item{$\bigsqcup x_n = n$. Then we know that $e \mapsto^* \bigsqcup x_n$, as any $x_n R_{\nat} e$}
 \item{$\bigsqcup x_n = \bot$. By Lemma \ref{bot} we know that $\bot R_{\nat} e$ for any $e$}
 \end{enumerate}
 

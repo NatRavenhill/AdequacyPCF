@@ -1,5 +1,5 @@
 \section{What did I learn/achieve?}
-Before I started this project I knew very little about domain theory, but I knew it featured prominently in research in programming language semantics. Now I know what a domain is (see \ref{dom}), how to prove given structures are domains and how certain domains can be used to give models of programming languages (see Chapter \ref{ch6}).
+Before I started this project I knew very little about Domain Theory, but I knew it featured prominently in research in programming language semantics. Now I know what a domain is (see \ref{dom}), how to prove given structures are domains and how certain domains can be used to give models of programming languages (see Chapter \ref{ch6}).
 
 I also knew nothing about Logical Relations (see \ref{log}), but now know how to construct them and prove properties using them.
 
@@ -12,11 +12,11 @@ Finishing the Adequacy proof (see Theorem \ref{adeq}) was rewarding, as in the m
 \section{Evaluation of the Product and Presentation}
 My product is the proofs and analysis of these proofs. The proofs on domains mostly involved checking that the domain definition was satisfied when a new domain (such as the product of two domains and domain of continuous functions)  was constructed. Proving that a given relation on a set was a partial order was quite easy as the properties they must satisfy were studied in the Maths Techniques module in 2nd year. Proving that all chains have limits was the most difficult bit. The proof of the fixpoint theorem (see \ref{fixpoint}) was the most difficult domain theory proof, but it had clear stages that made it easier to prove.
 
-Many of the proofs on the operational semantics and typing rules were by induction. Having now completed more difficult proofs, they seem easier than they were at the time. The number of cases involved make the proofs very long, but each case uses the inductive hypothesis in a similar way.  
+Many of the proofs on the Operational Semantics and typing rules were by induction. Having now completed more difficult proofs, they seem easier than they were at the time. The number of cases involved make the proofs very long, but each case uses the inductive hypothesis in a similar way.  
 
 The Adequacy proof was the hardest and took a lot of consideration to get right. Our first attempt to prove Adequacy was based on the following logical predicate (unary logical relation) defined inductively on types in the following way:
 
-\[\adeq_{\nat} = \{e  \ | \ \vdash e : Nat \ \wedge \ (\llbracket e \rrbracket = n \Rightarrow e \mapsto^* \underline{n}) \} \]
+\[\adeq_{\nat} = \{e  \ | \ \vdash e : \nat \ \wedge \ (\llbracket e \rrbracket = n \Rightarrow e \mapsto^* \underline{n}) \} \]
 
 \[\adeq_{A \to B} = \{ e \ | \  \vdash e : A \to B \ \wedge \ \forall e' \in \adeq_A (e \ e') \in \adeq_B \}\]
 
@@ -27,7 +27,7 @@ where $<>$ is the empty substitution and $\cdot$ is the empty context.
 
 \[\adeq_{Ctx}(\Gamma, A) = \{ (\gamma, e/x) \ | \ \gamma \in \adeq_{Ctx}(\Gamma) \ \wedge \ e \in \adeq_A\} \]
 
-Then we tried to prove the following main lemma:
+Then we tried to prove the following Main Lemma:
 
 \vspace{0.5cm}
 
@@ -42,39 +42,35 @@ We proved a similar Expansion Lemma to Lemma \ref{exp} and we used the following
 \vspace{0.5cm}
 
 \begin{lem}
-If $\llbracket e \rrbracket = \bot$ and $\vdash e : A$ and $e \mapsto^{\infty}$, then $e \in Good_A$
+If $\llbracket e \rrbracket = \bot$ and $\vdash e : A$ and $e \mapsto^{\infty}$, then $e \in \adeq_A$
 \end{lem}
 
 Proving the Main Lemma by induction on terms worked for every PCF expression except in the fixpoint case. We could attempt to prove this by induction, as from the typing rule of fixpoint we have $\Gamma, x : A \vdash e : A$. We could try to use induction with this and  $[\gamma, e'/x]$, but when we evaluate $\fix x: A . \ e : A$, we get $[\fix x:A. \ e: A/ x]e$, so  $e'$ must be $\fix x:A. e : A$. This would require us to already know that the whole fixpoint expression is in $\adeq$!
 
 Therefore we tried defining a fixpoint approximation like the one described in Lemma \ref{fix}. We managed to prove the Main Lemma for this successfully and I presented this in my demonstration, but then it was noted that this does not actually prove the Main Lemma for the fixpoint term, it just proves it for the approximation! 
 
-What I had done was take the definition of the term, but I had not actually proved the lemma that it is from. To prove this lemma, our logical predicate would have to be equivalent to the definition of a 'Computable' term. However the main lemma we want to prove is actually part three of the definition in Section \ref{ch8}. Therefore we were trying to prove part of the definition, so we could not use this approach. 
+What I had done was take the definition of the term, but I had not actually proved the lemma that it is from. To prove this lemma, our logical predicate would have to be equivalent to the definition of a 'computable' term. However the Main Lemma we want to prove is actually part \emph{3} of the definition in Section \ref{ch8}. Therefore we were trying to prove part of the definition, so we could not use this approach. 
 
 As we got completely stuck with the syntactic predicate and we had proved the fixpoint theorem (Lemma \ref{fixpoint}), it made much more sense to consider using a binary logical relation, so we could actually use this theorem in our proof. Such a logical relation is defined in \citep{Streicher06} , albeit for a different version of PCF with constants, as explained in Section \ref{const}. 
 
-We adjusted this definition to work for our definition of PCF with constructors and used it in our proof. This gave proofs for the simpler terms that were not too different from our  original proofs, and we could still use an Expansion Lemma like the one we proved for our original logical predicate. Being able to use the fixpoint theorem gave a much simpler proof than the one that uses the 'computable' terms, described in Section \ref{ch8}. 
+We adjusted this relation to work for our definition of PCF with constructors and used it in our proof. This gave proofs for the simpler terms that were not too different from our  original proofs, and we could still use an Expansion Lemma like the one we proved for our original logical predicate. Being able to use the fixpoint theorem gave a much simpler proof than the one that uses the 'computable' terms, described in Section \ref{ch8}. 
 
 After proving Adequacy, we studied how the function $\por$ can be defined in the denotational model of PCF but not as a PCF term. This involved knowing more about logical relations and another property of domains, which was completely new to me, so we just reviewed the content of two chapters of \citep{Streicher06}. There were a few things we added to this review. The Main Lemma for the logical relation (see Lemma \ref{main2}) did not include the variables case, so we explained this case too. We expanded on a trivial exercise given in the book, which was proving the PCF constructors were $R$-invariant in Section \ref{exercise}. We also had to rephrase these chapters for our definition of PCF and to do this, we reproved Lemma \ref{adm} to fit our PCF definition (particularly in the fixpoint case) and to use the definition of domains with chains (as opposed to directed sets). Finally, we explained the lemma on stable functions and its corollary that gives the non-definability of $\por$ in more detail than in the book (see Lemma \ref{stable}).
 
 \section{Evaluation of the Process} 
-My problem statement was to prove Adequacy for PCF. I completed this by defining the operational and denotational semantics for PCF, then proving both directions of the theorem. Therefore I believe I have fully solved the problem stated in the introduction. 
+My problem statement was to prove Adequacy for PCF. I completed this by defining the Operational and Denotational Semantics for PCF, then proving both directions of the theorem. Therefore I believe I have fully solved the problem stated in the introduction. 
 
 Everything we proved in the preceding sections is necessary to show that our domains are appropriate for modelling the language, its typing system is correct and that the semantics can be related. The report is ordered in such a way that no proof needs unspecified content given later in the report in order for the reader to understand it. 
 
 \section{Review of Project Plan}
-I followed my project plan up until the later stages, when we got to Adequacy. This proof took much longer than expected, the reason being that I underestimated its difficulty. As I was unfamiliar with the logical relations technique, it was hard to know exactly how long it would take to  prove a theorem in this way.
-
- Luckily I had no further work planned past this point, as Adequacy was the main goal of the report. This ensured I had enough time to fall back on this, as I had not over-planned my time with no room to manoeuvre. 
+I followed my project plan up until the later stages, when we got to Adequacy. This proof took much longer than expected, the reason being that I underestimated its difficulty. As I was unfamiliar with the Logical Relations technique, it was hard to know exactly how long it would take to prove a theorem in this way. I had no further work planned past this point, as Adequacy was the main goal of the report. This ensured I had enough time to fall back on this, as I had not over-planned my time with no room to manoeuvre. 
  
-As we had some time left at the end, we were able to discuss other approaches to the proof of Adequacy (in Section \ref{ch8}) and discuss some  aspects of the denotational model (in Chapter \ref{ch9}).
+As we had some time left at the end, we were able to discuss other approaches to the proof of Adequacy (in Section \ref{ch8}) and discuss some  aspects of the denotational model (in Chapter \ref{por}).
 
 \section{Limitations and ideas for future work}
-There is no original work in my project, but I have proved theorems in domain theory from the basic definitions, selected a version of PCF for which I have developed operational and denotational semantics for, with the help of my first supervisor, and related these by proving a theorem I had not encountered before, with the help of my second supervisor. Almost all of the mathematical theory in this report was entirely new to me and not taught in any undergraduate or postgraduate Computer Science module. Therefore I believe my report represents a substantial amount of work for a Computer Science student of my level.   
+There is no original work in my project, but I have proved theorems in Domain Theory from the basic definitions, selected a version of PCF for which I have developed Operational and Denotational Semantics for, with the help of my first supervisor, and related these by proving a theorem I had not encountered before, with the help of my second supervisor. Almost all of the mathematical theory in this report was entirely new to me and not taught in any undergraduate or postgraduate Computer Science module. Therefore I believe my report represents a substantial amount of work for a Computer Science student of my level.   
 
-Having now proved Adequacy for PCF in the Domain Theoretic model, I could consider other models of PCF and/or other languages. For example FPC, described in \citep{Harper16}, is a language similar to PCF in which we have recursive types, so I could try to prove the same theorem with this addition to the possible types we can form.
-
-I could also try different ways of constructing the logical relation to describe Adequacy.
+Having now proved Adequacy for PCF in the Domain Theoretic model, I could consider other models of PCF and/or other languages. For example FPC, described in \citep{Harper16}, is a language similar to PCF in which we have recursive types, so I could try to prove the same theorem with this addition to the possible types we can form. I could also construct the  logical relation to describe Adequacy in a different way.
 
 
 %Applicative structures? 

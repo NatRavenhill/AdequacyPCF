@@ -1,5 +1,5 @@
 \section{Other Proofs of Adequacy}\label{ch8}
-Other proofs for Adequacy of PCF exist. Here we discuss some of the other approaches:
+Other proofs for Adequacy of PCF exist in the literature. Here we discuss one approach to the proof that contrasts ours:
 
 \subsection{Proof using "Computable Terms"}
 The following definition of a computable term in PCF is given by \citep{Gunter92} and is adapted from \citep{Plotkin77}:
@@ -14,13 +14,13 @@ The following definition of a computable term in PCF is given by \citep{Gunter92
 \end{enumerate}
 \end{defn}  
 
-As described by \citep{Gunter92}, by combining the second two parts of the definition of computable terms, we know that an expression $e$ is computable iff there is some substitution $\sigma$ of closed computable expressions for all the free variables of $e$ (i.e..\ part 3 of the definition) and there are closed computable terms $e_1, \dots e_n$ that make $(\sigma e)e_1, \dots e_n$ a closed term of ground type, then  $(\sigma e)e_1, \dots e_n$ is computable (using part 2 of the definition).  
+As described by \citep{Gunter92}, by combining the second two parts of the definition of computable terms, we know that an expression $e$ is computable iff there is some substitution $\sigma$ of closed computable expressions for all the free variables of $e$ (i.e.\ part 3 of the definition) and there are closed computable terms $e_1, \dots e_n$ that make $(\sigma e)e_1, \dots e_n$ a closed term of ground type, then  $(\sigma e)e_1, \dots e_n$ is computable (using part 2 of the definition).  
 
 %get that $e : A \to B$ is computable only if  $\sigma e(e'_1, \dots e'_n)$ is (where $\forall i. \ e'_i :  A_i$ is closed computable and $\sigma $ is a substitution formed of closed computable terms). This is because starting from the open term $e$, using part 3 of the definition we know that everything in $\sigma$ is closed computable, so if $\sigma e$ is closed computable, then so is $e$. Then we use part 2 to prove $\sigma e$ is closed computable. We get $\sigma e (e'_1)$ is closed computable, then $(\sigma e (e'_1))(e'_2)$ is closed computable and so on until we have applied every argument and the whole result is closed computable, so $\sigma e$ is too.
 
 %Therefore if open terms are substituted with a closed computable substitution are closed computable and the application of them to any closed computable terms will give a closed computable term as a result, then the open function term is also closed computable. 
 
-This is used to prove terms of types other than base type are computable:
+This is used to prove that PCF terms of types other than the base type are computable:
 
 \vspace{0.5cm}
 
@@ -32,18 +32,18 @@ Every PCF term is computable
 \begin{proof}
 By induction on $e$. We show just a couple of cases here, for $\case$ and $\fix$. The rest of the cases are given in \citep{Gunter92}.
 
-For $\case$, we use the statement above and prove $\sigma \case(e, z \to e_0, s(v) \to e_S)(e_1, \dots e_n)$ is a closed computable expression of ground type (where $(e_1, \dots e_n)$ are all closed  computable and $\sigma$ contains only closed computable terms) to prove all possible $\case$ terms are computable. (This also works in closed $\case$ terms, where $\sigma$ is just the empty substitution).  
+For $\case$, we use the statement above and prove $\sigma \case(e, z \mapsto e_0, s(v) \mapsto e_S)(e_1, \dots e_n)$ is a closed computable expression of ground type (where $(e_1, \dots e_n)$ are all closed  computable and $\sigma$ contains only closed computable terms) to prove all possible $\case$ terms are computable. (This also works in closed $\case$ terms, where $\sigma$ is just the empty substitution).  
 
-Assume $\llbracket  \sigma \case(e, z \to e_0, s(v) \to e_S)(e_1, \dots e_n) \rrbracket = \llbracket v \rrbracket$ for some $v$. Therefore it cannot be that $\llbracket \sigma e \rrbracket = \bot$, so there are two cases.
+Assume $\llbracket  \sigma \case(e, z \mapsto e_0, s(v) \mapsto e_S)(e_1, \dots e_n) \rrbracket = \llbracket v \rrbracket$ for some $v$. Therefore $\llbracket \sigma e \rrbracket \neq \bot$, so there are two cases, one for True and one for False:
 
-If $\llbracket \sigma e \rrbracket = n$, for some $n > 0$ then the entire denotation is $\llbracket \sigma e_S (e_1, \dots e_n) \rrbracket$ and by the inductive hypothesis,  $\sigma e_S (e_1, \dots e_n) \rrbracket \mapsto v$. By the inductive hypothesis we also have $\sigma e \mapsto n$. By using the congruence rule and evaluation rule in the operational semantics, we get from this that $\sigma \case(e, z \to e_0, s(v) \to e_S)(e_1, \dots e_n) \mapsto v$.
+If $\llbracket \sigma e \rrbracket = n$ for some $n > 0$, then the entire denotation is $\llbracket \sigma e_S (e_1, \dots e_n) \rrbracket$ and by the inductive hypothesis,  $\sigma e_S (e_1, \dots e_n)  \mapsto v$. By the inductive hypothesis we also have $\sigma e \mapsto n$. By using the congruence rule and evaluation rule in the operational semantics, we get $\sigma \case(e, z \mapsto e_0, s(v) \mapsto e_S)(e_1, \dots e_n) \mapsto v$.
 
-The false case is similar, but instead we use the induction hypothesis on $e$ to get $\sigma e \mapsto 0$ and $\sigma e_0 \mapsto v$.
+The False case is similar, but instead we use the induction hypothesis on $e$ to get $\sigma e \mapsto 0$ and $\sigma e_0 \mapsto v$.
 %Function application just follows from the inductive hypothesis (on $\sigma e$ and $\sigma e'$ for open terms) and part 2 of the definition.
 
 %For $\lambda$ abstraction, we prove $(\lambda x:A. \ \sigma e)(e_1 \dots e_n)$ is computable if $e'_1 \dots e_n$ are closed computable and all the free variables of $e$ have been substituted by closed computable terms in $\sigma$, by using parts $2$ and $3$ of the definition, so   any $\lambda x:A. \ e$ is closed computable.
 
-Fixpoint is the hardest case. We want to prove $(\fix x:A. \ \sigma e)(e_1 \dots e_n)$ is computable if $e_1 \dots e_n$ are closed computable and all the free variables of $e$ have been substituted. To do this we use a syntactic approximation described and proved in \citep{Gunter92} by the following lemma:
+Fixpoint is the hardest case. We want to prove $(\sigma \fix x:A. \ e)(e_1 \dots e_n)$ is computable if $e_1 \dots e_n$ are closed computable and all the free variables of $e$ have been substituted. To do this we use a syntactic approximation described by the following lemma, which is proved in \citep{Gunter92} :
 
 \begin{lem}\label{fix}
 Let $e = \fix x : A. \ e' : A$ be a well-typed expression and define:
@@ -55,19 +55,32 @@ Then
 
 \begin{enumerate}
 \item{$\llbracket e \rrbracket = \bigsqcup_k \llbracket e^k \rrbracket$}
-\item{If $e^k \ e_1, \dots e_n \mapsto v$ for some $V$ and $e$ is of ground type, then $e \ e_1, \dots e_n \mapsto v$} 
+\item{If $e^k \ e_1, \dots e_n \mapsto v$ for some $v$ and $e$ is of ground type, then $e \ e_1, \dots e_n \mapsto v$} 
 \end{enumerate}  
 \end{lem}
 
-So we now want to first prove $\sigma e^k (e'_1 \dots e'_n)$ is closed computable.
+So we now want to first prove $\sigma e^k$ is closed computable.
 
 We prove this by induction on $k$. $\llbracket e^0 \rrbracket = \bot$, so there is no value that $e^0$ evaluates to, so computability is vacuously true.
 
-For the inductive case, we assume $\sigma M^{k-1}$ is closed computable, and then evaluate $\sigma M^k$ in the operational semantics to get $[\sigma, \sigma M^{k-1}/x]e$.
+For the inductive case, we assume $\sigma e^{k-1}$ is closed computable, and then evaluate $\sigma e^k$ in the operational semantics to get $[\sigma, \sigma e^{k-1}/x]e'$.
 
-By the inductive hypothesis, we know $\sigma  M^{k-1}$ and $e$ are closed computable, so    $[\sigma, \sigma M^{k-1}/x]e$ is too.
+By the inductive hypothesis, we know $\sigma  e^{k-1}$ and $e$ are closed computable, so    $[\sigma, \sigma e^{k-1}/x]e'$ is too. Therefore $\sigma e^k$ is computable.
 
-Now we know $\sigma M^k$ is computable, we must show $\sigma M^k (e_1, \dots, e_n)$ is too. The denotation of $M^k$ is $\bigsqcup M^k$, so we must prove $\llbracket \sigma e^k (e_1, \dots, e_n)\rrbracket = n$. We use Lemma \ref{fix} for this, with the fact that we now know $e^k$ is computable.
+Now we know $\sigma e^k$ is computable, we use this to  show that $\sigma e (e_1, \dots, e_n)$ is a closed computable term of ground type, which we can then use to show that $\sigma e$ is computable.
+
+Assume that $e_1, \dots e_n$ are closed computable terms such that $\sigma e (e_1, \dots e_n)$ is of ground type and that $\llbracket \sigma e(e_1, \dots e_n) \rrbracket  = \llbracket v \rrbracket$. By Lemma \ref{fix} part \emph{1}, we have $\bigsqcup \llbracket \sigma e^k (e_1, \dots e_n) \rrbracket = \llbracket v \rrbracket$. Since this term is of ground type, there will be some $k$ such that $\llbracket \sigma e^k (e_1, \dots e_n) \rrbracket = \llbracket v \rrbracket$. Then since we know $\sigma e^k$ is computable, and that $e_1, \dots e_2$ are closed computable, we have $\sigma e^k (e_1, \dots e_n) \mapsto v$ (from the definition of computable). By using Lemma \ref{fix} part \emph{2}, we have $\sigma e (e_1, \dots e_n) \mapsto v$.
+
+Therefore $\sigma e (e_1, \dots e_n)$ is a closed computable term of ground type where $\sigma$ substitutes the free variables with closed computable terms and $(e_1, \dots e_n)$ are all closed computable terms, so by the remark before the proof, we know that $\sigma e = \sigma (\fix x:A. \ e : A)$ is a closed computable term.
+
+
+
+
+
+
+% $\llbracket \sigma e \rrbracket = \llbracket v \rrbracket$. By Lemma \ref{fix}, $\llbracket \sigma e \rrbracket = \bigsqcup_k \llbracket \sigma e^k \rrbracket$, so $\llbracket \sigma e(e_1, \dots e_n) \rrbracket = \bigsqcup \llbracket \sigma e^k (e_1, \dots e_n) \rrbracket = \llbracket v \rrbracket$.
+%
+%Then, there will be some $k$ such that $\llbracket \sigma e^k (e_1, \dots e_n) \rrbracket$, so we use the inductive hypothesis to know that $ \sigma e^k (e_1, \dots e_n) \mapsto v$ and then use Lemma \ref{fix} to get $e \mapsto v$. Therefore we have $\llbracket e rrbracket = \llbracket v \rrbracket \Rightarrow e \mapsto v$ and $e$ was our fixpoin 
 %continue with this.  
 \end{proof}
 

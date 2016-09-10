@@ -1,6 +1,8 @@
 Logical Relations, developed in \citep{Tait67},\citep{Plotkin73},\citep{Statman85}, is a proof technique used for establishing properties that cannot be proved by structural induction on program terms alone, due to higher order constructions being present in the structure we are proving a property of.
 
-They have been used to prove Strong Normalisation (i.e.\ that every expression terminates) of systems such as the Simply Typed $\lambda$ Calculus. They have also been used to prove Type Safety and Program Equivalence.
+Instead we define a family of relations containing a relation for each type, and the property we want to prove is contained in the definition of the relation at base type. We then prove a Main Lemma on the logical  relation. The proof of our original property is  obtained as a corollary of this Main Lemma.
+
+Logical Relations have been used to prove Strong Normalisation (i.e.\ that every expression terminates) of systems such as the Simply Typed $\lambda$ Calculus. They have also been used to prove Type Safety and Program Equivalence.
 
 We construct two logical relations in our report:
 

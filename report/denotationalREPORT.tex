@@ -1,17 +1,17 @@
-Denotational semantics describe expressions in a programming language as functions in a mathematical model, as explained in Chapter \ref{ch1}. Now we use the domain theory we discussed in Section \ref{dom} to create that model for PCF:
+Denotational Semantics describe expressions in a programming language as functions in a mathematical model, as explained in Chapter \ref{ch1}. Now we use the Domain Theory we discussed in Section \ref{dom} to create that model for PCF:
 
 \section{Denotational Model of PCF} 
 
 \subsection{Denotation of Types}
 
-Our denotational semantics maps the types of PCF to a domain representing that type. We define a function:
+Our Denotational Semantics maps the types of PCF to a domain representing that type. We define a function:
 
 \[\llbracket - \rrbracket : Type \to Domain \]
 
-that maps a type to a domain. We defined our types by induction, so we  have specify the different constructions of domains we use by induction on types:
+that maps a type to a domain. We defined our types by induction, so we must specify the different constructions of domains we use by induction on types:
 
 \begin{enumerate}
-\item{The type of Natural numbers is the base type, so they are modelled by a single domain. We use the flat domain of Natural numbers, described in Section \ref{flat}, where $\bot$ represents a term that does not terminate:
+\item{The type of natural numbers is the base type, so they are modelled by a single domain. We use the flat domain of natural numbers, described in Section \ref{flat}, where $\bot$ represents a term that does not terminate:
 
 \[ \llbracket \nat \rrbracket = \mathbb{N}_{\bot} \]
 
@@ -55,7 +55,7 @@ So $\llbracket \Gamma \vdash e : A \rrbracket d^*$ gives us an element of $\llbr
 
 Given a context $\Gamma = x_0 : A_0, \ \dots \ ,x_n : A_n$, $\llbracket \Gamma \rrbracket_{Ctx}$ maps a tuple $d^*$ in $\llbracket A_0 \rrbracket \times \dots \times \llbracket A_n \rrbracket$ to a value in $\llbracket A_i \rrbracket$:
 
-\[\llbracket \Gamma \vdash x_i : A_i \rrbracket  = \lambda d^* \in \llbracket \Gamma \rrbracket . \pi_i (d^*)\]
+\[\llbracket \Gamma \vdash x_i : A_i \rrbracket  = \lambda d^* \in \llbracket \Gamma \rrbracket . \ \pi_i (d^*)\]
 
 We use the $i$th projection function to get the value of the $i$th variable in the context.
 
@@ -65,7 +65,7 @@ $z$ has the type $\nat$, the domain of which we have defined to be $\mathbbm{N}_
 \[ \llbracket \Gamma \vdash z : Nat \rrbracket d^* = 0\]
 
 \paragraph{Successor} 
-When $\Gamma \vdash s(e) : \nat$ is a well typed term, then so is $\Gamma \vdash e : \nat$, so we can use $\llbracket \Gamma \vdash e : \nat \rrbracket$ in the definition of the denotational semantics for successor. As the domain of $e$ is $\mathbb{N}_{\bot}$, we must consider the case where $e$ maps to $\bot$, for which we would also have to map $s(e)$ to $\bot$:
+When $\Gamma \vdash s(e) : \nat$ is a well typed term, $\Gamma \vdash e : \nat$ is too, so we can use $\llbracket \Gamma \vdash e : \nat \rrbracket$ in the definition of the denotational semantics for successor. As the domain of $e$ is $\mathbb{N}_{\bot}$, we must consider the case where $e$ maps to $\bot$, for which we would also have to map $s(e)$ to $\bot$:
 
 \begin{minipage}{4in}
 \begin{align*}
@@ -77,7 +77,7 @@ When $\Gamma \vdash s(e) : \nat$ is a well typed term, then so is $\Gamma \vdash
 \end{align*} 
 \end{minipage}
 
-\paragraph{Case} When $\Gamma \vdash \case \ (e, z \mapsto e_0, s(y) \mapsto e_S) : C$ is a well typed term, then so is $\Gamma \vdash e : \nat$, so we can use $\llbracket \Gamma \vdash e : \nat \rrbracket$ in the definition of the denotational semantics for case:
+\paragraph{Case} When $\Gamma \vdash \case \ (e, z \mapsto e_0, s(y) \mapsto e_S) : C$ is a well typed term, $\Gamma \vdash e : \nat$ is too, so we can use $\llbracket \Gamma \vdash e : \nat \rrbracket$ in the definition of the denotational semantics for case:
 
 \begin{minipage}{4in}
 \begin{align*}
@@ -91,7 +91,7 @@ When $\Gamma \vdash s(e) : \nat$ is a well typed term, then so is $\Gamma \vdash
 \end{align*} 
 \end{minipage}
 
-\paragraph{Application} In this rule we already have a denotation for the function and for the element we are applying it to. The bottom element of our domain of functions is the function that loops on all inputs, $\lambda x \in X. \bot_Y$. Therefore the value of $f$ will always be a function. Functions on domains can be applied to bottom elements, so we can still have $f(v)$ when $v = \bot$. Therefore there is only one case for function application: 
+\paragraph{Application} In this rule we already have a denotation for the function and for the element we are applying it to. The bottom element of our domain of functions is the function that loops on all inputs, $\bot = \lambda x \in X. \bot(x)$. Therefore the value of $f$ will always be a function. Functions on domains can be applied to bottom elements, so we can still have $f(v)$ when $v = \bot$. Therefore there is only one case for function application: 
 
 \vspace{0.25cm}
 
@@ -101,11 +101,11 @@ $\llbracket \Gamma \vdash e \ e' : B \rrbracket d^* =$ Let $f = \llbracket \Gamm
 
 \hspace{7cm} in $f(v)$
 
-\paragraph{$\lambda$ abstraction} For $\lambda$ abstraction, by its typing rule, we already have a denotation for $\llbracket \Gamma , x : A \vdash e : B \rrbracket d^*$. This is a function of type $\llbracket \Gamma \rrbracket \times \llbracket A \rrbracket \to \llbracket B \rrbracket$. The function we want to obtain is of type $\llbracket \Gamma \rrbracket \to  (\llbracket A \to  B \rrbracket)$, so we must return a continuous function. We use currying, with our denotation of $\Gamma, x : A \vdash e : B$. As this is in a different context, we need our function to be in a context where the value of $x$ is our $a \in \llbracket A \rrbracket$ that is the argument to our function, which is $(d^*, a)$ :
+\paragraph{$\lambda$-Abstraction} For $\lambda$ abstraction, by its typing rule, we already have a denotation for $\llbracket \Gamma , x : A \vdash e : B \rrbracket d^*$. This is a function of type $\llbracket \Gamma \rrbracket \times \llbracket A \rrbracket \to \llbracket B \rrbracket$. The function we want to obtain is of type $\llbracket \Gamma \rrbracket \to  (\llbracket A \to  B \rrbracket)$, so we must return a continuous function. We use currying, with our denotation of $\Gamma, x : A \vdash e : B$. As this is in a different context, we need our function to be in a context where the value of $x$ is our $a \in \llbracket A \rrbracket$ that is in the argument to our function, which is $(d^*, a)$ :
 
-\[\llbracket \Gamma \vdash \lambda x : A. e : A \to B \rrbracket d^* = \lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a)\]
+\[\llbracket \Gamma \vdash \lambda x : A. e : A \to B \rrbracket d^* = \lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : B \rrbracket(d^*, a)\]
  
-\paragraph{Fixpoint} For fixpoint, by its typing rule we already have a denotation for $\llbracket \Gamma , x : A \vdash e : A \rrbracket d^*$ This is a function of type $\llbracket \Gamma \rrbracket \times \llbracket A \rrbracket \to \llbracket A \rrbracket$. The function we want to obtain is of type $\llbracket \Gamma \rrbracket \to  \llbracket A \rrbracket$ To get an element of $\llbracket A \rrbracket$, we use the fixpoint function, $\Fix_{\llbracket A \rrbracket}$, which is a continuous function of type $(\llbracket A \rrbracket \to \llbracket A \rrbracket) \to \llbracket A \rrbracket$. the function we give to the fixpoint is the one that maps any given $a \in \llbracket A \rrbracket$ to the denotation of $ \Gamma , x : A \vdash e : A$ in a context where $a$ is the value of $x$:
+\paragraph{Fixpoint} For fixpoint, by its typing rule we already have a denotation for $\llbracket \Gamma , x : A \vdash e : A \rrbracket d^*$ This is a function of type $\llbracket \Gamma \rrbracket \times \llbracket A \rrbracket \to \llbracket A \rrbracket$. The function we want to obtain is of type $\llbracket \Gamma \rrbracket \to  \llbracket A \rrbracket$. To get an element of $\llbracket A \rrbracket$, we use the fixpoint function, $\Fix_{\llbracket A \rrbracket}$, which is a continuous function of type $(\llbracket A \rrbracket \to \llbracket A \rrbracket) \to \llbracket A \rrbracket$. The function we give to the fixpoint is the one that maps any given $a \in \llbracket A \rrbracket$ to the denotation of $ \Gamma , x : A \vdash e : A$ in a context where $a$ is the value of $x$:
 
 \[\llbracket \Gamma \vdash \fix \ x : A. e : A \rrbracket d^* = \Fix_{\llbracket A \rrbracket} (\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a)) \] 
 
@@ -114,7 +114,7 @@ The following theorem says that given a well typed expression $e : A$ and anothe
 
 \vspace{0.5cm}
 
-\begin{thm}
+\begin{thm}\label{subst}
 If $\Gamma \vdash e : A$ and $\Gamma, x:A \vdash e' : C$ and $d^* \in \llbracket \Gamma \rrbracket$, then $\llbracket \Gamma \vdash [e/x]e' : C \rrbracket d^* =\llbracket \Gamma, x : A \vdash e': C \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$
 \end{thm}
 
@@ -172,16 +172,16 @@ Therefore $\llbracket \Gamma \vdash [e/x] (\case \ (e', z \mapsto e_0, s(v) \map
 
 Let $f = \llbracket \Gamma, x : A \vdash e_0 : A \to B \rrbracket (d^*,\llbracket \Gamma \vdash e : A \rrbracket d^*) $ in 
 
-\hspace{4.5cm} Let $v = \llbracket \Gamma, x : A \vdash e_1 : A \rrbracket (d^* \llbracket \Gamma \vdash e : A \rrbracket d^*)$ 
+\hspace{4.5cm} Let $v = \llbracket \Gamma, x : A \vdash e_1 : A \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$ 
 
 \hspace{7cm} in $f(v)$
 
-This function is also the definition of $\llbracket \Gamma, x : A \vdash e_0 \ e_1 : B \rrbracket (d^* \llbracket \Gamma \vdash e : A \rrbracket d^*)$.
+This function is also the definition of $\llbracket \Gamma, x : A \vdash e_0 \ e_1 : B \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$.
 
 Therefore, $\llbracket \Gamma \vdash [e/x](e_0 \ e_1) : B \rrbracket d^* = \llbracket \Gamma, x : A \vdash e_0 \ e_1 : B \rrbracket (d^*, \llbracket \Gamma \vdash e : A \rrbracket d^*)$
 
 
-\paragraph{$\lambda$-Abstraction} Using the substitution rule we have $\llbracket \Gamma \vdash [e/x](\lambda y : A.e') : A \to B \rrbracket d^* = \llbracket \Gamma \vdash \lambda y : A. ([e/x] e') : A \to B \rrbracket d^*$. We can use induction with $\llbracket \Gamma \vdash \lambda [e/x] e' : B$, to rewrite the denotation as the following:
+\paragraph{$\lambda$-Abstraction} Using the substitution rule we have $\llbracket \Gamma \vdash [e/x](\lambda y : A.e') : A \to B \rrbracket d^* = \llbracket \Gamma \vdash \lambda y : A. ([e/x] e') : A \to B \rrbracket d^*$. We can use induction on $\llbracket \Gamma, y : A \vdash [e/x] e' : B \rrbracket$, to rewrite the denotation as the following:
 
  \[\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, y : A, x : A  \vdash e : B \rrbracket(d^*, a , \llbracket \Gamma \vdash e : A \rrbracket d^*)\]
 
@@ -210,7 +210,7 @@ Now we have proved the theorem for every case of $e'$.
 \end{proof}
 
 \section{Soundness}\label{sound}
-In general, soundness says that if we have a mapping from one expression to another in the operational semantics, then these expressions must also have equal denotations in the denotational semantics (so the Operational Semantics are sound with relation to the Denotational Semantics).
+In general, Soundness says that if we have a mapping from one expression to another in the Operational Semantics, then these expressions must also have equal denotations in the Denotational Semantics (so the Operational Semantics are sound with relation to the Denotational Semantics).
  
 Our Soundness theorem is the following theorem, which says that for a well typed expression $e$, if it maps to another expression $e'$, then its denotation will be equal to that of the new expression in the same context:
 
@@ -277,7 +277,7 @@ Which is the same as $\llbracket \Gamma \vdash \case \ (e', z \mapsto e_0, s(y) 
 \end{align*} 
 \end{minipage}
 
-As $\llbracket \Gamma' \vdash z : \nat \rrbracket d^*$ is always 0, this can be simplified to $\llbracket \Gamma \vdash e_0 : C \rrbracket d^*$, which is the result of the evaluation rule.}
+As $\llbracket \Gamma \vdash z : \nat \rrbracket d^*$ is always 0, this can be simplified to $\llbracket \Gamma \vdash e_0 : C \rrbracket d^*$, which is the result of the evaluation rule.}
 \item{When $e = s(v)$, we have $\llbracket \Gamma \vdash \case(s(v), z \mapsto e_0, s(y) \mapsto e_S) : C \rrbracket d^*$ which is:
 
 \begin{minipage}{4in}
@@ -285,7 +285,7 @@ As $\llbracket \Gamma' \vdash z : \nat \rrbracket d^*$ is always 0, this can be 
 \intertext{ Let $v' = \llbracket \Gamma \vdash s(v) : \nat \rrbracket d^*$ in}
   \begin{cases} 
            \llbracket \Gamma \vdash e_0 : C \rrbracket d^* & \text{if } v' = 0 \\
-           \llbracket \Gamma, y : \nat \vdash e_S : C \rrbracket (d^*, n)  & \text{if } v' = v + 1 \\
+           \llbracket \Gamma, y : \nat \vdash e_S : C \rrbracket (d^*, n)  & \text{if } v' = n + 1 \\
              \bot & \text{if } v' = \bot
   \end{cases}
 \intertext{}
@@ -310,7 +310,7 @@ Using the substitution lemma, we get $\llbracket \Gamma \vdash [v/y]e_S \rrbrack
 \paragraph{Application}There are two cases for application:
 
 \begin{enumerate}
-\item{We use a congruence rule for function application, so when $e_0 \ e_1 \mapsto e_0' \ e_1$ we also know that $e \mapsto e'$. From $\Gamma \vdash e_0 \ e_1 : B$, we know that $\Gamma \vdash e_0 : A \to B$. Therefore we can use induction on this to get $\llbracket \Gamma \vdash e_0 \ e_1 : A \rrbracket d^* =  \llbracket \Gamma' \vdash e_0' \ e_1 : A \rrbracket d^*$.
+\item{We use a congruence rule for function application, so when $e_0 \ e_1 \mapsto e_0' \ e_1$ we also know that $e \mapsto e'$. From $\Gamma \vdash e_0 \ e_1 : B$, we know that $\Gamma \vdash e_0 : A \to B$. Therefore we can use induction on this to get $\llbracket \Gamma \vdash e_0 \ e_1 : A \rrbracket d^* =  \llbracket \Gamma \vdash e_0' \ e_1 : A \rrbracket d^*$.
 
 We can use this to rewrite $\llbracket \Gamma \vdash e_0 \ e_1 : B \rrbracket d^*$ as:
 
@@ -322,7 +322,7 @@ Let $f = \llbracket \Gamma \vdash e_0' : A \to B \rrbracket d^*$ in
 
 which is the same as $\llbracket \Gamma \vdash e_0' \ e_1 : B \rrbracket d^*$
 }
-\item{When $e = \lambda x:A.e$, it is a value, so cannot be reduced further by the congruence rule. We use the semantic rule:
+\item{When $e = \lambda x:A. \ e$, it is a value, so cannot be reduced further by the congruence rule. We use the following rule in the Operational Semantics:
 
 $$
 \inferrule{ \ }
@@ -331,16 +331,16 @@ $$
 
 so we need a denotation $\llbracket \Gamma \vdash [e'/x]e \rrbracket d^*$.
 
-As we have the denotation of $\llbracket \Gamma \vdash (\lambda x:A. e) \ e' : B \rrbracket d^*$, we have $f = \llbracket \Gamma \vdash \lambda x:A. e : A \to B \rrbracket d^*$ and $v = \llbracket \Gamma \vdash e': A  \rrbracket d^*.$
+As we have the denotation of $\llbracket \Gamma \vdash (\lambda x:A. \ e) \ e' : B \rrbracket d^*$, we have $f = \llbracket \Gamma \vdash \lambda x:A. e : A \to B \rrbracket d^*$ and $v = \llbracket \Gamma \vdash e': A  \rrbracket d^*.$
 
 $f = \lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a)$ , so $f \ v$ is $\llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, \llbracket \Gamma \vdash e' : A \rrbracket d^*)$
 
-By the substitution lemma, this is the same as $\llbracket \Gamma \vdash [e'/x]e \rrbracket d^*$}
+By the Substitution Theorem (see Theorem \ref{subst}) , this is the same as $\llbracket \Gamma \vdash [e'/x]e \rrbracket d^*$}
 \end{enumerate}
 
 \paragraph{$\lambda$-Abstraction}  is a value, so has no evaluation rules. Therefore there are no cases.
 
-\paragraph{Fixpoint} As $\llbracket \Gamma \vdash \fix \ x:A .e : A \rrbracket d^*$ is a fixpoint operator and we know that $f(\Fix(f)) = \Fix(f)$, we can rewrite it as:
+\paragraph{Fixpoint} As $\llbracket \Gamma \vdash \fix \ x:A . \ e : A \rrbracket d^*$ is a fixpoint operator and we know that $f(\Fix(f)) = \Fix(f)$, we can rewrite it as:
 
 \[(\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a))[\Fix_{\llbracket A \rrbracket} (\lambda a \in \llbracket A \rrbracket . \llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, a))]\]
 
@@ -354,15 +354,15 @@ which is equal to:
 \[\llbracket \Gamma, x : A \vdash e : A \rrbracket(d^*, \llbracket \Gamma \vdash \fix \ x:A .e : A \rrbracket d^*)
 \]
 
-Using the substitution lemma, this is the same as
+Using the Substitution Theorem (see Theorem \ref{subst}), this is the same as
 
-\[\llbracket \Gamma \vdash [\fix \ x:A.e/x] e : A \rrbracket d^* \]
+\[\llbracket \Gamma \vdash [\fix \ x:A. \ e/x] e : A \rrbracket d^* \]
  
  
 The evaluation rule is 
 $$
 \inferrule{ \ }
-{\fix \ x:A. e \mapsto [\fix \ x:A. e/x]e}
+{\fix \ x:A. \ e \mapsto [\fix \ x:A. e/x]e}
 $$
 so this is the denotation we need.
 \end{proof}

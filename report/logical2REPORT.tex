@@ -15,7 +15,7 @@ such that
 
 where $Type$ is the set of all possible types our programs can have, defined by induction.
 
-Logical relations for different properties are constructed by defining the relation differently on the base type for each property. For example, if the types are defined by the base type being $\nat$ and other types $A \to B$ (formed any other types $A$ and $B$), then the relation is defined by the definition of $R_{\nat}$.
+Logical relations for different properties are constructed by defining the relation differently on the base type for each property. For example, if the types are defined by the base type $\nat$ and other types $A \to B$ (formed any other types $A$ and $B$), then the relation is defined by the definition of $R_{\nat}$.
 
 Therefore we say that a logical relation $R$ of arity $W$ is uniquely determined by $R_{\nat}$, so for all subsets of ${\llbracket \nat \rrbracket}^W$ there is a unique $R$ equal to the set. 
 
@@ -85,18 +85,18 @@ where for any $(x,z) \in (R_A;S_A)$ we have
 
 \[ (R_B(f(x),g(y)) \ \wedge \ S_B(g(y),h(z)))\] 
 
-So as functions in $R$ are only applied to inputs that are in $R$ and the same for $S$, and functions in both are only applied to inputs that are in both, then \textbf{this is a logical relation.}
+So as functions in $R$ are only applied to inputs that are in $R$ and the same for $S$, and functions in both are only applied to inputs that are in both, then this is a logical relation.
 
  
 
 \subsection{Main Lemma}
-When using logical relations, we usually prove a general theorem about the relation, which we then give specific inputs to, to get the proof of our original property. This is called the Main Lemma (or sometimes the Fundamental Property/Theorem/Lemma). %(Note that this definition uses the denotational semantics of PCF, so reading Chapter \ref{ch6} first will make this definition much easier to understand): 
+When using logical relations, we usually prove a general theorem about the relation, which we then give specific inputs to, to get the proof of our original property. This is called the Main Lemma. %(Note that this definition uses the denotational semantics of PCF, so reading Chapter \ref{ch6} first will make this definition much easier to understand): 
 
 \vspace{0.5cm}
 
 For any denotation of a PCF term, we want to show that it is in a given logical relation at its type, so we want to show that $\llbracket \Gamma \vdash e : A \rrbracket \in R_{\Gamma \to A}$. An element of $\llbracket \Gamma \rrbracket$ is any tuple of substitutions $d^* = (d_1, \dots d_n)$ for $x_1 : A_1, \dots x_n :A_n = \Gamma$. So $R_\Gamma \in \mathcal{P}(\llbracket A_1 \rrbracket \times \dots \times \llbracket A_n \rrbracket$).
 
-We want all substitutions in a set $W$ of size $n$  to be in the relation, so by using the definition of $\llbracket \Gamma \vdash e : A \rrbracket \in R_{\Gamma \to A}$, we want to show that 
+We want all substitutions in a set $W$ to be in the relation, so by using the definition of $\llbracket \Gamma \vdash e : A \rrbracket \in R_{\Gamma \to A}$, we want to show that 
 
 \[ \forall (d^*(1), \dots d^*(W)) \in R_\Gamma. \ \lambda i \in W. \llbracket \Gamma \vdash e : A \rrbracket d^*(i)\]
 
@@ -110,12 +110,12 @@ Therefore for program terms, we define the Main Lemma in the following way, as i
 
 \begin{itemize}
 \item{$z$}
-\item{$\lambda x: \nat. s(x)$}
-\item{$\lambda x: \nat, e_0 : A, e_S: A. \case(e,z \to e_0,s(x) \to e_S)$}
-\item{$\lambda e: A . \ \fix x:A \ e $}
+\item{$\lambda x: \nat. \ s(x)$}
+\item{$\lambda x: \nat, e_0 : A, e_S: A. \  \case(e,z \mapsto e_0,s(x) \mapsto e_S)$}
+\item{$\lambda x : A. \ \lambda e: A . \ \fix x:A \ e $}
 \end{itemize}
 
-The statement of the main lemma is the following:
+The statement of the Main Lemma is the following:
 
 \vspace{0.5cm}
 
@@ -132,9 +132,9 @@ We include the proof given by \citep{Streicher06}, additionally explaining how t
 \begin{proof}
 By induction on $\lambda$ terms:
 
-\paragraph{Variables} Assume $x_1 : A_1, \dots x_n : A_n \vdash x_j : A_j$ and $d_j \in R_{A_j}$ for every $j$. We need to show that $\lambda i \in W. \ \llbracket x_1 : A_1, \dots x_n : A_n \vdash x_j : A_j \rrbracket(d^*(i)) \in R_{A_j} $. $d^*(i)$ includes $d_j(i)$, so by the denotational semantics for variables, we want to show that $\lambda i \ \in W. d_j(i) \in R_{A_J}$. As we have assumed that $d_j \in R_{A_j}$, then at each $i$th position, we already have $d_j(i) \in R_{A_j}$ as an assumption, so we have  $\lambda i \ \in W. d_j(i) \in R_{A_J}$.
+\paragraph{Variables} Assume $x_1 : A_1, \dots , x_n : A_n \vdash x_j : A_j$ and $d_j \in R_{A_j}$ for every $j$. We need to show that $\lambda i \in W. \ \llbracket x_1 : A_1, \dots x_n : A_n \vdash x_j : A_j \rrbracket(d^*(i)) \in R_{A_j} $. $d^*(i)$ includes $d_j(i)$, so by the denotational semantics for variables, we want to show that $\lambda i \ \in W. d_j(i) \in R_{A_J}$. As we have assumed that $d_j \in R_{A_j}$, then at each $i$th position, we already have $d_j(i) \in R_{A_j}$ as an assumption, so we have  $\lambda i \ \in W. d_j(i) \in R_{A_j}$.
  
-\paragraph{$\lambda$ -Abstraction} Assume that $\Gamma \vdash \lambda x : A. \ e : A $ and $\forall j \leq n. \ d_j \in R_{A_j}$. We need to show that $\lambda i \in W. \  \llbracket \Gamma \vdash \lambda x : A. \ e : B \rrbracket (d^*(i)) \in R_{A \to B}$. As this is a function type, we expand the definition of the logical relation to get:
+\paragraph{$\lambda$-Abstraction} Assume that $\Gamma \vdash \lambda x : A. \ e : B $ and $\forall j \leq n. \ d_j \in R_{A_j}$. We need to show that $\lambda i \in W. \  \llbracket \Gamma \vdash \lambda x : A. \ e : B \rrbracket (d^*(i)) \in R_{A \to B}$. As this is a function type, we expand the definition of the logical relation to get:
 
 \[ \forall d \in R_A. \ \lambda i \in W. \ \llbracket \Gamma \vdash \lambda x:A. e : B \rrbracket (d^*(i))(d(i)) \in R_B\]
 
@@ -142,7 +142,7 @@ Let $d$ be a substitution in $R_A$. We use the induction hypothesis with $\Gamma
 
 \[\lambda i \in W. \ \llbracket \Gamma ,x:A \vdash e : B \rrbracket (d^*(i),d(i))\in R_B \]
 
-By the definition of the denotational semantics for $\lambda$-abstraction, this is the same as:
+By the definition of the Denotational Semantics for $\lambda$-abstraction, this is the same as:
 
 \[\lambda i \in W. \ \llbracket \Gamma \vdash \lambda x:A. e : B \rrbracket (d^*(i))(d(i)) \in R_B\]
 
@@ -165,7 +165,7 @@ Let $d = \lambda i \in W. \llbracket \Gamma \vdash e' : A  \rrbracket(d^*(i)) \i
 
 \[  \lambda i \in W. \  \llbracket \Gamma \vdash e : A \to B \rrbracket(d^*(i))( \llbracket \Gamma \vdash e' : A \rrbracket(d^*(i)) \in R_B \]
  
-Using the definition of the denotational semantics for function application, we have:
+Using the definition of the Denotational Semantics for function application, we have:
 
 \[\lambda i \in W. \  \llbracket \Gamma \vdash  e \ e' : B \rrbracket (d^*(i)) \in R_B\]
 

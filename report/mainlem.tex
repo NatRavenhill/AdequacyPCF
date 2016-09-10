@@ -43,13 +43,13 @@ Therefore there will be two cases:
 
 \[ \llbracket \Gamma \vdash \case(e,z \mapsto e_0, s(x) \mapsto e_S) : A \rrbracket (d_1, \dots, d_n) \]
 \[ R_A \]
-\[ [e_1/x_1, \dots, e_n/x_n]\case (z \mapsto e_0, s(x) \mapsto e_S) \]
+\[ [e_1/x_1, \dots, e_n/x_n]\case (e, z \mapsto e_0, s(x) \mapsto e_S) \]
 
 The result of the denotation depends on the value of $e$, so we have three cases:
 
 \begin{enumerate}
 \item{$\llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = \bot$, then we must show $\bot \ R_A \ [e_1/x_1, \dots, e_n/x_n] \\ \case (z \mapsto e_0, s(x) \mapsto e_S)$, which we get by applying Lemma \ref{bot}.}
-\item{$\llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = 0$, then we want to show $\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ \\ R_A [e_1/x_1, \dots, e_n/x_n]\case (z \mapsto e_0, s(x) \mapsto e_S)$. As we have $\Gamma \vdash e_0 : A$ from the typing rule of case, we can get $\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ R_A [e_1/x_1, \dots, e_n/x_n]e_0$ by the induction hypothesis. We can now use this in Lemma \ref{exp}, with the operational semantics rule for case when the expression is zero, to get 
+\item{$\llbracket \Gamma \vdash e : \nat \rrbracket (d_1, \dots, d_n) = 0$, then we want to show $\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ \\ R_A [e_1/x_1, \dots, e_n/x_n]\case (z \mapsto e_0, s(x) \mapsto e_S)$. As we have $\Gamma \vdash e_0 : A$ from the typing rule of case, we can get $\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ R_A [e_1/x_1, \dots, e_n/x_n]e_0$ by the induction hypothesis. We can now use this in Lemma \ref{exp}, with the Operational Semantics rule for case when the expression is zero, to get 
 
 \[\llbracket \Gamma \vdash e_0 : A \rrbracket (d_1, \dots, d_n) \ R_A [e_1/x_1, \dots, e_n/x_n]\case (z \mapsto e_0, s(x) \mapsto e_S)\]
 }
@@ -78,7 +78,7 @@ We can now use this in Lemma \ref{exp}, with the operational semantics rule for 
 \[ R_B \]
 \[ [e_1/x_1, \dots, e_n/x_n]e \ e' \]
 
-Using the denotational semantics and substitution function we can rewrite this as:
+Using the Denotational Semantics and substitution function we can rewrite this as:
 
 \[ \llbracket \Gamma \vdash  e : A \to B \rrbracket (d_1, \dots, d_n) (\llbracket \Gamma \vdash e' : B \rrbracket (d_1, \dots, d_n))\]
 \[ \ R_B \]
@@ -166,8 +166,10 @@ because
 
 \[ = [e_1/x_1, \dots e_n/x_n, [e_1/x_1, \dots e_n/x_n] \fix x:A. e/x] e : A \]
 
-We can use Lemma \ref{exp}, to get 
+We can the use Lemma \ref{exp} with this, to get 
 \[(\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash e : A \rrbracket(d_1 \dots d_n,a))^{n+1}(\bot) \ R_A \ [e_1/x_1, \dots e_n/x_n]\fix x : A. \ e : A\]
+
+Therefore $\forall n \in \mathbbm{N}. \ (\lambda a \in \llbracket A \rrbracket. \ \llbracket \Gamma, x : A \vdash \ e : A \rrbracket(d_1 \dots d_n, a))^n(\bot) \ R_A \ [e_1/x_1, \dots e_n/x_n]\fix x : A. \ e : A$, so the Main Lemma holds for fixpoint.
 
 
 
