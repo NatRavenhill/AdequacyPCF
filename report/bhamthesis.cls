@@ -142,6 +142,8 @@ Signed .........................................................................
       \end{sc}
       \vfill
       {\@author}\\
+      ID Number: 1249790 \\
+      \vspace*{.2in}
       Supervisors: {\@supervisor}\\
       \vspace*{4mm}
       \includegraphics[width=30mm,height=30mm]{crest.png}\\
@@ -149,6 +151,8 @@ Signed .........................................................................
       for the degree of {\@degree}\\
       School of {\@department}\\
       University of Birmingham\\
+      \vspace{.2in}
+      Date: 12th September 2016\\
       \vfill
       Copyright {\copyright} {\@gyear} School of {\@department}, University of Birmingham\\
       \vspace*{.2in}
